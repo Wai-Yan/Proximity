@@ -13,7 +13,7 @@ module.exports = {
     }
   },
   test: {
-    database: process.env.DATABASE,
+    database: "jobpostdb",
     username: process.env.USER_NAME,
     password: process.env.SQL_PW,
     host: process.env.HOST,
@@ -24,7 +24,7 @@ module.exports = {
     }
   },
   production: {
-    database: process.env.DATABASE,
+    database: "jobpostdb",
     username: process.env.USER_NAME,
     password: process.env.SQL_PW,
     host: process.env.HOST,
