@@ -1,0 +1,33 @@
+{
+  "name": "ProjectTwo",
+  "version": "1.0.0",
+  "description": "-\tHTML\r   -\tBootstrap\r   -\tJavascript\r   -\tNode.js\r   -\tSequelize\r   -\tMySQL\r   -\tHandlebars\r   -\tExpress.js\r   -\tjQuery UI\r   -\tGeocoder.js",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Wai-Yan/ProjectTwo.git"
+  },
+  "keywords": [],
+  "author": "Angela Kressin, Tak Nalut, Wai Yan, Sean Andersen",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Wai-Yan/ProjectTwo/issues"
+  },
+  "homepage": "https://github.com/Wai-Yan/ProjectTwo#readme",
+  "dependencies": {
+    "@google/maps": "^0.4.5",
+    "body-parser": "^1.18.2",
+    "dotenv": "^5.0.1",
+    "express": "^4.16.3",
+    "express-handlebars": "^3.0.0",
+    "geocoder": "^0.2.3",
+    "load-google-maps-api": "^1.2.0",
+    "mysql2": "^1.5.2",
+    "sequelize": "^4.36.1"
+  },
+  "devDependencies": {}
+}
