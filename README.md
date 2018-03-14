@@ -1,4 +1,4 @@
-##Tech Used
+## **Tech Used**
   -	HTML
   -	Bootstrap
   -	Javascript
@@ -10,7 +10,7 @@
   -	jQuery UI
   -	Geocoder.js
   
- ##API Docs
+ ## **API Docs**
 	-Glassdoor API (for search comparison-possible other use)
 	-Google Maps API(Markers added)
 
