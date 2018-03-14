@@ -17,7 +17,7 @@
 ## **Architecture**
 
 	├── config
-	|     └── config.json
+	|     └── config.js
 	├── db
 	|     ├── schema.sql
 	|     └── seeds.sql
