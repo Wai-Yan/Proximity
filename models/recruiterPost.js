@@ -32,7 +32,6 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.INTEGER,
       allowNull: false,
       validate: {
-        not: ["[a-z]",'i'], //not allow letters
         len: [5,5]
       }
     },
@@ -40,7 +39,6 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.INTEGER,
       allowNull: true,
       validate: {
-        not: ["[a-z]",'i'], //not allow letters
         min: -90,
         max: 90,
         len: [2,10]
@@ -50,7 +48,6 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.INTEGER,
       allowNull: true,
       validate: {
-        not: ["[a-z]",'i'], //not allow letters
         min: -180,
         max: 180,
         len: [3,10]
