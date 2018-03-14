@@ -34,10 +34,3 @@ googleMapsClient.geocode({
     }
   }
 })
-
-
-module.exports = {
-    "production": {
-        "hostname": process.env.SQL_PW
-    }
-}
