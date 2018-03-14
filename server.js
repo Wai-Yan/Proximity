@@ -18,6 +18,9 @@ app.use(express.static(__dirname + "/public"));
 app.engine("handlebars", exphbs({ defaultLayout: "main" }));
 app.set("view engine", "handlebars");
 
+require("./routes/recruiterPost-routes.js")(app);
+require("./routes/jobSearch-routes.js")(app);
+
 db.sequelize.sync({ force: true }).then(function() {
   app.listen(PORT, function() {
     console.log("App listening on PORT " + PORT);
