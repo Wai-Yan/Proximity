@@ -41,7 +41,7 @@ module.exports = function(sequelize, DataTypes) {
       validate: {
         min: -90,
         max: 90,
-        len: [2,10]
+        len: [2,20]
       }
     },
     longitude: {
@@ -50,7 +50,7 @@ module.exports = function(sequelize, DataTypes) {
       validate: {
         min: -180,
         max: 180,
-        len: [3,10]
+        len: [3,20]
       }
     }
   });

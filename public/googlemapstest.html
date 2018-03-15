@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+		<link rel="stylesheet" href="css/styles.css" type="text/css" />
+		<title>ProjectTwo</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootswatch/4.0.0-beta.3/cosmo/bootstrap.min.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+    <script src="js/googlemaps.js" type="text/javascript"></script>
+    <script src="js/jobSearcher.js" type="text/javascript"></script>
+    <script src="js/recruiter.js" type="text/javascript"></script>
+	</head>
+	<body>
+    <form class="text-center">
+      <div class="form-group">
+        <input type="text" class="form-control" placeholder="Job Tit 5-30 chars" id="jobTit">
+        <input type="text" class="form-control" placeholder="Job Desc 15-255 chars" id="jobDesc">
+        <input type="text" class="form-control" placeholder="Job Adrs 10-50 chars" id="jobAdr">
+        <input type="text" class="form-control" placeholder="Job State 2 ints" id="jobState">
+        <input type="text" class="form-control" placeholder="Job Zip 5 ints" id="jobZip">
+      </div>
+      <button type="submit" id="addPost" class="btn btn-primary">Submit Post</button>
+    </form>
+    <br>
+    <br>
+    <br>
+    <!--Google Maps Display-->
+    <div class="container">
+      <div class="row">
+        <div class="map col-md-12" id="mapContainer">
+          <!--First Map -->
+
+          <input id="pac-input" class="controls" type="text" placeholder="Search Locations">
+          <div id="map"></div>
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <div class="row" id="locQueryDivs"></div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDOInqUXlCvmj2Ci9jifSJyGwhOHV3dxy4&libraries=places&callback=googleMaps" async defer></script>
+    <script src="https://use.fontawesome.com/7cd611b726.js"></script>
+  </body>
+</html>
