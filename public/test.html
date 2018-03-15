@@ -16,12 +16,12 @@
 </head>
 
 <body>
-	<!-- Image and text -->
+	<div class="wrapper">
 	<nav class="navbar navbar-light">
 		<div class="container">
 			<a class="navbar-brand" href="#">
     <img src="images/geolocalization.png" height="50" class="d-inline-block" alt="">
-    JobLocator
+    Job<style="color:#55A8DD;">Locator</style>
   </a>
 			<div class="float-right">
 				<a href="#"><button type="button" id="registerbtn" class="btn btn-success">Register</button></a>
@@ -47,8 +47,8 @@
 	</div>
 	<div class="container">
 		<form class="form-inline">
-			<input class="search-keyword" type="text" name="search" placeholder="Search keyword">
-			<input class="search-location" type="text" name="search" placeholder="Location">
+			<input class="search-keyword" id="keywordVal" type="text" name="search" placeholder="Search keyword">
+			<input class="search-location" id="locationVal" type="text" name="search" placeholder="Location">
 			<select class="search-radius">
   <option value="10" selected>10 miles</option>
   <option value="20">20 miles</option>
@@ -57,21 +57,22 @@
 			<option value="50">50 miles</option>
 				<option value="60">60 miles</option>
 </select>
-			<button type="submit" class="btn btn-primary mb-2 search-submit">Submit</button>
+			<button type="submit" id="sendSearch" class="btn btn-primary mb-2 search-submit">Submit</button>
 		</form>
 	</div>
-	<div class="container mt-5">
-		<form class="text-center">
-			<div class="form-group">
-				<input type="text" class="form-control" placeholder="Job Tit 5-30 chars" id="jobTit">
-				<input type="text" class="form-control" placeholder="Job Desc 15-255 chars" id="jobDesc">
-				<input type="text" class="form-control" placeholder="Job Adrs 10-50 chars" id="jobAdr">
-				<input type="text" class="form-control" placeholder="Job City 2-20 chars" id="jobCity">
-				<input type="text" class="form-control" placeholder="Job State 2 ints" id="jobState">
-				<input type="text" class="form-control" placeholder="Job Zip 5 ints" id="jobZip">
-			</div>
-			<button type="submit" id="addPost" class="btn btn-primary">Submit Post</button>
-		</form>
+	<div class="latest-section" >
+		<div class="container">
+		<h3>Latest jobs</h3>
+		<div id="recentJobs">
+		</div>
+</div>
+	</div>
+</div>
+	<div class="footer">
+		<div class="container text-center">
+			<p class="recruiter-login-text">Are you a recruiter?</p> <button type="submit" class="btn btn-light recruiter-login">Register/Login</button>
+			<p>© Copyright JobLocator 2018 | <a href="#" target="_blank">About</a></p>
+		</div>
 	</div>
 </body>
 
