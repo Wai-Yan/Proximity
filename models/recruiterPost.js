@@ -42,6 +42,24 @@ module.exports = function(sequelize, DataTypes) {
         len: [5,5]
       }
     },
+    // postLink: {
+    //   type: DataTypes.STRING,
+    //   allowNull: false,
+    //   validate: {
+    //     len: [10,50]
+    //   }
+    // },
+    // companyLink: {
+    //   type: DataTypes.STRING,
+    //   allowNull: false,
+    //   validate: {
+    //     len: [10,50]
+    //   }
+    // },
+    placeID: {
+      type: DataTypes.STRING,
+      allowNull: true
+    },
     latitude: {
       type: DataTypes.DECIMAL(20,15),
       allowNull: true,

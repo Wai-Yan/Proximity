@@ -10,14 +10,23 @@ var geocoder;
 var lat;
 var lng;
 
-
+//Review markers and get them to be placed into Google Maps based on mySQL information
 //User search--- if they put in a Location
   //Geocode the location to get the latitude/longitude
   //Gather information from the distance query
   //Geometry Library google.maps.geometry.spherical.computeDistanceBetween
   //array of objects lat/longs from the api/posts
+  //Nice to have-- Doing loctions based on autocomplete
 
 $(document).ready(function() {
+  //job Searcher request
+  $("#sendSearch").on("click",function(event){
+    event.preventDefault();
+    var radius = $(".search-radius").val();
+    console.log("job search radius: ", radius)
+  })
+
+
   //recruiter post, and taking address to geocode Latitude & Longitude in mySQL
   $("#addPost").on("click", function(event) {
       event.preventDefault();
