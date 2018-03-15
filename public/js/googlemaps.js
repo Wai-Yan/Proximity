@@ -1,5 +1,4 @@
 var markerName = ""
-console.log("global-markerName", markerName)
 var map;
 var markers = []
 var hotMarker = []
@@ -11,7 +10,52 @@ var popularity = ""
 var veryBestPic = ""
 var placeId = ""
 var placeMarker = []
+var geocoder;
+var lat;
+var lng;
 
+$(document).ready(function() {
+
+  $("#addPost").on("click", function(event) {
+      event.preventDefault();
+      var jobTitInput = $("#jobTit");
+      var jobDescInput = $("#jobDesc");
+      var jobAdrsInput = $("#jobAdr");
+      var jobCityInput = $("#jobCity")
+      var jobStateInput = $("#jobState");
+      var jobZipInput = $("#jobZip");
+      var address = "'" + jobAdrsInput.val().trim() + "," + " " + jobCityInput.val().trim() + "," + " " + jobStateInput.val().trim() + " " + jobZipInput.val().trim() + "'"
+      function geocodeAddress() {
+              geocoder.geocode({address: address}, function(results, status) {
+                  lat = results[0].geometry.location.lat()
+                  lng = results[0].geometry.location.lng()
+                  console.log(lat,lng)
+                  newPost(lat,lng)
+                })
+            }
+      geocodeAddress()
+      function newPost(lat,lng) {
+        var newPost = {
+          jobTitle: jobTitInput.val().trim(),
+          jobDescription: jobDescInput.val().trim(),
+          address: jobAdrsInput.val().trim(),
+          city: jobCityInput.val().trim(),
+          state: jobStateInput.val().trim(),
+          zipCode: jobZipInput.val().trim(),
+          latitude: lat,
+          longitude: lng
+        };
+        if (newPost != {}) {
+          submitPost(newPost);
+        }
+      }
+    function submitPost(newPost) {
+      $.post("/api/posts", newPost, function() {
+        console.log(newPost)
+      });
+    }
+  });
+});
 
 function googleMaps() {
   var washingtonDC = new google.maps.LatLng(38.9072, -77.0369)
@@ -23,6 +67,7 @@ function googleMaps() {
     },
     zoom: 13,
   });
+  geocoder = new google.maps.Geocoder();
   // Create the search box and link it to the UI element.
   input = document.getElementById('pac-input');
   var searchBox = new google.maps.places.SearchBox(input);

@@ -43,7 +43,7 @@ module.exports = function(sequelize, DataTypes) {
       }
     },
     latitude: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.DECIMAL(20,15),
       allowNull: true,
       validate: {
         min: -90,
@@ -52,7 +52,7 @@ module.exports = function(sequelize, DataTypes) {
       }
     },
     longitude: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.DECIMAL(20,15),
       allowNull: true,
       validate: {
         min: -180,
