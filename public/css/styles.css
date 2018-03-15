@@ -77,6 +77,10 @@ body {
   font-family: 'Roboto Condensed', sans-serif;
 }
 
+.wrapper {
+  height: calc(100vh - 30px);
+}
+
 .navbar {
   position: -webkit-sticky;
   /* Safari */
@@ -226,9 +230,16 @@ h1 {
   z-index: 1;
 }
 
-
 .search-keyword:focus, .search-location:focus, .search-radius:focus {
     outline: none;
+}
+
+.latest-section {
+ margin-top: 4%;
+}
+
+.recruiter-login-text {
+  display: inline-block;
 }
 
 .search-submit {
