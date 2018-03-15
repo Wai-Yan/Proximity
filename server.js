@@ -1,10 +1,10 @@
-require("dotenv").config();
+// require("dotenv").config();
 var express = require("express");
 var bodyParser = require("body-parser");
 var exphbs = require("express-handlebars");
-var googleMapsClient = require('@google/maps').createClient({
-  key: process.env.GMAP_KEY
-});
+// var googleMapsClient = require('@google/maps').createClient({
+//   key: process.env.GMAP_KEY
+// });
 var app = express();
 var PORT = process.env.PORT || 8080;
 
@@ -28,13 +28,13 @@ db.sequelize.sync({ force: true }).then(function() {
   });
 });
 
-googleMapsClient.geocode({
-  address: '1600 Amphitheatre Parkway, Mountain View, CA'
-}, function(err, response) {
-  if (!err) {
-    var res = (response.json.results);
-    for (var i=0; i < res.length; i++) {
-    console.log(res[i].geometry.location)
-    }
-  }
-})
+// googleMapsClient.geocode({
+//   address: '1600 Amphitheatre Parkway, Mountain View, CA 94043'
+// }, function(err, response) {
+//   if (!err) {
+//     var res = (response.json.results);
+//     for (var i=0; i < res.length; i++) {
+//     console.log(res[i].geometry.location)
+//     }
+//   }
+// })
