@@ -159,13 +159,13 @@
 }
 
 .search-keyword {
-  width: 30%;
+  width: 28%;
   box-sizing: border-box;
   border: 2px solid #ccc;
   border-radius: 60px;
   font-size: 1rem;
   background-color: #fff;
-  background-image: url("../images/magnifying-glass.png");
+  background-image: url("../images/search.png");
   background-position-y: center;
   background-position-x: .5rem;
   background-size: 5%;
@@ -177,6 +177,54 @@
   z-index: 1;
 }
 
-.search-keyword:focus {
+.search-location {
+  width: 28%;
+  box-sizing: border-box;
+  border: 2px solid #ccc;
+  border-radius: 60px;
+  font-size: 1rem;
+  background-color: #fff;
+  background-image: url("../images/map-location.png");
+  background-position-y: center;
+  background-position-x: .5rem;
+  background-size: 5%;
+  background-repeat: no-repeat;
+  padding: 12px 20px 12px 35px;
+  position: absolute;
+  margin-left: 29%;
+  top: 415px;
+  z-index: 1;
+}
+
+.search-radius {
+  width: 10%;
+  background: url(http://i62.tinypic.com/15xvbd5.png) no-repeat 90% 0;
+  background-position-y: center;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  padding: 12px 20px 12px 35px;
+  box-sizing: border-box;
+  border: 2px solid #ccc;
+  border-radius: 60px;
+  font-size: 1rem;
+  background-color: #fff;
+  position: absolute;
+  margin-left: 58%;
+  top: 415px;
+  z-index: 1;
+}
+
+
+.search-keyword:focus, .search-location:focus, .search-radius:focus {
     outline: none;
+}
+
+.search-submit {
+  /* border-radius: 60px; */
+  font-size: 1rem;
+  position: absolute;
+  margin-left: 69%;
+  top: 420px;
+  z-index: 1;
 }
