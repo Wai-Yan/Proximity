@@ -10,6 +10,13 @@ var geocoder;
 var lat;
 var lng;
 
+
+//User search--- if they put in a Location
+  //Geocode the location to get the latitude/longitude
+  //Gather information from the distance query
+  //Geometry Library google.maps.geometry.spherical.computeDistanceBetween
+  //array of objects lat/longs from the api/posts
+
 $(document).ready(function() {
   //recruiter post, and taking address to geocode Latitude & Longitude in mySQL
   $("#addPost").on("click", function(event) {
