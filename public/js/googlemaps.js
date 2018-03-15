@@ -1,18 +1,64 @@
 var markerName = ""
-console.log("global-markerName", markerName)
 var map;
 var markers = []
-var hotMarker = []
-var restMarker = []
-var barMarker = []
-var musMarker = []
 var input = ""
 var popularity = ""
 var veryBestPic = ""
 var placeId = ""
 var placeMarker = []
+var geocoder;
+var lat;
+var lng;
 
 
+//User search--- if they put in a Location
+  //Geocode the location to get the latitude/longitude
+  //Gather information from the distance query
+  //Geometry Library google.maps.geometry.spherical.computeDistanceBetween
+  //array of objects lat/longs from the api/posts
+
+$(document).ready(function() {
+  //recruiter post, and taking address to geocode Latitude & Longitude in mySQL
+  $("#addPost").on("click", function(event) {
+      event.preventDefault();
+      var jobTitInput = $("#jobTit");
+      var jobDescInput = $("#jobDesc");
+      var jobAdrsInput = $("#jobAdr");
+      var jobCityInput = $("#jobCity")
+      var jobStateInput = $("#jobState");
+      var jobZipInput = $("#jobZip");
+      var address = "'" + jobAdrsInput.val().trim() + "," + " " + jobCityInput.val().trim() + "," + " " + jobStateInput.val().trim() + " " + jobZipInput.val().trim() + "'"
+      function geocodeAddress() {
+              geocoder.geocode({address: address}, function(results, status) {
+                  lat = results[0].geometry.location.lat()
+                  lng = results[0].geometry.location.lng()
+                  console.log(lat,lng)
+                  newPost(lat,lng)
+                })
+            }
+      geocodeAddress()
+      function newPost(lat,lng) {
+        var newPost = {
+          jobTitle: jobTitInput.val().trim(),
+          jobDescription: jobDescInput.val().trim(),
+          address: jobAdrsInput.val().trim(),
+          city: jobCityInput.val().trim(),
+          state: jobStateInput.val().trim(),
+          zipCode: jobZipInput.val().trim(),
+          latitude: lat,
+          longitude: lng
+        };
+        if (newPost != {}) {
+          submitPost(newPost);
+        }
+      }
+    function submitPost(newPost) {
+      $.post("/api/posts", newPost, function() {
+        console.log(newPost)
+      });
+    }
+  });
+});
 function googleMaps() {
   var washingtonDC = new google.maps.LatLng(38.9072, -77.0369)
   //Creates map in HTML centered on Washington, D.C.
@@ -23,6 +69,7 @@ function googleMaps() {
     },
     zoom: 13,
   });
+  geocoder = new google.maps.Geocoder();
   // Create the search box and link it to the UI element.
   input = document.getElementById('pac-input');
   var searchBox = new google.maps.places.SearchBox(input);
@@ -52,11 +99,9 @@ function googleMaps() {
     markers = [];
     //empty out the location query divs when new search occurs
     $("#locQueryDivs").empty()
-
     //Store the bounds when panning around
     var bounds = new google.maps.LatLngBounds();
     searchBox.setBounds(bounds)
-
     // For each place, get the icon, name and location.
     places.forEach(function(place) {
       if (!place.geometry) {
@@ -86,7 +131,6 @@ function googleMaps() {
               //grabs marker lat/long
               var lat = marker.getPosition().lat()
               var lng = marker.getPosition().lng()
-
               var divContainer = $("<div class='col-md-12 text-white bg-secondary mb-3 margin'>")
               var divHeader = $("<h4 class='card-header bg-primary margin2'>")
               var divBody = $("<div class='card-body'>")
@@ -100,7 +144,6 @@ function googleMaps() {
                   'maxHeight': 200
                 }) + '">' + '<br>' +
                 place.formatted_address + '<br>' + 'Average User Rating: ' + place.rating + '/5' + '<br>' + 'Price Level: ' + place.price_level + '/5' + '<br>' + 'Phone Number: ' + place.international_phone_number + '<br>' + 'Official site: ' + '<a href="' + place.website + '">' + place.website + '</a>' + '<br>' + 'User Feedback: ' + place.reviews["0"].author_name + '<br>' + 'Comments: ' + place.reviews["0"].text + '</div>');
-
                 divHeader.append(placeDetailsTitle)
                 divHeader.append(zoomToLocationBtn)
                 divContainer.append(divHeader)
@@ -124,15 +167,12 @@ function googleMaps() {
       //Push marker to markers array
       markers.push(marker);
       console.log(markers)
-
-
       //Click event to add Marker name to array to link with FourSquare & Place Details Function
       google.maps.event.addListener(marker, 'click', function(location) {
         placeId = place.place_id
         console.log("placeID", placeId)
         markerName = marker.title
         placeDetails(placeId)
-
         location = location.latLng
         console.log("location name: ", markerName)
       })
@@ -179,9 +219,7 @@ function placeDetails(placeId) {
             'maxHeight': 200
           }) + '">' + '<br>' +
           place.formatted_address + '<br>' + 'Average User Rating: ' + place.rating + '/5' + '<br>' + 'Price Level: ' + place.price_level + '/5' + '<br>' + 'Phone Number: ' + place.international_phone_number + '<br>' + 'Official site: ' + '<a href="' + place.website + '">' + place.website + '</a>' + '<br>' + 'User Feedback: ' + place.reviews["0"].author_name + '<br>' + 'Comments: ' + place.reviews["0"].text + '</div>');
-
         var contentString = '<h2>'+(place.name)+'</h2>' + placeDetailsInfo
-;
         var infowindow = new google.maps.InfoWindow({
             content: contentString
           });
