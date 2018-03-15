@@ -1,11 +1,12 @@
-
 /*--------------------------------Google Maps Required Testing----------------*/
-html, body {
+
+/* html, body {
   padding: 0;
   margin: 0;
   height: 100%;
   width: 100%;
-}
+} */
+
 #map {
   padding: 0;
   margin: 0;
@@ -22,25 +23,30 @@ html, body {
   box-shadow: 10px 10px 10px black;
 }
 
-a.btn.btn-outline-secondary {
+/* a.btn.btn-outline-secondary {
   border-radius: 15px;
   border: 0px;
-  color: white;
+  color: black;
   text-shadow: 1px 1px 1px black;
-}
-a.btn.btn-outline-secondary.red {
+} */
+
+/* a.btn.btn-outline-secondary.red {
   color: red;
-}
-a.navbar-brand {
-  color: white;
+} */
+
+/* a.navbar-brand {
+  color: black;
   font-size: 2rem;
-}
-.navbar a:not(.btn):not(.dropdown-item) {
-  color: white;
-}
+} */
+
+/* .navbar a:not(.btn):not(.dropdown-item) {
+  color: black;
+} */
+
 .font20 {
   font-size: 20px;
 }
+
 #pac-input {
   background-color: #fff;
   font-size: 19px;
@@ -50,15 +56,127 @@ a.navbar-brand {
   margin: 10px 10px 10px 0px;
   width: 65%;
 }
+
 #pac-input:focus {
   border-color: #4d90fe;
 }
+
 .margin {
   margin: 20px 0px 20px 0px;
   box-shadow: 10px 10px 10px black;
 }
+
 .margin2 {
   margin: 20px 0px 20px 0px;
   box-shadow: 10px 10px 10px black;
 }
+
 /*--------------------------------Google Maps Required Testing----------------*/
+
+.navbar {
+  position: -webkit-sticky;
+  /* Safari */
+  position: sticky;
+  top: 0;
+}
+
+.navbar-brand {
+  font-size: 2rem;
+}
+
+/* Dropdown Button */
+
+.dropbtn {
+  background-image: url("../images/user.png");
+  padding: 16px;
+  border: none;
+}
+
+/* The container <div> - needed to position the dropdown content */
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+/* Dropdown Content (Hidden by Default) */
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+  right: 0;
+}
+
+/* Links inside the dropdown */
+
+.dropdown-content a, p {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  margin-bottom: 0;
+}
+
+/* Change color of dropdown links on hover */
+
+.dropdown-content a:hover {
+  background-color: #ddd
+}
+
+/* Show the dropdown menu on hover */
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+/* Change the background color of the dropdown button when the dropdown content is shown */
+
+.dropdown:hover .dropbtn {
+  opacity: .7;
+}
+
+.float-right {
+  float: right;
+}
+
+.main-banner {
+  background-image: url("../images/main-bg.jpeg");
+  background-position: 90% 40%;
+  background-size: cover;
+  background-repeat: no-repeat;
+  padding: 100px;
+  color: #fff;
+}
+
+.header-text {
+  padding: 0px;
+  color: #fff;
+  width: 35%;
+}
+
+.search-keyword {
+  width: 30%;
+  box-sizing: border-box;
+  border: 2px solid #ccc;
+  border-radius: 60px;
+  font-size: 1rem;
+  background-color: #fff;
+  background-image: url("../images/magnifying-glass.png");
+  background-position-y: center;
+  background-position-x: .5rem;
+  background-size: 5%;
+  background-repeat: no-repeat;
+  padding: 12px 20px 12px 35px;
+  position: absolute;
+  /* left: 0px; */
+  top: 415px;
+  z-index: 1;
+}
+
+.search-keyword:focus {
+    outline: none;
+}
