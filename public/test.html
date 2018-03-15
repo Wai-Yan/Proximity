@@ -45,9 +45,19 @@
 		</div>
 	</div>
 	<div class="container">
-		<form>
-	  <input class="search-keyword" type="text" name="search" placeholder="Search keyword">
-	</form>
+		<form class="form-inline">
+			<input class="search-keyword" type="text" name="search" placeholder="Search keyword">
+			<input class="search-location" type="text" name="search" placeholder="Location">
+			<select class="search-radius">
+  <option value="10" selected>10 miles</option>
+  <option value="20">20 miles</option>
+	<option value="30">30 miles</option>
+		<option value="40">40 miles</option>
+			<option value="50">50 miles</option>
+				<option value="60">60 miles</option>
+</select>
+			<button type="submit" class="btn btn-primary mb-2 search-submit">Submit</button>
+		</form>
 	</div>
 	<div class="container mt-5">
 		<form class="text-center">
