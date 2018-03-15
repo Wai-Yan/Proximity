@@ -73,15 +73,21 @@
 
 /*--------------------------------Google Maps Required Testing----------------*/
 
+body {
+  font-family: 'Roboto Condensed', sans-serif;
+}
+
 .navbar {
   position: -webkit-sticky;
   /* Safari */
   position: sticky;
   top: 0;
+  background-color: #fff;
 }
 
 .navbar-brand {
   font-size: 2rem;
+  font-family: 'Ubuntu', sans-serif;
 }
 
 /* Dropdown Button */
@@ -139,6 +145,11 @@
   opacity: .7;
 }
 
+h1 {
+  font-family: 'Raleway', sans-serif;
+  font-weight: bold;
+}
+
 .float-right {
   float: right;
 }
@@ -155,13 +166,13 @@
 .header-text {
   padding: 0px;
   color: #fff;
-  width: 35%;
+  width: 40%;
 }
 
 .search-keyword {
   width: 28%;
   box-sizing: border-box;
-  border: 2px solid #ccc;
+  border: 1px solid #ccc;
   border-radius: 60px;
   font-size: 1rem;
   background-color: #fff;
@@ -173,14 +184,14 @@
   padding: 12px 20px 12px 35px;
   position: absolute;
   /* left: 0px; */
-  top: 415px;
+  top: 390px;
   z-index: 1;
 }
 
 .search-location {
   width: 28%;
   box-sizing: border-box;
-  border: 2px solid #ccc;
+  border: 1px solid #ccc;
   border-radius: 60px;
   font-size: 1rem;
   background-color: #fff;
@@ -192,7 +203,7 @@
   padding: 12px 20px 12px 35px;
   position: absolute;
   margin-left: 29%;
-  top: 415px;
+  top: 390px;
   z-index: 1;
 }
 
@@ -205,13 +216,13 @@
   appearance: none;
   padding: 12px 20px 12px 35px;
   box-sizing: border-box;
-  border: 2px solid #ccc;
+  border: 1px solid #ccc;
   border-radius: 60px;
   font-size: 1rem;
   background-color: #fff;
   position: absolute;
   margin-left: 58%;
-  top: 415px;
+  top: 390px;
   z-index: 1;
 }
 
@@ -225,6 +236,6 @@
   font-size: 1rem;
   position: absolute;
   margin-left: 69%;
-  top: 420px;
+  top: 395px;
   z-index: 1;
 }
