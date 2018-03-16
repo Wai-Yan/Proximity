@@ -49,7 +49,7 @@ $(document).ready(function() {
         var adr2 = results[i].city
         var adr3 = results[i].state
         var adr4 = results[i].zipCode
-        var fullAddress = "'"+ adr1 + "," adr2 + adr3 + adr4
+        var fullAddress = adr1 + " " + adr2 + " " + adr3 + " " + adr4
         var latitude = results[i].latitude
         var longitude = results[i].longitude
         var placeIdentifier = results[i].placeID
@@ -108,9 +108,9 @@ $(document).ready(function() {
     function submitPost(newPost) {
       $.post("/api/posts", newPost, function() {
         console.log(newPost)
+        location.reload();
       });
     }
-    // location.reload();
   });
 });
 function googleMain() {
@@ -153,26 +153,22 @@ function googleMaps() {
     console.log("SEARCH", searchMarkersLatLng)
     for (var i = 0; i < searchMarkersLatLng.length; i++) {
       var marksLatLng = searchMarkersLatLng[i]
-
       var marker = new google.maps.Marker({
             position: {lat: marksLatLng[0], lng: marksLatLng[1]
             },
             map: map,
             placeId: marksLatLng[2],
             content: '<div><strong>' + marksLatLng[4] + '</strong><br>' +
-              'Position: ' + marksLatLng[5] + '<br>' +
-              marksLatLng[3] + '</div>',
+              'Job Title: ' + marksLatLng[5] + '<br>' + 'Address: ' +
+              marksLatLng[3] + '</div>' + 'More Info: ' + '<a href="#">testURL</a>' + '<br>' ,
             zIndex: 999999
           })
-
           google.maps.event.addListener(marker, 'click', function() {
             infowindow.setContent(this.content);
             infowindow.open(map, this);
       })
     }
   }
-
-
 
 //--------------------Autocomplete search box information with google-----------
 // Create the search box and link it to the UI element.
