@@ -62,36 +62,6 @@ $(document).ready(function() {
       }
     })
   });
-
-  $(".moreInfoUrl").on("click", function(event) {
-    event.preventDefault();
-    queryURL = "'http://localhost:8080/api/posts/:'" + this.val() + '"'
-    console.log(queryURL)
-    $.ajax({
-      url: 'http://localhost:8080/api/posts',
-      method: "GET",
-    }).done(function(results) {
-      console.log(results)
-      for (var i = 0; i < results.length; i++) {
-        //work on adding custom information from mySQL to the markers!
-        jobId = results[i].id
-        var jbTit = results[i].jobTitle
-        var cmpName = results[i].companyName
-        var adr1 = results[i].address
-        var adr2 = results[i].city
-        var adr3 = results[i].state
-        var adr4 = results[i].zipCode
-        var fullAddress = adr1 + " " + adr2 + " " + adr3 + " " + adr4
-        var latitude = results[i].latitude
-        var longitude = results[i].longitude
-        var placeIdentifier = results[i].placeID
-        searchMarkersLatLng.push([parseFloat(latitude), parseFloat(longitude), placeIdentifier,fullAddress,cmpName,jbTit,jobId])
-        console.log(searchMarkersLatLng)
-        googleMaps();
-      }
-    })
-  });
-
   //recruiter post, and taking address to geocode Latitude & Longitude in mySQL
   $("#addPost").on("click", function(event) {
     event.preventDefault();
@@ -192,13 +162,43 @@ function googleMaps() {
             placeId: marksLatLng[2],
             content: '<div><strong>' + marksLatLng[4] + '</strong><br>' +
               'Job Title: ' + marksLatLng[5] + '<br>' + 'Address: ' +
-              marksLatLng[3] + '</div>' + 'More Info: ' + '<a class="moreInfoUrl" value="'+marksLatLng[6]+'" href="api/posts/' + marksLatLng[6] +'">testURL</a>' + '<br>',
+              marksLatLng[3] + '</div>' + 'More Info: ' + '<a class="moreInfoUrl" data-value='+marksLatLng[6]+'" href="api/posts/'+ marksLatLng[6]+'">testURL</a>' + '<br>',
             zIndex: 999999
           })
-          google.maps.event.addListener(marker, 'click', function() {
+      google.maps.event.addListener(marker, 'mouseover', function() {
             infowindow.setContent(this.content);
             infowindow.open(map, this);
       })
+      google.maps.event.addListener(marker, 'click', function() {
+          queryURL = 'http://localhost:8080/api/posts/' + $(".moreInfoUrl").data("value")
+          console.log(queryURL)
+          $.ajax({
+            url: queryURL,
+            method: "GET",
+          }).done(function(results) {
+            console.log(results)
+              $("#markerName").empty()
+              $("#markerCheckins").empty()
+              $("#applyButton").empty()
+              var jbTit = results.jobTitle
+              var cmpName = results.companyName
+              var jobDesc = results.jobDescription
+              var adr1 = results.address
+              var adr2 = results.city
+              var adr3 = results.state
+              var adr4 = results.zipCode
+              var fullAddress = adr1 + " " + adr2 + " " + adr3 + " " + adr4
+              var createdAt = results.created_at
+              var updatedAt = results.updated_at
+
+              var placeDetailsModal = ('<div>'+ 'Company:' + cmpName + '<br>' + 'Job Description:'+ jobDesc + '<br>' + 'Job Address:'+ fullAddress + '<br>' +'Created At:'+ createdAt + '<br>' +'Updated At:'+ updatedAt+ '<br>' +'</div>');
+              $("#markerName").text('Job Title: ' + jbTit)
+              $("#markerCheckins").append(placeDetailsModal)
+              $("#applyButton").append('<button type="submit" id="apply" class="btn btn-success">Apply</button>')
+              jQuery.noConflict();
+              $("#markerModal").modal()
+          })
+        });
     }
   }
 
