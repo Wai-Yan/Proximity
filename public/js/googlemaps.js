@@ -18,10 +18,48 @@ var placePostId;
 var service;
 var jobId;
 var queryURL;
+var gMarkers = [];
 
 //Someone needs to work on getting query working for Job Search--then posting those items to /api/SearchQuery
+//Need to make small table for the location information
+// $("#locationVal")
+//Multi-stage approach,logic from url---
+  //1. Post data using $("#addPost") template for initial location
+  //2. Get markers from the $("#test") template, add functionality to post them into an array called gMarkers
+  //3. Run code from URL
+    //   function codeAddress() {
+    // var address = document.getElementById('address').value;
+    // var radius = parseInt(document.getElementById('radius').value, 10)*1000;
+    // geocoder.geocode( { 'address': address}, function(results, status) {
+    //   if (status == google.maps.GeocoderStatus.OK) {
+    //     map.setCenter(results[0].geometry.location);
+    //     var marker = new google.maps.Marker({
+    //       map: map,
+    //       position: results[0].geometry.location
+    //     });
+    //     if (circle) circle.setMap(null);
+    //     circle = new google.maps.Circle({center:marker.getPosition(),
+    //                                    radius: radius,
+    //                                    fillOpacity: 0.35,
+    //                                    fillColor: "#FF0000",
+    //                                    map: map});
+    //     var bounds = new google.maps.LatLngBounds();
+    //     for (var i=0; i<gmarkers.length;i++) {
+    //       if (google.maps.geometry.spherical.computeDistanceBetween(gmarkers[i].getPosition(),marker.getPosition()) < radius) {
+    //         bounds.extend(gmarkers[i].getPosition())
+    //         gmarkers[i].setMap(map);
+    //       } else {
+    //         gmarkers[i].setMap(null);
+    //       }
+    //     }
+    //     map.fitBounds(bounds);
+    //
+    //   } else {
+    //     alert('Geocode was not successful for the following reason: ' + status);
+    //   }
+    // });
+    // }
 
-//work on adding custom information from mySQL to the markers!
 
 //User search--- if they put in a Location
 //Gather information from the distance query
@@ -165,6 +203,8 @@ function googleMaps() {
               marksLatLng[3] + '</div>' + 'More Info: ' + '<a class="moreInfoUrl" data-value='+marksLatLng[6]+'" href="api/posts/'+ marksLatLng[6]+'">testURL</a>' + '<br>',
             zIndex: 999999
           })
+      gMarkers.push(marker);
+      console.log("gMarkers array: ", gMarkers)
       google.maps.event.addListener(marker, 'mouseover', function() {
             infowindow.setContent(this.content);
             infowindow.open(map, this);
