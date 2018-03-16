@@ -77,9 +77,9 @@ body {
   font-family: 'Roboto Condensed', sans-serif;
 }
 
-.wrapper {
+/* .wrapper {
   height: calc(100vh - 30px);
-}
+} */
 
 .navbar {
   position: -webkit-sticky;
@@ -231,11 +231,11 @@ h1 {
 }
 
 .search-keyword:focus, .search-location:focus, .search-radius:focus {
-    outline: none;
+  outline: none;
 }
 
 .latest-section {
- margin-top: 4%;
+  margin-top: 4%;
 }
 
 .recruiter-login-text {
@@ -249,4 +249,37 @@ h1 {
   margin-left: 69%;
   top: 395px;
   z-index: 1;
+}
+
+.jobRow {
+  border-top: 1px solid #ccc;
+}
+
+.jobData {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.btn-apply {
+  background-color: #4CAF50;
+  /* Green */
+  border: none;
+  color: white;
+  padding: 10px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: .25rem;
+}
+
+.btn-apply:hover {
+  opacity: .7;
+}
+
+.footer {
+  background-color: #fff;
+  border-top: 1px solid black;
+  margin-top: 50px;
 }
