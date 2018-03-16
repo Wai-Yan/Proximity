@@ -21,13 +21,6 @@ module.exports = function(sequelize, DataTypes) {
         len: [1,255]
       }
     },
-    phoneNumber: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      validate: {
-        len: [8,255]
-      }
-    },
     address: {
       type: DataTypes.STRING,
       allowNull: false,
