@@ -18,8 +18,8 @@ var placePostId;
 var service;
 
 //Someone needs to work on getting query working for Job Search--then posting those items to /api/SearchQuery
-//
 
+//work on adding custom information from mySQL to the markers!
 
 //User search--- if they put in a Location
 //Gather information from the distance query
@@ -42,6 +42,7 @@ $(document).ready(function() {
     }).done(function(results) {
       console.log(results)
       for (var i = 0; i < results.length; i++) {
+        //work on adding custom information from mySQL to the markers!
         var latitude = results[i].latitude
         var longitude = results[i].longitude
         var placeIdentifier = results[i].placeID
@@ -103,6 +104,17 @@ $(document).ready(function() {
     // location.reload();
   });
 });
+function googleMain() {
+  var washingtonDC = new google.maps.LatLng(38.9072, -77.0369)
+  //Creates map in HTML centered on Washington, D.C.
+  map = new google.maps.Map(document.getElementById('map'), {
+    center: {
+      lat: 38.9072,
+      lng: -77.0369
+    },
+    zoom: 13,
+  });
+}
 function googleMaps() {
   var washingtonDC = new google.maps.LatLng(38.9072, -77.0369)
   //Creates map in HTML centered on Washington, D.C.
@@ -134,6 +146,21 @@ function googleMaps() {
       var infowindow = new google.maps.InfoWindow();
       var service = new google.maps.places.PlacesService(map);
 
+      var marker = new google.maps.Marker({
+            position: {lat: marksLatLng[0], lng: marksLatLng[1]
+            },
+            map: map,
+            placeId: marksLatLng[2],
+            zIndex: 999999
+          })
+
+
+//Company name (new column to be added)
+//job title
+//phone number (new column to be added)
+//address
+//company site (option URL)
+
       service.getDetails({
         placeId: marksLatLng[2]
       }, function(place, status) {
@@ -151,7 +178,7 @@ function googleMaps() {
           });
         }
       });
-      
+
     }
   }
   //     // console.log(marksLatLng)
