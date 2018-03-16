@@ -30,5 +30,15 @@ $(document).ready(function() {
 
   getPosts();
 
+  $( ".btn-success" ).click(function() {
+    starJob();
+  });
 
+  function starJob() {
+    console.log("You starred a job");
+  }
+
+  function unstarJob() {
+    console.log("You unstarred a job");
+  }  
 })
