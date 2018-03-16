@@ -1,14 +1,14 @@
-$(document).ready(function() {
-var latestResults = [];
-
-function RecentJobsTable (
-  $("#recentJobs").html()
-
-)
-
-
-
-
-
-
-}
+// $(document).ready(function() {
+// var latestResults = [];
+//
+// function RecentJobsTable (
+//   $("#recentJobs").html()
+//
+// )
+//
+//
+//
+//
+//
+//
+// }
