@@ -6,6 +6,7 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 	<link href="https://fonts.googleapis.com/css?family=Raleway:400,800|Roboto+Condensed|Ubuntu" rel="stylesheet">
 	<link rel="stylesheet" href="css/styles.css" type="text/css" />
+	<link rel="stylesheet" href="css/maingmoverride.css" type="text/css" />
 	<title>ProjectTwo</title>
 	<script src="https://code.jquery.com/jquery.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
@@ -75,12 +76,17 @@
 </div>
 	</div>
 </div>
+
+			<div id="map"></div>
+
 	<div class="footer">
 		<div class="container text-center">
 			<p class="recruiter-login-text">Are you a recruiter?</p> <button type="submit" class="btn btn-light recruiter-login">Register/Login</button>
 			<p>© Copyright JobLocator 2018 | <a href="#" target="_blank">About</a></p>
 		</div>
 	</div>
+	<!--Google Maps Script-->
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDxfscSb8wwqM-slfCubiwM1KKt7sb1P-c&libraries=places&callback=googleMain" async defer></script>
 </body>
 
 </html>
