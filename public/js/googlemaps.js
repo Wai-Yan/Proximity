@@ -43,10 +43,17 @@ $(document).ready(function() {
       console.log(results)
       for (var i = 0; i < results.length; i++) {
         //work on adding custom information from mySQL to the markers!
+        var jbTit = results[i].jobTitle
+        var cmpName = results[i].companyName
+        var adr1 = results[i].address
+        var adr2 = results[i].city
+        var adr3 = results[i].state
+        var adr4 = results[i].zipCode
+        var fullAddress = "'"+ adr1 + "," adr2 + adr3 + adr4
         var latitude = results[i].latitude
         var longitude = results[i].longitude
         var placeIdentifier = results[i].placeID
-        searchMarkersLatLng.push([parseFloat(latitude), parseFloat(longitude), placeIdentifier])
+        searchMarkersLatLng.push([parseFloat(latitude), parseFloat(longitude), placeIdentifier,fullAddress,cmpName,jbTit])
         console.log(searchMarkersLatLng)
         googleMaps();
       }
@@ -61,6 +68,7 @@ $(document).ready(function() {
     googleMaps();
     var jobTitInput = $("#jobTit");
     var jobDescInput = $("#jobDesc");
+    var jobCompInput = $("#jobComp");
     var jobAdrsInput = $("#jobAdr");
     var jobCityInput = $("#jobCity");
     var jobStateInput = $("#jobState");
@@ -84,6 +92,7 @@ $(document).ready(function() {
       var newPost = {
         jobTitle: jobTitInput.val().trim(),
         jobDescription: jobDescInput.val().trim(),
+        companyName: jobCompInput.val().trim(),
         address: jobAdrsInput.val().trim(),
         city: jobCityInput.val().trim(),
         state: jobStateInput.val().trim(),
@@ -140,60 +149,28 @@ function googleMaps() {
       coords: [1, 1, 1, 20, 18, 20, 18, 1],
       type: 'poly'
     };
+    var infowindow = new google.maps.InfoWindow();
     console.log("SEARCH", searchMarkersLatLng)
     for (var i = 0; i < searchMarkersLatLng.length; i++) {
       var marksLatLng = searchMarkersLatLng[i]
-      var infowindow = new google.maps.InfoWindow();
-      var service = new google.maps.places.PlacesService(map);
 
       var marker = new google.maps.Marker({
             position: {lat: marksLatLng[0], lng: marksLatLng[1]
             },
             map: map,
             placeId: marksLatLng[2],
+            content: '<div><strong>' + marksLatLng[4] + '</strong><br>' +
+              'Position: ' + marksLatLng[5] + '<br>' +
+              marksLatLng[3] + '</div>',
             zIndex: 999999
           })
 
-
-//Company name (new column to be added)
-//job title
-//phone number (new column to be added)
-//address
-//company site (option URL)
-
-      service.getDetails({
-        placeId: marksLatLng[2]
-      }, function(place, status) {
-        if (status === google.maps.places.PlacesServiceStatus.OK) {
-          var marker = new google.maps.Marker({
-              position: {lat: marksLatLng[0], lng: marksLatLng[1]},
-              map: map,
-              zIndex: 999999,
-          });
           google.maps.event.addListener(marker, 'click', function() {
-            infowindow.setContent('<div><strong>' + place.name + '</strong><br>' +
-              'Place ID: ' + place.place_id + '<br>' +
-              place.formatted_address + '</div>');
+            infowindow.setContent(this.content);
             infowindow.open(map, this);
-          });
-        }
-      });
-
+      })
     }
   }
-  //     // console.log(marksLatLng)
-  //     // var marker = new google.maps.Marker({
-  //     //   position: {lat: marksLatLng[0], lng: marksLatLng[1]
-  //     //   },
-  //     //   map: map,
-  //     //   icon: image,
-  //     //   shape: shape,
-  //     //   placeId: marksLatLng[2],
-  //     //   zIndex: 999999
-  //     // })
-  //     // console.log("MARKER", marker)
-  //   }
-  // }
 
 
 
