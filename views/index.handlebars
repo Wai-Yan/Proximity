@@ -1,10 +1,31 @@
-<form class="text-center">
-  <div class="form-group">
-    <input type="text" class="form-control" placeholder="Default input" id="jobTit">
-    <input type="text" class="form-control" placeholder="Default input" id="jobDesc">
-    <input type="text" class="form-control" placeholder="Default input" id="jobAdr">
-    <input type="text" class="form-control" placeholder="Default input" id="jobState">
-    <input type="text" class="form-control" placeholder="Default input" id="jobZip">
+<div class="main-banner">
+  <div class="container">
+    <h1>Find the job you want</h1>
+    <h1>where you want it</h1>
+    <p class="header-text">Search for a job within the exact radius of where you want to be
   </div>
-  <button type="submit" id="addPost" class="btn btn-primary">Submit Post</button>
-</form>
+</div>
+<div class="container">
+  <form class="form-inline">
+    <input class="search-keyword" id="keywordVal" type="text" name="search" placeholder="Search keyword">
+    <input class="search-location" id="locationVal" type="text" name="search" placeholder="Location">
+    <select class="search-radius">
+<option value="10" selected>10 miles</option>
+<option value="20">20 miles</option>
+<option value="30">30 miles</option>
+  <option value="40">40 miles</option>
+    <option value="50">50 miles</option>
+      <option value="60">60 miles</option>
+</select>
+    <button type="submit" id="sendSearch" class="btn btn-primary mb-2 search-submit">Submit</button>
+  </form>
+</div>
+<div class="latest-section" >
+  <div class="container">
+  <h3>Latest jobs</h3>
+  <div id="recentJobs">
+    <p>testing to see what is showing</p>
+  </div>
+</div>
+</div>
+</div>
