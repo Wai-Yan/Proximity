@@ -16,6 +16,8 @@ var searchMarkerAry = []
 var image;
 var placePostId;
 var service;
+var jobId;
+var queryURL;
 
 //Someone needs to work on getting query working for Job Search--then posting those items to /api/SearchQuery
 
@@ -43,6 +45,7 @@ $(document).ready(function() {
       console.log(results)
       for (var i = 0; i < results.length; i++) {
         //work on adding custom information from mySQL to the markers!
+        jobId = results[i].id
         var jbTit = results[i].jobTitle
         var cmpName = results[i].companyName
         var adr1 = results[i].address
@@ -53,7 +56,36 @@ $(document).ready(function() {
         var latitude = results[i].latitude
         var longitude = results[i].longitude
         var placeIdentifier = results[i].placeID
-        searchMarkersLatLng.push([parseFloat(latitude), parseFloat(longitude), placeIdentifier,fullAddress,cmpName,jbTit])
+        searchMarkersLatLng.push([parseFloat(latitude), parseFloat(longitude), placeIdentifier,fullAddress,cmpName,jbTit,jobId])
+        console.log(searchMarkersLatLng)
+        googleMaps();
+      }
+    })
+  });
+
+  $(".moreInfoUrl").on("click", function(event) {
+    event.preventDefault();
+    queryURL = "'http://localhost:8080/api/posts/:'" + this.val() + '"'
+    console.log(queryURL)
+    $.ajax({
+      url: 'http://localhost:8080/api/posts',
+      method: "GET",
+    }).done(function(results) {
+      console.log(results)
+      for (var i = 0; i < results.length; i++) {
+        //work on adding custom information from mySQL to the markers!
+        jobId = results[i].id
+        var jbTit = results[i].jobTitle
+        var cmpName = results[i].companyName
+        var adr1 = results[i].address
+        var adr2 = results[i].city
+        var adr3 = results[i].state
+        var adr4 = results[i].zipCode
+        var fullAddress = adr1 + " " + adr2 + " " + adr3 + " " + adr4
+        var latitude = results[i].latitude
+        var longitude = results[i].longitude
+        var placeIdentifier = results[i].placeID
+        searchMarkersLatLng.push([parseFloat(latitude), parseFloat(longitude), placeIdentifier,fullAddress,cmpName,jbTit,jobId])
         console.log(searchMarkersLatLng)
         googleMaps();
       }
@@ -132,7 +164,7 @@ function googleMaps() {
       lat: 38.9072,
       lng: -77.0369
     },
-    zoom: 13,
+    zoom: 4,
   });
   //geocoder for recruiter posting for latitude/longitude
   geocoder = new google.maps.Geocoder();
@@ -160,7 +192,7 @@ function googleMaps() {
             placeId: marksLatLng[2],
             content: '<div><strong>' + marksLatLng[4] + '</strong><br>' +
               'Job Title: ' + marksLatLng[5] + '<br>' + 'Address: ' +
-              marksLatLng[3] + '</div>' + 'More Info: ' + '<a href="#">testURL</a>' + '<br>' ,
+              marksLatLng[3] + '</div>' + 'More Info: ' + '<a class="moreInfoUrl" value="'+marksLatLng[6]+'" href="api/posts/' + marksLatLng[6] +'">testURL</a>' + '<br>',
             zIndex: 999999
           })
           google.maps.event.addListener(marker, 'click', function() {
