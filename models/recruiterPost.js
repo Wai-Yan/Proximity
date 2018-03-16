@@ -18,14 +18,14 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
-        len: [15,255]
+        len: [1,255]
       }
     },
     phoneNumber: {
       type: DataTypes.INTEGER,
       allowNull: false,
       validate: {
-        len: [15,255]
+        len: [8,255]
       }
     },
     address: {
