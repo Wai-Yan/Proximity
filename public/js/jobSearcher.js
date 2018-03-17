@@ -3,7 +3,7 @@ $(document).ready(function() {
   function initializeRows(posts) {
     var latestPosts = posts.reverse();
     var rowsToAdd = [];
-    for (var i = 0; i < 7; i++) {
+    for (var i = 0; i < 4; i++) {
       rowsToAdd.push(createNewRow(latestPosts[i]));
     }
     $("#recentJobs").append(rowsToAdd);
@@ -27,15 +27,17 @@ $(document).ready(function() {
     var stateTd = $("<td>").text(posts.state).addClass("jobData")
     var viewbtn = $("<td>")
     var btn = $('<input />', {
-      type: 'button',
-      value: 'View',
-      class: 'btn-viewPost',
+      type: "button",
+      value: "View",
+      class: "btn-viewPost",
+      "data-toggle": "modal",
+      "data-target": "#viewJobPostInfo",
       on    : {
                  click:
                  function() {
-                     console.log ( posts.id );
+                     // console.log ( posts.id );
+                     displayPost(posts.id)
                  }
-                 // displayPost()
               }
     })
     viewbtn.append(btn)
@@ -46,37 +48,45 @@ $(document).ready(function() {
   getPosts();
 
   /// click action for view to pop up with modal on the job info
-  // function displayPost() {
-  //   console.log("hi")
-  //   queryURL = 'http://localhost:8080/api/posts/' + posts.id
-  //   console.log(queryURL)
-  //   $.ajax({
-  //     url: queryURL,
-  //     method: "GET",
-  //   }).done(function(results) {
-  //     console.log(results)
-  //       // $("#markerName").empty()
-  //       // $("#markerCheckins").empty()
-  //       // $("#applyButton").empty()
-  //       var jbTit = results.jobTitle
-  //       var cmpName = results.companyName
-  //       var jobDesc = results.jobDescription
-  //       var adr1 = results.address
-  //       var adr2 = results.city
-  //       var adr3 = results.state
-  //       var adr4 = results.zipCode
-  //       var fullAddress = adr1 + " " + adr2 + " " + adr3 + " " + adr4
-  //       var createdAt = results.created_at
-  //       var updatedAt = results.updated_at
-  //
-  //       var placeDetailsModal = ('<div>'+ 'Company:' + cmpName + '<br>' + 'Job Description:'+ jobDesc + '<br>' + 'Job Address:'+ fullAddress + '<br>' +'Created At:'+ createdAt + '<br>' +'Updated At:'+ updatedAt+ '<br>' +'</div>');
-  //       // $("#markerName").text('Job Title: ' + jbTit)
-  //       // $("#markerCheckins").append(placeDetailsModal)
-  //       // $("#applyButton").append('<button type="submit" id="apply" class="btn btn-success">Apply</button>')
-  //       // jQuery.noConflict();
-  //       // $("#markerModal").modal()
-  //   })
-  // };
+  function displayPost(id) {
+    console.log("hi")
+    queryURL = 'http://localhost:8080/api/posts/' + id
+    console.log(queryURL)
+    $.ajax({
+      url: queryURL,
+      method: "GET",
+    }).done(function(results) {
+      console.log(results)
+        // $("#markerName").empty()
+        // $("#markerCheckins").empty()
+        // $("#applyButton").empty()
+        $("#viewJobPostTitle").text(results.jobTitle)
+        // $("#viewJobPostCompany").text(results.companyName)
+        // $("viewJobAddressCompany").text(results.address)
+        // $("viewJobCityStateZipCompany").text(results.city + results.state + results.zipCode)
+        // $("viewJobDescriptionCompany").text(results.jobDescription)
+        // $("viewJobQualificationCompany").text("placeholder for qualifications")
+        // $("#viewJobAddInfoCompany").text("placeholder for the additional information")
+
+        var jbTit = results.jobTitle
+        var cmpName = results.companyName
+        var jobDesc = results.jobDescription
+        var adr1 = results.address
+        var adr2 = results.city
+        var adr3 = results.state
+        var adr4 = results.zipCode
+        var fullAddress = adr1 + " " + adr2 + " " + adr3 + " " + adr4
+        var createdAt = results.created_at
+        var updatedAt = results.updated_at
+
+        var placeDetailsModal = ('<div>'+ 'Company:' + cmpName + '<br>' + 'Job Description:'+ jobDesc + '<br>' + 'Job Address:'+ fullAddress + '<br>' +'Created At:'+ createdAt + '<br>' +'Updated At:'+ updatedAt+ '<br>' +'</div>');
+        // $("#markerName").text('Job Title: ' + jbTit)
+        $(".modal-body").html(placeDetailsModal)
+        // $("#applyButton").append('<button type="submit" id="apply" class="btn btn-success">Apply</button>')
+        // jQuery.noConflict();
+        // $("#markerModal").modal()
+    })
+  };
 
   $("#resultsPageTitleText").text("Your search results for " + "(variable)" + " jobs in " + "(variable)")
 
