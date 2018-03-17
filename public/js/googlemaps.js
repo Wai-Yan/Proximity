@@ -69,7 +69,7 @@ var gMarkers = [];
 
 $(document).ready(function() {
   //job Searcher request this will need to be taken from results page of query post
-  $("#test").on("click", function(event) {
+  $("#sendSearch").on("click", function(event) {
     event.preventDefault();
     //emptySearchMarkersArray
     searchMarkersLatLng = []
@@ -108,7 +108,7 @@ $(document).ready(function() {
     googleMaps();
     var jobTitInput = $("#jobTit");
     var jobDescInput = $("#jobDesc");
-    var jobCompInput = $("#jobComp");
+    // var jobCompInput = $("#jobComp");
     var jobAdrsInput = $("#jobAdr");
     var jobCityInput = $("#jobCity");
     var jobStateInput = $("#jobState");
@@ -231,7 +231,7 @@ function googleMaps() {
               var createdAt = results.created_at
               var updatedAt = results.updated_at
 
-              var placeDetailsModal = ('<div>'+ 'Company:' + cmpName + '<br>' + 'Job Description:'+ jobDesc + '<br>' + 'Job Address:'+ fullAddress + '<br>' +'Created At:'+ createdAt + '<br>' +'Updated At:'+ updatedAt+ '<br>' +'</div>');
+              var placeDetailsModal = ('<div>'+ 'Company: <COMPANY NAME>' + '<br>' + 'Job Description:'+ jobDesc + '<br>' + 'Job Address:'+ fullAddress + '<br>' +'Created At:'+ createdAt + '<br>' +'Updated At:'+ updatedAt+ '<br>' +'</div>');
               $("#markerName").text('Job Title: ' + jbTit)
               $("#markerCheckins").append(placeDetailsModal)
               $("#applyButton").append('<button type="submit" id="apply" class="btn btn-success">Apply</button>')

@@ -6,7 +6,6 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 	<link href="https://fonts.googleapis.com/css?family=Raleway:400,800|Roboto+Condensed|Ubuntu" rel="stylesheet">
 	<link rel="stylesheet" href="css/styles.css" type="text/css" />
-	<link rel="stylesheet" href="css/maingmoverride.css" type="text/css" />
 	<title>ProjectTwo</title>
 	<script src="https://code.jquery.com/jquery.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
@@ -27,7 +26,7 @@
   </a>
 				<div class="float-right">
 					<a href="#"><button type="button" id="registerbtn" class="btn btn-success">Register</button></a>
-					<a href="#"><button type="button" href="#" id="loginbtn" class="btn btn-light">Login</button></a>
+					<button type="button" id="loginbtn" class="btn btn-light" data-toggle="modal" data-target="#loginModal">Login</button>
 					<!-- <div class="dropdown" id="profilebtn">
 	  <button class="dropbtn"></button>
 	  <div class="dropdown-content">
@@ -76,9 +75,93 @@
 				</table>
 			</div>
 		</div>
+		<div class="container">
+      <div class="row">
+        <div class="map col-md-12" id="mapContainer">
+          <!--First Map -->
 
+          <input id="pac-input" class="controls" type="text" placeholder="Search Locations">
+          <div id="map"></div>
+        </div>
+      </div>
+    </div>
+		<div class="container">
+			<!-- Modal -->
+			<div class="modal fade" id="markerModal" role="dialog">
+				<div class="modal-dialog">
 
-		<div id="map"></div>
+					<!-- Modal content-->
+					<div class="modal-content">
+						<div class="modal-header">
+							<div class="row">
+								<div class="col-md-10">
+									<h4 style="color:red;" id="markerName"></h4>
+								</div>
+								<div class="col-md-2">
+									<h4 id="applyButton"></h4>
+								</div>
+							</div>
+						</div>
+						<div class="container">
+							<div class="row">
+								<div class="col-md-12">
+									<p class="modalfont" id="markerCheckins"></p>
+
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+
+		<!-- The Modal -->
+			<div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel" aria-hidden="true">
+				<div class="modal-dialog modal-sm" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="loginModalLabel">Welcome to JobLocator!</h5>
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+		          <span aria-hidden="true">&times;</span>
+		        </button>
+						</div>
+						<div class="modal-body">
+							<form>
+								<div class="img_container">
+									<img src="images/user.png" alt="User" class="avatar">
+								</div>
+								<div class="form-group">
+									<input type="text" id="username" class="form-control" placeholder="Username" required>
+								</div>
+								<div class="form-group">
+									<input type="text" id="password" class="form-control" placeholder="Password" required>
+								</div>
+								<div>
+									<label for="remember">
+									<input type="checkbox" name="remember"> Remember me
+								</label>
+								</div>
+								<div>
+									<label for="help"><a href="#">Need help signing in?</a></label>
+								</div>
+							</form>
+						</div>
+						<div class="modal-footer">
+							<button type="button" id="oktaLogin" class="btn btn-primary">Login</button>
+							<button type="button" id="cancelLogin" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		<!-- Tak -->
 
 		<div class="footer">
 			<div class="container text-center">
@@ -88,7 +171,10 @@
 		</div>
 	</div>
 	<!--Google Maps Script-->
-	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDxfscSb8wwqM-slfCubiwM1KKt7sb1P-c&libraries=places&callback=googleMain" async defer></script>
+	<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDxfscSb8wwqM-slfCubiwM1KKt7sb1P-c&libraries=places,geometry"></script>
 </body>
 
 </html>

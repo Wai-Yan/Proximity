@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <link href="https://fonts.googleapis.com/css?family=Raleway:400,800|Roboto+Condensed|Ubuntu" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css" type="text/css" />
+  <link rel="stylesheet" href="css/maingmoverride.css" type="text/css" />
+  <title>ProjectTwo</title>
+  <script src="https://code.jquery.com/jquery.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.0/moment.min.js" type="text/javascript"></script>
+  <script src="js/googlemaps.js" type="text/javascript"></script>
+  <script src="js/jobSearcher.js" type="text/javascript"></script>
+  <script src="js/recruiter.js" type="text/javascript"></script>
+</head>
+
+<body>
+  <div class="wrapper">
+  <nav class="navbar navbar-light">
+    <div class="container">
+      <a class="navbar-brand" href="#">
+    <img src="images/geolocalization.png" height="50" class="d-inline-block" alt="">
+    Job<style="color:#55A8DD;">Locator</style>
+  </a>
+      <div class="float-right">
+        <a href="#"><button type="button" id="registerbtn" class="btn btn-success">Register</button></a>
+        <a href="#"><button type="button" href="#" id="loginbtn" class="btn btn-light">Login</button></a>
+        <!-- <div class="dropdown" id="profilebtn">
+    <button class="dropbtn"></button>
+    <div class="dropdown-content">
+      <p>(dynamic name)</p>
+      <a href="#">Saved Jobs</a>
+      <a href="#">Settings</a>
+      <a href="#">Logout</a>
+    </div>
+  </div> -->
+      </div>
+    </div>
+  </nav>
+  <div class="main-banner">
+    <div class="container">
+      <h1>Find the job you want</h1>
+      <h1>where you want it</h1>
+      <p class="header-text">Search for a job within the exact radius of where you want to be
+    </div>
+  </div>
+  <div class="container">
+    <form class="form-inline">
+      <input class="search-keyword" id="keywordVal" type="text" name="search" placeholder="Search keyword">
+      <input class="search-location" id="locationVal" type="text" name="search" placeholder="Location">
+      <select class="search-radius">
+  <option value="10" selected>10 miles</option>
+  <option value="20">20 miles</option>
+  <option value="30">30 miles</option>
+    <option value="40">40 miles</option>
+      <option value="50">50 miles</option>
+        <option value="60">60 miles</option>
+</select>
+      <button type="submit" id="sendSearch" class="btn btn-primary mb-2 search-submit">Submit</button>
+    </form>
+  </div>
+  <div class="latest-section">
+    
+  </div>
+</div>
+
+      <div id="map"></div>
+
+  <div class="footer">
+    <div class="container text-center">
+      <p class="recruiter-login-text">Are you a recruiter?</p> <button type="submit" class="btn btn-light recruiter-login">Register/Login</button>
+      <p>© Copyright JobLocator 2018 | <a href="#" target="_blank">About</a></p>
+    </div>
+  </div>
+  <!--Google Maps Script-->
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDxfscSb8wwqM-slfCubiwM1KKt7sb1P-c&libraries=places&callback=googleMain" async defer></script>
+</body>
+
+</html>

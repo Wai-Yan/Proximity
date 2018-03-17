@@ -3,7 +3,7 @@ $(document).ready(function() {
   function initializeRows(posts) {
     var latestPosts = posts.reverse();
     var rowsToAdd = [];
-    for (var i = 0; i < 3; i++) {
+    for (var i = 0; i < 7; i++) {
       rowsToAdd.push(createNewRow(latestPosts[i]));
     }
     $("#recentJobs").append(rowsToAdd);
@@ -78,6 +78,9 @@ $(document).ready(function() {
   });
 
   function starJob() {
+    $.post("/api/people", function(data) {
+      console.log(data);
+    });
     console.log("You starred a job");
   }
 
