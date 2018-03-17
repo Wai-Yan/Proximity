@@ -19,6 +19,8 @@ var service;
 var jobId;
 var queryURL;
 var gMarkers = [];
+var circle;
+
 
 //Someone needs to work on getting query working for Job Search--then posting those items to /api/SearchQuery
 //Need to make small table for the location information
@@ -27,38 +29,6 @@ var gMarkers = [];
   //1. Post data using $("#addPost") template for initial location
   //2. Get markers from the $("#test") template, add functionality to post them into an array called gMarkers
   //3. Run code from URL
-    //   function codeAddress() {
-    // var address = document.getElementById('address').value;
-    // var radius = parseInt(document.getElementById('radius').value, 10)*1000;
-    // geocoder.geocode( { 'address': address}, function(results, status) {
-    //   if (status == google.maps.GeocoderStatus.OK) {
-    //     map.setCenter(results[0].geometry.location);
-    //     var marker = new google.maps.Marker({
-    //       map: map,
-    //       position: results[0].geometry.location
-    //     });
-    //     if (circle) circle.setMap(null);
-    //     circle = new google.maps.Circle({center:marker.getPosition(),
-    //                                    radius: radius,
-    //                                    fillOpacity: 0.35,
-    //                                    fillColor: "#FF0000",
-    //                                    map: map});
-    //     var bounds = new google.maps.LatLngBounds();
-    //     for (var i=0; i<gmarkers.length;i++) {
-    //       if (google.maps.geometry.spherical.computeDistanceBetween(gmarkers[i].getPosition(),marker.getPosition()) < radius) {
-    //         bounds.extend(gmarkers[i].getPosition())
-    //         gmarkers[i].setMap(map);
-    //       } else {
-    //         gmarkers[i].setMap(null);
-    //       }
-    //     }
-    //     map.fitBounds(bounds);
-    //
-    //   } else {
-    //     alert('Geocode was not successful for the following reason: ' + status);
-    //   }
-    // });
-    // }
 
 
 //User search--- if they put in a Location
@@ -68,13 +38,12 @@ var gMarkers = [];
 //Nice to have-- Doing loctions based on autocomplete
 
 $(document).ready(function() {
+
   //job Searcher request this will need to be taken from results page of query post
   $("#sendSearch").on("click", function(event) {
     event.preventDefault();
     //emptySearchMarkersArray
     searchMarkersLatLng = []
-    var radius = $(".search-radius").val();
-    console.log("job search radius: ", radius)
 
     $.ajax({
       url: 'http://localhost:8080/api/posts',
@@ -97,9 +66,40 @@ $(document).ready(function() {
         searchMarkersLatLng.push([parseFloat(latitude), parseFloat(longitude), placeIdentifier,fullAddress,cmpName,jbTit,jobId])
         console.log(searchMarkersLatLng)
         googleMaps();
-      }
-    })
-  });
+      //   var address = $('#locationVal').val().trim();
+      //   var radius = $(".search-radius").val().trim();
+      //   geocoder.geocode( { 'address': address}, function(results, status) {
+      //     if (status == google.maps.GeocoderStatus.OK) {
+      //       map.setCenter(results[0].geometry.location);
+      //       var marker = new google.maps.Marker({
+      //         map: map,
+      //         position: results[0].geometry.location
+      //       });
+      //       if (circle) circle.setMap(null);
+      //       circle = new google.maps.Circle({center:marker.getPosition(),
+      //                                      radius: radius,
+      //                                      fillOpacity: 0.35,
+      //                                      fillColor: "#FF0000",
+      //                                      map: map});
+      //       var bounds = new google.maps.LatLngBounds();
+      //       for (var i=0; i<gMarkers.length;i++) {
+      //         if (google.maps.geometry.spherical.computeDistanceBetween(gMarkers[i].getPosition(),marker.getPosition()) < radius) {
+      //           bounds.extend(gMarkers[i].getPosition())
+      //           gMarkers[i].setMap(map);
+      //         } else {
+      //           gMarkers[i].setMap(null);
+      //         }
+      //       }
+      //       map.fitBounds(bounds);
+      //
+      //     } else {
+      //       alert('Geocode was not successful for the following reason: ' + status);
+      //     }
+        }
+      });
+    });
+
+
   //recruiter post, and taking address to geocode Latitude & Longitude in mySQL
   $("#addPost").on("click", function(event) {
     event.preventDefault();
@@ -153,6 +153,7 @@ $(document).ready(function() {
     }
   });
 });
+
 function googleMain() {
   var washingtonDC = new google.maps.LatLng(38.9072, -77.0369)
   //Creates map in HTML centered on Washington, D.C.
