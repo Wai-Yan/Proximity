@@ -33,8 +33,8 @@ function createNewRow(posts) {
 
 getPosts();
 
-$("#addNewJob").on("click", function() {
-
-})
+// $("#addNewJob").on("click", function() {
+//
+// })
 
 })
