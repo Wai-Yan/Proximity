@@ -21,16 +21,12 @@ var queryURL;
 var gMarkers = [];
 var circle;
 
+//TO DO LIST:
+//finish pushing markers within radius to new array so that they are kept for future use
+// Job Search query with jQueryUI--then posting those items to /api/SearchQuery with mySQL
+//go back to the recruiter.html and make sure all the information is storing to mySQL properly
 
-//Someone needs to work on getting query working for Job Search--then posting those items to /api/SearchQuery
-//Need to make small table for the location information
-// $("#locationVal")
-//Multi-stage approach,logic from url---
-  //1. Post data using $("#addPost") template for initial location
-  //2. Get markers from the $("#test") template, add functionality to post them into an array called gMarkers
-  //3. Run code from URL
-
-
+//WISH LIST:
 //User search--- if they put in a Location
 //Gather information from the distance query
 //Geometry Library google.maps.geometry.spherical.computeDistanceBetween
@@ -65,37 +61,48 @@ $(document).ready(function() {
         var placeIdentifier = results[i].placeID
         searchMarkersLatLng.push([parseFloat(latitude), parseFloat(longitude), placeIdentifier,fullAddress,cmpName,jbTit,jobId])
         console.log(searchMarkersLatLng)
-        googleMaps();
-      //   var address = $('#locationVal').val().trim();
-      //   var radius = $(".search-radius").val().trim();
-      //   geocoder.geocode( { 'address': address}, function(results, status) {
-      //     if (status == google.maps.GeocoderStatus.OK) {
-      //       map.setCenter(results[0].geometry.location);
-      //       var marker = new google.maps.Marker({
-      //         map: map,
-      //         position: results[0].geometry.location
-      //       });
-      //       if (circle) circle.setMap(null);
-      //       circle = new google.maps.Circle({center:marker.getPosition(),
-      //                                      radius: radius,
-      //                                      fillOpacity: 0.35,
-      //                                      fillColor: "#FF0000",
-      //                                      map: map});
-      //       var bounds = new google.maps.LatLngBounds();
-      //       for (var i=0; i<gMarkers.length;i++) {
-      //         if (google.maps.geometry.spherical.computeDistanceBetween(gMarkers[i].getPosition(),marker.getPosition()) < radius) {
-      //           bounds.extend(gMarkers[i].getPosition())
-      //           gMarkers[i].setMap(map);
-      //         } else {
-      //           gMarkers[i].setMap(null);
-      //         }
-      //       }
-      //       map.fitBounds(bounds);
-      //
-      //     } else {
-      //       alert('Geocode was not successful for the following reason: ' + status);
-      //     }
-        }
+        googleMaps()
+        var address = $('#locationVal').val().trim();
+        var radius = parseInt($('.search-radius').val())*(1609.34);
+        geocoder.geocode( { 'address': address}, function(results, status) {
+          if (status == google.maps.GeocoderStatus.OK) {
+            map.setCenter(results[0].geometry.location);
+            var icon = {
+              url: 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png',
+              // https://developers.google.com/maps/documentation/javascript/markers#icons
+              size: new google.maps.Size(50, 50),
+              origin: new google.maps.Point(0, 0),
+              anchor: new google.maps.Point(17, 34),
+              scaledSize: new google.maps.Size(25, 25)
+            };
+            var marker = new google.maps.Marker({
+              map: map,
+              icon: icon,
+              position: results[0].geometry.location
+            });
+            if (circle) circle.setMap(null);
+            circle = new google.maps.Circle({center:marker.getPosition(),
+                                           radius: radius,
+                                           fillOpacity: 0.35,
+                                           fillColor: "#FFA07A", //https://developers.google.com/maps/documentation/javascript/examples/circle-simple
+                                           map: map});
+            var bounds = new google.maps.LatLngBounds();
+            for (var i=0; i < gMarkers.length;i++) {
+              if (google.maps.geometry.spherical.computeDistanceBetween(gMarkers[i].getPosition(),marker.getPosition()) < radius) {
+                bounds.extend(gMarkers[i].getPosition())
+                gMarkers[i].setMap(map);
+                //need to gMarkers[i], get pushed to an array to be stored for job population
+              } else {
+                gMarkers[i].setMap(null);
+              }
+            }
+            map.fitBounds(bounds);
+
+          } else {
+            alert('Geocode was not successful for the following reason: ' + status);
+          }
+        })
+      }
       });
     });
 
@@ -162,19 +169,10 @@ function googleMain() {
       lat: 38.9072,
       lng: -77.0369
     },
-    zoom: 13,
+    zoom: 4,
   });
 }
 function googleMaps() {
-  var washingtonDC = new google.maps.LatLng(38.9072, -77.0369)
-  //Creates map in HTML centered on Washington, D.C.
-  map = new google.maps.Map(document.getElementById('map'), {
-    center: {
-      lat: 38.9072,
-      lng: -77.0369
-    },
-    zoom: 4,
-  });
   //geocoder for recruiter posting for latitude/longitude
   geocoder = new google.maps.Geocoder();
   // Display Search Markers
