@@ -16,10 +16,50 @@ var searchMarkerAry = []
 var image;
 var placePostId;
 var service;
+var jobId;
+var queryURL;
+var gMarkers = [];
 
 //Someone needs to work on getting query working for Job Search--then posting those items to /api/SearchQuery
+//Need to make small table for the location information
+// $("#locationVal")
+//Multi-stage approach,logic from url---
+  //1. Post data using $("#addPost") template for initial location
+  //2. Get markers from the $("#test") template, add functionality to post them into an array called gMarkers
+  //3. Run code from URL
+    //   function codeAddress() {
+    // var address = document.getElementById('address').value;
+    // var radius = parseInt(document.getElementById('radius').value, 10)*1000;
+    // geocoder.geocode( { 'address': address}, function(results, status) {
+    //   if (status == google.maps.GeocoderStatus.OK) {
+    //     map.setCenter(results[0].geometry.location);
+    //     var marker = new google.maps.Marker({
+    //       map: map,
+    //       position: results[0].geometry.location
+    //     });
+    //     if (circle) circle.setMap(null);
+    //     circle = new google.maps.Circle({center:marker.getPosition(),
+    //                                    radius: radius,
+    //                                    fillOpacity: 0.35,
+    //                                    fillColor: "#FF0000",
+    //                                    map: map});
+    //     var bounds = new google.maps.LatLngBounds();
+    //     for (var i=0; i<gmarkers.length;i++) {
+    //       if (google.maps.geometry.spherical.computeDistanceBetween(gmarkers[i].getPosition(),marker.getPosition()) < radius) {
+    //         bounds.extend(gmarkers[i].getPosition())
+    //         gmarkers[i].setMap(map);
+    //       } else {
+    //         gmarkers[i].setMap(null);
+    //       }
+    //     }
+    //     map.fitBounds(bounds);
+    //
+    //   } else {
+    //     alert('Geocode was not successful for the following reason: ' + status);
+    //   }
+    // });
+    // }
 
-//work on adding custom information from mySQL to the markers!
 
 //User search--- if they put in a Location
 //Gather information from the distance query
@@ -43,6 +83,7 @@ $(document).ready(function() {
       console.log(results)
       for (var i = 0; i < results.length; i++) {
         //work on adding custom information from mySQL to the markers!
+        jobId = results[i].id
         var jbTit = results[i].jobTitle
         var cmpName = results[i].companyName
         var adr1 = results[i].address
@@ -53,13 +94,12 @@ $(document).ready(function() {
         var latitude = results[i].latitude
         var longitude = results[i].longitude
         var placeIdentifier = results[i].placeID
-        searchMarkersLatLng.push([parseFloat(latitude), parseFloat(longitude), placeIdentifier,fullAddress,cmpName,jbTit])
+        searchMarkersLatLng.push([parseFloat(latitude), parseFloat(longitude), placeIdentifier,fullAddress,cmpName,jbTit,jobId])
         console.log(searchMarkersLatLng)
         googleMaps();
       }
     })
   });
-
   //recruiter post, and taking address to geocode Latitude & Longitude in mySQL
   $("#addPost").on("click", function(event) {
     event.preventDefault();
@@ -132,7 +172,7 @@ function googleMaps() {
       lat: 38.9072,
       lng: -77.0369
     },
-    zoom: 13,
+    zoom: 4,
   });
   //geocoder for recruiter posting for latitude/longitude
   geocoder = new google.maps.Geocoder();
@@ -160,13 +200,45 @@ function googleMaps() {
             placeId: marksLatLng[2],
             content: '<div><strong>' + marksLatLng[4] + '</strong><br>' +
               'Job Title: ' + marksLatLng[5] + '<br>' + 'Address: ' +
-              marksLatLng[3] + '</div>' + 'More Info: ' + '<a href="#">testURL</a>' + '<br>' ,
+              marksLatLng[3] + '</div>' + 'More Info: ' + '<a class="moreInfoUrl" data-value='+marksLatLng[6]+'" href="api/posts/'+ marksLatLng[6]+'">testURL</a>' + '<br>',
             zIndex: 999999
           })
-          google.maps.event.addListener(marker, 'click', function() {
+      gMarkers.push(marker);
+      console.log("gMarkers array: ", gMarkers)
+      google.maps.event.addListener(marker, 'mouseover', function() {
             infowindow.setContent(this.content);
             infowindow.open(map, this);
       })
+      google.maps.event.addListener(marker, 'click', function() {
+          queryURL = 'http://localhost:8080/api/posts/' + $(".moreInfoUrl").data("value")
+          console.log(queryURL)
+          $.ajax({
+            url: queryURL,
+            method: "GET",
+          }).done(function(results) {
+            console.log(results)
+              $("#markerName").empty()
+              $("#markerCheckins").empty()
+              $("#applyButton").empty()
+              var jbTit = results.jobTitle
+              var cmpName = results.companyName
+              var jobDesc = results.jobDescription
+              var adr1 = results.address
+              var adr2 = results.city
+              var adr3 = results.state
+              var adr4 = results.zipCode
+              var fullAddress = adr1 + " " + adr2 + " " + adr3 + " " + adr4
+              var createdAt = results.created_at
+              var updatedAt = results.updated_at
+
+              var placeDetailsModal = ('<div>'+ 'Company:' + cmpName + '<br>' + 'Job Description:'+ jobDesc + '<br>' + 'Job Address:'+ fullAddress + '<br>' +'Created At:'+ createdAt + '<br>' +'Updated At:'+ updatedAt+ '<br>' +'</div>');
+              $("#markerName").text('Job Title: ' + jbTit)
+              $("#markerCheckins").append(placeDetailsModal)
+              $("#applyButton").append('<button type="submit" id="apply" class="btn btn-success">Apply</button>')
+              jQuery.noConflict();
+              $("#markerModal").modal()
+          })
+        });
     }
   }
 

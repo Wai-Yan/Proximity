@@ -26,6 +26,7 @@
     "express-handlebars": "^3.0.0",
     "geocoder": "^0.2.3",
     "load-google-maps-api": "^1.2.0",
+    "moment": "^2.21.0",
     "mysql2": "^1.5.2",
     "sequelize": "^4.36.1"
   },

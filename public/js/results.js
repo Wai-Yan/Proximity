@@ -1,6 +1,6 @@
 $(document).ready(function() {
 
-$("#resultsRecreuiterPageTitleText").text("Your posted jobs")
+$("#resultsPageTitleText").text("Your posted jobs")
 
 function initializeRows(posts) {
   var latestPosts = posts.reverse();
@@ -26,15 +26,11 @@ function createNewRow(posts) {
   var titleTd = $("<td>").text(posts.jobTitle).addClass("jobData")
   var descriptionTd = $("<td>").text(posts.jobDescription).addClass("jobData description-td overflow")
   var createdDateTd = $("<td>").text(date).addClass("jobData padding-table-left")
-  var applybtn = $("<td>").text("View").addClass("btn-view").attr("id", "viewBtn")
+  var applybtn = $("<td>").text("Apply").addClass("btn-apply").attr("id", "applyBtn")
   tRow.append(titleTd, descriptionTd, createdDateTd, applybtn)
   tBody.append(tRow);
 }
 
 getPosts();
-
-$("#addNewJob").on("click", function() {
-
-})
 
 })
