@@ -4,14 +4,14 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
-        len: [5,30]
+        len: [5,50]
       }
     },
     jobDescription: {
-      type: DataTypes.STRING,
+      type: DataTypes.STRING(10000),
       allowNull: false,
       validate: {
-        len: [15,255]
+        len: [15,10000]
       }
     },
     companyName: {

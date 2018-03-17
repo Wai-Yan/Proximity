@@ -21,7 +21,7 @@ $(document).ready(function() {
     var tBody = $("tbody")
     var tRow = $("<tr>").addClass("jobRow")
     var titleTd = $("<td>").text(posts.jobTitle).addClass("jobData")
-    var companyTd = $("<td>").text(posts.jobTitle).addClass("jobData")
+    var companyTd = $("<td>").text(posts.companyName).addClass("jobData")
     var cityTd = $("<td>").text(posts.city).addClass("jobData")
     var stateTd = $("<td>").text(posts.state).addClass("jobData")
     var applybtn = $("<td>").text("Apply").addClass("btn-apply").attr("id", "applyBtn")
@@ -30,6 +30,13 @@ $(document).ready(function() {
   }
 
   getPosts();
+
+  $("#resultsPageTitleText").text("Your search results for " + "(variable)" + " jobs in " + "(variable)")
+
+  $("#recruiter-btn").on("click", function() {
+    console.log("registering button click")
+    window.location = "/recruiter";
+  })
 
   $( ".btn-success" ).click(function() {
     starJob();

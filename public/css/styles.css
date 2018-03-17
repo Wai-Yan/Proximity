@@ -77,9 +77,11 @@ body {
   font-family: 'Roboto Condensed', sans-serif;
 }
 
-/* .wrapper {
-  height: calc(100vh - 30px);
-} */
+.wrapper {
+  /* height: calc(100vh - 100px); */
+  min-height:100%;
+   position:relative;
+}
 
 .navbar {
   position: -webkit-sticky;
@@ -87,6 +89,7 @@ body {
   position: sticky;
   top: 0;
   background-color: #fff;
+  z-index: 2;
 }
 
 .navbar-brand {
@@ -236,6 +239,16 @@ h1 {
 
 .latest-section {
   margin-top: 4%;
+  margin-bottom: 10%;
+}
+
+.print-post-section {
+  margin-top: 1%;
+  margin-bottom: 10%;
+}
+
+#resultsRecreuiterPageTitleText {
+  margin-bottom: 1%;
 }
 
 .recruiter-login-text {
@@ -260,6 +273,24 @@ h1 {
   padding-bottom: 10px;
 }
 
+table {
+  table-layout: fixed;
+}
+
+.description-td {
+  overflow-x: scroll
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.overflow {
+  overflow: scroll
+}
+
+.padding-table-left {
+  padding-left: 30px;
+}
+
 .btn-apply {
   background-color: #4CAF50;
   /* Green */
@@ -278,8 +309,30 @@ h1 {
   opacity: .7;
 }
 
+.btn-view {
+  background-color: #4CAF50;
+  /* Green */
+  border: none;
+  color: white;
+  padding: 10px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: .25rem;
+}
+
+.btn-view:hover {
+  opacity: .7;
+}
+
 .footer {
   background-color: #fff;
   border-top: 1px solid black;
   margin-top: 50px;
+  position:absolute;
+   bottom:0;
+   width:100%;
+   /* height:60px;   /* Height of the footer */ */
 }
