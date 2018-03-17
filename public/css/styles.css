@@ -1,12 +1,4 @@
 /*--------------------------------Google Maps Required Testing----------------*/
-
-/* html, body {
-  padding: 0;
-  margin: 0;
-  height: 100%;
-  width: 100%;
-} */
-
 #map {
   padding: 0;
   margin: 0;
@@ -15,62 +7,22 @@
   border-radius: 20px;
   border: black 1.5px solid;
 }
-
 #mapContainer {
   padding: 2em;
   border-radius: 20px;
   border: black 1.5px solid;
   box-shadow: 10px 10px 10px black;
 }
-
-/* a.btn.btn-outline-secondary {
-  border-radius: 15px;
-  border: 0px;
-  color: black;
-  text-shadow: 1px 1px 1px black;
-} */
-
-/* a.btn.btn-outline-secondary.red {
-  color: red;
-} */
-
-/* a.navbar-brand {
-  color: black;
-  font-size: 2rem;
-} */
-
-/* .navbar a:not(.btn):not(.dropdown-item) {
-  color: black;
-} */
-
-.font20 {
-  font-size: 20px;
-}
-
 #pac-input {
-  background-color: #fff;
-  font-size: 19px;
-  font-weight: bold;
-  padding: 0 11px 0 13px;
+  font-size: 0px;
   text-overflow: ellipsis;
-  margin: 10px 10px 10px 0px;
-  width: 65%;
+  margin: 0px 0px 0px 0px;
+  width: 0%;
+  height: 0%;
 }
-
 #pac-input:focus {
   border-color: #4d90fe;
 }
-
-.margin {
-  margin: 20px 0px 20px 0px;
-  box-shadow: 10px 10px 10px black;
-}
-
-.margin2 {
-  margin: 20px 0px 20px 0px;
-  box-shadow: 10px 10px 10px black;
-}
-
 /*--------------------------------Google Maps Required Testing----------------*/
 
 body {
