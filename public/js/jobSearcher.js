@@ -35,6 +35,9 @@ $(document).ready(function() {
   });
 
   function starJob() {
+    $.post("/api/people", function(data) {
+      console.log(data);
+    });
     console.log("You starred a job");
   }
 
