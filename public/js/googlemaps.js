@@ -24,6 +24,8 @@ var radiusMarkers=[];
 var keyWordSearch=[];
 
 //TO DO LIST:
+//Focus on the mySQL search algorithm and find the best way to query out the job titles that match and then
+//cont...   compare against the mySQL database and then use Location and Radius
 // Job Search query with jQueryUI--then posting those items to /api/SearchQuery with mySQL
 //Have main page map display the latest 10 jobs to display on page load
 
@@ -36,39 +38,36 @@ var keyWordSearch=[];
 
 $(document).ready(function() {
 
-    $("#keywordVal").on("focus", function(event){
-      event.preventDefault();
-      keyWordSearch=[];
-      $.ajax({
-      url: 'http://localhost:8080/api/posts',
-      method: "GET",
-      }).done(function(results) {
-      console.log(results)
-        keyWordSearch = results
-      });
-
-      $('#keywordVal').autocomplete({
-        minLength: 2,
-        source: function (request, response) {
-             var keySearch = $.makeArray(keyWordSearch)
-             response($.map(keySearch, function (value, key) {
-                  return {
-                      label: value.jobTitle,
-                      value: value.id
-                  }
-              }));
-      },
-      select: function(event, ui) {
-              $('#keywordVal').val(ui.item.label);
-              $('#link_origin_id').val(ui.item.value);
-              console.log("KeyWord Search mSQL ID:", $('#link_origin_id').val().trim())
-              return false;
-          }
-      });
-    });
-
-
-
+    // $("#keywordVal").on("focus", function(event){
+    //   event.preventDefault();
+    //   keyWordSearch=[];
+    //   $.ajax({
+    //   url: 'http://localhost:8080/api/posts',
+    //   method: "GET",
+    //   }).done(function(results) {
+    //   console.log(results)
+    //     keyWordSearch = results
+    //   });
+    //
+    //   $('#keywordVal').autocomplete({
+    //     minLength: 2,
+    //     source: function (request, response) {
+    //          var keySearch = $.makeArray(keyWordSearch)
+    //          response($.map(keySearch, function (value, key) {
+    //               return {
+    //                   label: value.jobTitle,
+    //                   value: value.id
+    //               }
+    //           }));
+    //   },
+    //   select: function(event, ui) {
+    //           $('#keywordVal').val(ui.item.label);
+    //           $('#link_origin_id').val(ui.item.value);
+    //           console.log("KeyWord Search mSQL ID:", $('#link_origin_id').val().trim())
+    //           return false;
+    //       }
+    //   });
+    // });
   //job Searcher request this will need to be taken from results page of query post
   $("#sendSearch").on("click", function(event) {
     event.preventDefault();
