@@ -243,6 +243,15 @@ table {
   padding-left: 30px;
 }
 
+.modal-header {
+  border-bottom: 0px;
+}
+
+.jobTitleModalView {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
 .btn-viewPost {
   background-color: #4CAF50;
   /* Green */
@@ -276,6 +285,25 @@ table {
 }
 
 .btn-view:hover {
+  opacity: .7;
+}
+
+.apply-btn{
+  background-color: #4CAF50;
+  /* Green */
+  border: none;
+  color: white;
+  padding: 10px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  margin-left: 15px;
+  cursor: pointer;
+  border-radius: .25rem;
+  outline: none;
+}
+
+.apply-btn:hover {
   opacity: .7;
 }
 
