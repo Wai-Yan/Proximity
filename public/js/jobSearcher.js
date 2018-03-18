@@ -112,10 +112,6 @@ $(document).ready(function() {
     window.location = "/recruiter";
   })
 
-  $(".btn-success").click(function() {
-    starJob();
-  });
-
   function starJob() {
     $.post("/api/people", function(data) {
       console.log(data);
@@ -126,4 +122,4 @@ $(document).ready(function() {
   function unstarJob() {
     console.log("You unstarred a job");
   }
-})
+});
