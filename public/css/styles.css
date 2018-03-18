@@ -263,7 +263,7 @@ h3 {
 }
 
 .search-submit:hover {
-  background-color: #44AC9D;
+  background-color: #E1A72F;
 }
 
 #listviewclick {
@@ -440,4 +440,77 @@ table {
 img.avatar {
   width: 40%;
   border-radius: 50%;
+}
+
+/* media queries */
+@media only screen and (max-width: 992px) {
+  .search-keyword {
+    width: 25%;
+    background-size: 20%;
+  }
+
+  .search-location {
+    width: 25%;
+    background-size: 20%;
+    margin-left: 2%;
+  }
+
+  .search-radius {
+    width: 20%;
+    background: url(http://i62.tinypic.com/15xvbd5.png) no-repeat 90% 0;
+    background-position-y: center;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    padding: 12px 20px 12px 8px;
+    box-sizing: border-box;
+    border: 1px solid #4F6367;
+    border-radius: 60px;
+    font-size: 1rem;
+    background-color: #fff;
+    position: relative;
+    margin-left: 2%;
+    top: -25px;
+    z-index: 1;
+  }
+
+  .search-submit {
+    margin-left: 2%;
+  }
+}
+
+@media only screen and (max-width: 490px) {
+  .search-keyword {
+    width: 45%;
+    background-size: 10%;
+  }
+
+  .search-location {
+    width: 45%;
+    background-size: 10%;
+    margin-left: 2%;
+  }
+
+  .search-radius {
+    width: 45%;
+    background: url(http://i62.tinypic.com/15xvbd5.png) no-repeat 90% 0;
+    background-position-y: center;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    padding: 12px 20px 12px 8px;
+    box-sizing: border-box;
+    border: 1px solid #4F6367;
+    border-radius: 60px;
+    font-size: 1rem;
+    background-color: #fff;
+    position: relative;
+    margin-left: 0%;
+    top: -25px;
+    z-index: 1;
+  }
+
+  .search-submit {
+    margin-left: 2%;
+  }
 }
