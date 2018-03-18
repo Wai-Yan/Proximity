@@ -49,6 +49,9 @@ $(document).ready(function() {
         keyWordSearch.push(jbTit);
         console.log("keyWordSearch: ", keyWordSearch)
       }
+      $( "#keywordVal" ).autocomplete({
+        source: keyWordSearch
+      });
     })
   });
 
