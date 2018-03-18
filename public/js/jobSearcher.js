@@ -113,10 +113,10 @@ $(document).ready(function() {
   })
 
   function starJob() {
-    $.post("/api/people", function(data) {
+    $.put("/api/users", function(data) {
       console.log(data);
     });
-    console.log("You starred a job");
+    console.log("White castle infiltrated");
   }
 
   function unstarJob() {

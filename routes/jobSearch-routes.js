@@ -48,4 +48,9 @@ module.exports = function(app) {
       oktaNo: req.body.oktaNo
     })
   });
+
+  app.put("/api/users", function(req, res) {
+    console.log("You're about to UPDATE a user in sql");
+    db.User.update({associatedJobs: "[4, 20]"}, {where: {id: 1}})
+  });
 };
