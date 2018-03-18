@@ -216,6 +216,24 @@ h1 {
   z-index: 1;
 }
 
+#listviewclick {
+  color: #007bff;
+}
+
+#listviewclick:hover {
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+#mapviewclick {
+  color: #007bff;
+}
+
+#mapviewclick:hover {
+  cursor: pointer;
+  text-decoration: underline;
+}
+
 .jobRow {
   border-top: 1px solid #ccc;
 }

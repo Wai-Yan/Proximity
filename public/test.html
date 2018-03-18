@@ -63,8 +63,9 @@
 		</div>
 		<div class="latest-section">
 			<div class="container">
-				<h3>Latest jobs</h3>
-				<table style="width:100%">
+				<h3 class="mb-3">Latest jobs</h3>
+				<div class="mb-3"><a id="listviewclick">List View</a> | <a id="mapviewclick">Map View</a></div>
+				<table id="listview" style="width:100%">
 					<tr id="recentJobs">
 						<th>Title</th>
 						<th>Company</th>
@@ -73,6 +74,16 @@
 						<th></th>
 					</tr>
 				</table>
+				<div class="container" id="mapview">
+		      <div class="row">
+		        <div class="map col-md-12" id="mapContainer">
+		          <!--First Map -->
+
+		          <input id="pac-input" class="controls" type="text" placeholder="Search Locations">
+		          <div id="map"></div>
+		        </div>
+		      </div>
+		    </div>
 			</div>
 		</div>
 
@@ -94,18 +105,6 @@
 		</div>
 	<!-- End Modal -->
 
-
-
-		<div class="container">
-      <div class="row">
-        <div class="map col-md-12" id="mapContainer">
-          <!--First Map -->
-
-          <input id="pac-input" class="controls" type="text" placeholder="Search Locations">
-          <div id="map"></div>
-        </div>
-      </div>
-    </div>
 		<div class="container">
 			<!-- Modal -->
 			<div class="modal fade" id="markerModal" role="dialog">
@@ -134,17 +133,7 @@
 					</div>
 				</div>
 			</div>
-
-
 		</div>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
 
 		<!-- The Modal Login-->
 		<div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel" aria-hidden="true">

@@ -28,6 +28,7 @@
     "load-google-maps-api": "^1.2.0",
     "moment": "^2.21.0",
     "mysql2": "^1.5.2",
+    "npm": "^5.7.1",
     "sequelize": "^4.36.1"
   },
   "devDependencies": {}
