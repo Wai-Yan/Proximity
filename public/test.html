@@ -14,6 +14,7 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.0/moment.min.js" type="text/javascript"></script>
 	<script src="js/googlemaps.js" type="text/javascript"></script>
 	<script src="js/jobSearcher.js" type="text/javascript"></script>
+	<script src="js/registration.js" type="text/javascript"></script>
 	<!-- <script src="js/recruiter.js" type="text/javascript"></script> -->
 </head>
 
@@ -136,7 +137,7 @@
 			</div>
 		</div>
 
-		<!-- The Modal Login-->
+		<!-- The Modal for Login-->
 		<div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel" aria-hidden="true">
 			<div class="modal-dialog modal-sm" role="document">
 				<div class="modal-content">
@@ -147,15 +148,15 @@
 		        </button>
 					</div>
 					<div class="modal-body">
-						<form>
+						<form id="frmLogin">
 							<div class="img_container">
 								<img src="images/user.png" alt="User" class="avatar">
 							</div>
 							<div class="form-group">
-								<input type="text" id="username" class="form-control" placeholder="Username" required>
+								<input type="text" id="loginEmail" class="form-control" placeholder="Email" required>
 							</div>
 							<div class="form-group">
-								<input type="text" id="password" class="form-control" placeholder="Password" required>
+								<input type="text" id="loginPassword" class="form-control" placeholder="Password" required>
 							</div>
 							<div>
 								<label for="remember">
@@ -175,7 +176,7 @@
 			</div>
 		</div>
 
-		<!-- The Modal Register-->
+		<!-- The Modal for Register-->
 		<div class="modal fade" id="registerModal" tabindex="-1" role="dialog" aria-labelledby="registerModalLabel" aria-hidden="true">
 			<div class="modal-dialog modal-md" role="document">
 				<div class="modal-content">
@@ -186,12 +187,21 @@
 		        </button>
 					</div>
 					<div class="modal-body">
-						<form>
+						<form id="frmRegister">
 							<div class="form-group">
 								<input type="text" id="firstname" class="form-control" placeholder="First Name" required>
 							</div>
 							<div class="form-group">
 								<input type="text" id="lastname" class="form-control" placeholder="Last Name" required>
+							</div>
+							<div class="form-group">
+								<input type="email" id="email" class="form-control" placeholder="Email" required>
+							</div>
+							<div class="form-group">
+								<input type="password" id="password" class="form-control" placeholder="Password" data-toggle="password">
+							</div>
+							<div class="form-group">
+								<input type="text" id="mobilephone" class="form-control" placeholder="Mobile Phone (ex. 7031234567)" maxlength="10" required>
 							</div>
 							<div class="form-group">
 								<input type="text" id="preferredloc" class="form-control" placeholder="Preferred Location" required>
@@ -203,22 +213,41 @@
 								  <option data-size="15" value="15">15 mi radius</option>
 								  <option data-size="20" value="20">20 mi radius</option>
 								</select>&nbsp;&nbsp;&nbsp;&nbsp;
-								<input type="checkbox" name="remote" value="remote" id="remote"> Include Remote?<br>
+								<input type="checkbox" id="remote" name="remote" value="remote"> Include Remote?<br>
 							</div>
 							<div class="form-group">
-								<label for="exampleFormControlFile1">Upload Image</label>
+								<label for="imageUploadFile">Upload Image</label>
 								<input type="file" class="form-control-file" id="imageUploadFile">
 							</div>
 						</form>
 					</div>
 					<div class="modal-footer">
-						<button type="button" id="oktaRegister" class="btn btn-success">Register</button>
+						<button type="button" id="oktaRegister" class="btn btn-success" data-dismiss="modal">Register</button>
 						<button type="button" id="cancelRegister" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
 					</div>
 				</div>
 			</div>
 		</div>
-		<!-- Tak -->
+
+		<!-- User successfully created Modal-->
+		<div class="modal" tabindex="-1" role="dialog" id="successModal">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title">Congratulations!</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+					</div>
+					<div class="modal-body">
+						<p>Your account is successfully created.</p>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+					</div>
+				</div>
+			</div>
+		</div>
 
 		<div class="footer">
 			<div class="container text-center">
