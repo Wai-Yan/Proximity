@@ -21,6 +21,7 @@ var queryURL;
 var gMarkers = [];
 var circle;
 var radiusMarkers=[];
+var keyWordSearch=[];
 
 //TO DO LIST:
 // Job Search query with jQueryUI--then posting those items to /api/SearchQuery with mySQL
@@ -34,6 +35,22 @@ var radiusMarkers=[];
 //Nice to have-- Doing loctions based on autocomplete
 
 $(document).ready(function() {
+
+    $("#keywordVal").on("focus", function(event){
+      event.preventDefault();
+      keyWordSearch=[];
+      $.ajax({
+      url: 'http://localhost:8080/api/posts',
+      method: "GET",
+      }).done(function(results) {
+      console.log(results)
+      for (var i = 0; i < results.length; i++) {
+        var jbTit = results[i].jobTitle
+        keyWordSearch.push(jbTit);
+        console.log("keyWordSearch: ", keyWordSearch)
+      }
+    })
+  });
 
 
   //job Searcher request this will need to be taken from results page of query post
