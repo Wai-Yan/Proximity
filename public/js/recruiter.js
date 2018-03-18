@@ -10,7 +10,6 @@ function initializeRows(posts) {
   }
   $("#postedJobs").append(rowsToAdd);
 }
-
 function getPosts() {
   $.get("/api/posts", function(data) {
     posts = data;
@@ -18,7 +17,6 @@ function getPosts() {
     console.log(posts)
   });
 }
-
 function createNewRow(posts) {
   var date = moment(posts.created_at).format('MM/DD/YYYY');
   var tBody = $("tbody")
@@ -30,16 +28,7 @@ function createNewRow(posts) {
   tRow.append(titleTd, descriptionTd, createdDateTd, viewbtn)
   tBody.append(tRow);
 }
-
 getPosts();
-
-// $("#addNewJob").on("click", function() {
-//
-// })
-
-
-
-
 //recruiter post, and taking address to geocode Latitude & Longitude in mySQL
 $("#addPost").on("click", function(event) {
   event.preventDefault();
@@ -97,14 +86,8 @@ $("#addPost").on("click", function(event) {
     });
   }
 });
-
 })
-
 //------------------------------------------------------------------------------
-
-
-
-
 function googleRecruiter() {
 var washingtonDC = new google.maps.LatLng(38.9072, -77.0369)
 //Creates map in HTML centered on Washington, D.C.

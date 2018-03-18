@@ -142,7 +142,7 @@ $(document).ready(function() {
       }
       });
     });
-    })
+
 
   //recruiter post, and taking address to geocode Latitude & Longitude in mySQL
   $("#addPost").on("click", function(event) {
@@ -201,23 +201,12 @@ $(document).ready(function() {
       });
     }
   });
-
+})
 //------------------------------------------------------------------------------
 
 
 
 function googleMain() {
-  var washingtonDC = new google.maps.LatLng(38.9072, -77.0369)
-  //Creates map in HTML centered on Washington, D.C.
-  map = new google.maps.Map(document.getElementById('map'), {
-    center: {
-      lat: 38.9072,
-      lng: -77.0369
-    },
-    zoom: 4,
-  });
-}
-function googleRecruiter() {
   var washingtonDC = new google.maps.LatLng(38.9072, -77.0369)
   //Creates map in HTML centered on Washington, D.C.
   map = new google.maps.Map(document.getElementById('map'), {
