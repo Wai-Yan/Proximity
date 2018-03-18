@@ -41,6 +41,9 @@ $(document).ready(function() {
     event.preventDefault();
     //emptySearchMarkersArray
     searchMarkersLatLng = []
+    searchMarkerAry = []
+    gMarkers = []
+    radiusMarkers=[]
 
     $.ajax({
       url: 'http://localhost:8080/api/posts',
