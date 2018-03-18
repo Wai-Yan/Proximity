@@ -47,7 +47,6 @@ module.exports = function(app) {
         lastname: req.body.lastName,
         email: req.body.email
       };
-      console.log(dbObj);
       res.json(dbObj);
 
       insertToDB(dbObj);

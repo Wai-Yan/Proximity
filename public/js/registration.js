@@ -30,7 +30,10 @@ $(document).ready(function() {
 
     console.log(newRegistration);
 
+    var userOktaId;
+
     $.post("/api/register", newRegistration).done(function(data) {
+
       if (data) {
         console.log(data);
 
@@ -50,6 +53,27 @@ $(document).ready(function() {
       //   $(this).find('form').trigger('reset');
       // });
 
-    });
+    }).
+    then(function() {
+
+      var newUser = {
+        fullName: newFirstname + " " + newLastname,
+        isRecruiter: false,
+        wantsRemote: newRemote,
+        preferredLocation: newPreferredLoc,
+        radius: newRadius,
+        associatedJobs: "[1, 3, 5]",
+        email: newEmail,
+        profilePicLink: "newImage.jpg",
+        oktaNo: userOktaId
+      };
+
+      // Send to DB
+      $.ajax({
+        method: "POST",
+        url: "/api/users/",
+        data: newUser
+        });
+    }); 
   });
 });
