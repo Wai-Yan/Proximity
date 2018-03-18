@@ -14,9 +14,24 @@ module.exports = function(sequelize, DataTypes) {
         len: [15,10000]
       }
     },
+    jobQualification: {
+      type: DataTypes.TEXT,
+      allowNull: false,
+      validate: {
+        len: [15,10000]
+      }
+    },
+    additionalInfo: {
+      type: DataTypes.TEXT,
+      allowNull: false,
+      validate: {
+        len: [15,10000]
+      }
+    },
     companyName: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
+      defaultValue: '<Company Name>',
       validate: {
         len: [1,255]
       }

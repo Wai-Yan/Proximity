@@ -24,17 +24,17 @@ function createNewRow(posts) {
   var tBody = $("tbody")
   var tRow = $("<tr>").addClass("jobRow")
   var titleTd = $("<td>").text(posts.jobTitle).addClass("jobData")
-  var descriptionTd = $("<td>").text(posts.jobDescription).addClass("jobData description-td overflow")
+  var descriptionTd = $("<td>").text(posts.jobDescription).addClass("jobData description-td")
   var createdDateTd = $("<td>").text(date).addClass("jobData padding-table-left")
-  var applybtn = $("<td>").text("View").addClass("btn-view").attr("id", "viewBtn")
-  tRow.append(titleTd, descriptionTd, createdDateTd, applybtn)
+  var viewbtn = $("<td>").text("View").addClass("btn-view").attr("id", "viewBtn")
+  tRow.append(titleTd, descriptionTd, createdDateTd, viewbtn)
   tBody.append(tRow);
 }
 
 getPosts();
 
-$("#addNewJob").on("click", function() {
-
-})
+// $("#addNewJob").on("click", function() {
+//
+// })
 
 })
