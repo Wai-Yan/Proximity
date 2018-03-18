@@ -196,13 +196,13 @@
 								<input type="text" id="preferredloc" class="form-control" placeholder="Preferred Location" required>
 							</div>
 							<div class="form-group">
-								<select>
-								  <option value="5">5 mi radius</option>
-								  <option value="10">10 mi radius</option>
-								  <option value="15">15 mi radius</option>
-								  <option value="20">20 mi radius</option>
+								<select id="radius">
+								  <option data-size="5" value="5">5 mi radius</option>
+								  <option data-size="10" value="10">10 mi radius</option>
+								  <option data-size="15" value="15">15 mi radius</option>
+								  <option data-size="20" value="20">20 mi radius</option>
 								</select>&nbsp;&nbsp;&nbsp;&nbsp;
-								<input type="radio" name="remote" value="remote"> Include Remote?<br>
+								<input type="checkbox" name="remote" value="remote" id="remote"> Include Remote?<br>
 							</div>
 							<div class="form-group">
 								<label for="exampleFormControlFile1">Upload Image</label>

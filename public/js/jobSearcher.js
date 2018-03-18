@@ -112,9 +112,50 @@ $(document).ready(function() {
     window.location = "/recruiter";
   })
 
-  $(".btn-success").click(function() {
-    starJob();
+  $( "#registerbtn" ).click(function() {
+    createUser();
   });
+
+  $(document.body).on("click", "#registerModal #oktaRegister", function() {
+      //event.preventDefault();
+      console.log("I'm here");
+      var registerModal = $("#registerform");
+      var newFirstname = $("#registerModal #firstname").val().trim();
+      var newLastname = $("#registerModal #lastname").val().trim();
+      var newPreferredLoc = $("#registerModal #preferredloc").val().trim();
+      var newRadius = $("#radius").find(":selected").data("size");
+      // var newRemote = $("#registerModal #remote");
+      var newRemote = $('#remote').is(':checked');
+      var newImage = $("#registerModal #imageUploadFile");
+
+      console.log(newFirstname);
+      console.log(newLastname);
+      console.log(newPreferredLoc);
+      console.log(newRadius);
+      console.log(newRemote);
+
+   });
+
+  function createUser() {
+    {
+      console.log("createUser has been started");
+
+      var newUser = {
+        fullName: "Jack",
+        isRecruiter: false,
+        preferredLocation: "DC",
+        radius: 5,
+        associatedJobs: "[]",
+        email: "kek@gmail.com",
+        profilePicLink: "lol.com/picture.png"
+      };
+      $.ajax({
+        method: "POST",
+        url: "/api/users/",
+        data: newUser
+        });
+    }
+  }
 
   function starJob() {
     $.post("/api/people", function(data) {
@@ -126,4 +167,4 @@ $(document).ready(function() {
   function unstarJob() {
     console.log("You unstarred a job");
   }
-})
+});
