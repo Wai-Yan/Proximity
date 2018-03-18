@@ -32,13 +32,12 @@ $(document).ready(function() {
       class: "btn-viewPost",
       "data-toggle": "modal",
       "data-target": "#viewJobPostInfo",
-      on    : {
-                 click:
-                 function() {
-                     // console.log ( posts.id );
-                     displayPost(posts.id)
-                 }
-              }
+      on: {
+        click: function() {
+          // console.log ( posts.id );
+          displayPost(posts.id)
+        }
+      }
     })
     viewbtn.append(btn)
     tRow.append(titleTd, companyTd, cityTd, stateTd, viewbtn)
@@ -57,34 +56,35 @@ $(document).ready(function() {
       method: "GET",
     }).done(function(results) {
       console.log(results)
-        // $("#markerName").empty()
-        // $("#markerCheckins").empty()
-        // $("#applyButton").empty()
-        $("#viewJobPostTitle").text(results.jobTitle)
-        // $("#viewJobPostCompany").text(results.companyName)
-        // $("viewJobAddressCompany").text(results.address)
-        // $("viewJobCityStateZipCompany").text(results.city + results.state + results.zipCode)
-        // $("viewJobDescriptionCompany").text(results.jobDescription)
-        // $("viewJobQualificationCompany").text("placeholder for qualifications")
-        // $("#viewJobAddInfoCompany").text("placeholder for the additional information")
+      var applybtn = $('<input />', {
+        type: "button",
+        value: "Apply",
+        class: "apply-btn",
+        on: {
+          click: function() {
+            // window.open(postLink,'_blank');
+            window.open("http://www.facebook.com", '_blank');
+            console.log("click to go to url")
+          }
+        }
+      })
+      $("#viewJobPostTitle").text(results.jobTitle)
+      $("#apply-btn-area").html(applybtn)
+      // var jbTit = results.jobTitle
+      var cmpName = results.companyName
+      var jobDesc = results.jobDescription
+      var jobQual = results.jobQualification
+      var addInfo = results.additionalInfo
+      var adr1 = results.address
+      var adr2 = results.city
+      var adr3 = results.state
+      var adr4 = results.zipCode
+      var fullAddress = adr1 + " " + adr2 + " " + adr3 + " " + adr4
+      var createdAt = results.created_at
+      var updatedAt = results.updated_at
 
-        var jbTit = results.jobTitle
-        var cmpName = results.companyName
-        var jobDesc = results.jobDescription
-        var adr1 = results.address
-        var adr2 = results.city
-        var adr3 = results.state
-        var adr4 = results.zipCode
-        var fullAddress = adr1 + " " + adr2 + " " + adr3 + " " + adr4
-        var createdAt = results.created_at
-        var updatedAt = results.updated_at
-
-        var placeDetailsModal = ('<div>'+ 'Company:' + cmpName + '<br>' + 'Job Description:'+ jobDesc + '<br>' + 'Job Address:'+ fullAddress + '<br>' +'Created At:'+ createdAt + '<br>' +'Updated At:'+ updatedAt+ '<br>' +'</div>');
-        // $("#markerName").text('Job Title: ' + jbTit)
-        $(".modal-body").html(placeDetailsModal)
-        // $("#applyButton").append('<button type="submit" id="apply" class="btn btn-success">Apply</button>')
-        // jQuery.noConflict();
-        // $("#markerModal").modal()
+      var placeDetailsModal = ('<div>' + cmpName + '<br>' + '<br>' + '<h5>Job Description: </h5>' + jobDesc + '<br>' + '<br>' + '<h5>Qualifications: </h5>' + jobQual + '<br>' + '<br>' + '<h5>Additional Information: </h5>' + addInfo + '<br>' + '<br>' + '<h5>Job Address: </h5>' + adr1 + '<br>' +  adr2 + ', ' + adr3 + ' ' + adr4 + '</div>');
+      $(".modal-body").html(placeDetailsModal)
     })
   };
 

@@ -26,8 +26,8 @@ function createNewRow(posts) {
   var titleTd = $("<td>").text(posts.jobTitle).addClass("jobData")
   var descriptionTd = $("<td>").text(posts.jobDescription).addClass("jobData description-td overflow")
   var createdDateTd = $("<td>").text(date).addClass("jobData padding-table-left")
-  var applybtn = $("<td>").text("View").addClass("btn-view").attr("id", "viewBtn")
-  tRow.append(titleTd, descriptionTd, createdDateTd, applybtn)
+  var viewbtn = $("<td>").text("View").addClass("btn-view").attr("id", "viewBtn")
+  tRow.append(titleTd, descriptionTd, createdDateTd, viewbtn)
   tBody.append(tRow);
 }
 
