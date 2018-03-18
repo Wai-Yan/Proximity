@@ -8,7 +8,7 @@ module.exports = function(sequelize, DataTypes) {
       }
     },
     jobDescription: {
-      type: DataTypes.STRING(10000),
+      type: DataTypes.TEXT,
       allowNull: false,
       validate: {
         len: [15,10000]
@@ -16,14 +16,14 @@ module.exports = function(sequelize, DataTypes) {
     },
     // jobQualification: {
     //   type: DataTypes.TEXT,
-    //   allowNull: false,
+    //   allowNull: true,
     //   validate: {
     //     len: [15,10000]
     //   }
     // },
     // additionalInfo: {
     //   type: DataTypes.TEXT,
-    //   allowNull: false,
+    //   allowNull: true,
     //   validate: {
     //     len: [15,10000]
     //   }

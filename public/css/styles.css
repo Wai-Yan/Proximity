@@ -35,6 +35,7 @@
 
 body {
   font-family: 'Roboto Condensed', sans-serif;
+  background-color: #FFFCFC;
 }
 
 .wrapper {
@@ -48,13 +49,17 @@ body {
   /* Safari */
   position: sticky;
   top: 0;
-  background-color: #fff;
-  z-index: 2;
+  background-color: #FFFCFC;
+  z-index: 3;
 }
 
 .navbar-brand {
   font-size: 2rem;
   font-family: 'Ubuntu', sans-serif;
+}
+
+#registerbtn {
+  background-color: #F7B733;
 }
 
 /* Dropdown Button */
@@ -130,18 +135,30 @@ th {
   background-position: 90% 40%;
   background-size: cover;
   background-repeat: no-repeat;
-  padding: 100px;
+  /* padding: 100px; */
   color: #fff;
 }
 
+.main-banner-overlay {
+  background-color: rgba(74, 189, 172, 0.2);
+  width: 100%;
+  padding: auto;
+  /* z-index: 1 */
+}
+
+.heading {
+  font-size: 2.5rem;
+  padding-top: 85px;
+}
+
 .header-text {
-  padding: 0px;
+  padding-bottom: 100px;
   color: #fff;
   width: 40%;
 }
 
 .search-keyword {
-  width: 28%;
+  width: 35%;
   box-sizing: border-box;
   border: 1px solid #ccc;
   border-radius: 60px;
@@ -153,14 +170,14 @@ th {
   background-size: 5%;
   background-repeat: no-repeat;
   padding: 12px 20px 12px 35px;
-  position: absolute;
+  position: relative;
   /* left: 0px; */
-  top: 390px;
-  z-index: 1;
+  top: -25px;
+  z-index: 2;
 }
 
 .search-location {
-  width: 28%;
+  width: 35%;
   box-sizing: border-box;
   border: 1px solid #ccc;
   border-radius: 60px;
@@ -172,14 +189,14 @@ th {
   background-size: 5%;
   background-repeat: no-repeat;
   padding: 12px 20px 12px 35px;
-  position: absolute;
-  margin-left: 29%;
-  top: 390px;
-  z-index: 1;
+  position: relative;
+  margin-left: 2%;
+  top: -25px;
+  z-index: 2;
 }
 
 .search-radius {
-  width: 10%;
+  width: 15%;
   background: url(http://i62.tinypic.com/15xvbd5.png) no-repeat 90% 0;
   background-position-y: center;
   -webkit-appearance: none;
@@ -191,9 +208,9 @@ th {
   border-radius: 60px;
   font-size: 1rem;
   background-color: #fff;
-  position: absolute;
-  margin-left: 58%;
-  top: 390px;
+  position: relative;
+  margin-left: 2%;
+  top: -25px;
   z-index: 1;
 }
 
@@ -202,7 +219,7 @@ th {
 }
 
 .latest-section {
-  margin-top: 4%;
+  margin-top: 2%;
   margin-bottom: 10%;
 }
 
@@ -222,10 +239,12 @@ th {
 .search-submit {
   /* border-radius: 60px; */
   font-size: 1rem;
-  position: absolute;
-  margin-left: 69%;
-  top: 395px;
+  position: relative;
+  margin-left: 2%;
+  top: -20px;
   z-index: 1;
+  background-color: #FC4A1A;
+  color: #fff;
 }
 
 #listviewclick {
@@ -280,7 +299,7 @@ table {
 }
 
 .btn-viewPost {
-  background-color: #4CAF50;
+  background-color: #4ABDAC;
   /* Green */
   border: none;
   color: white;
@@ -291,6 +310,7 @@ table {
   margin: 4px 2px;
   cursor: pointer;
   border-radius: .25rem;
+  float: right;
 }
 
 .btn-viewPost:hover {
