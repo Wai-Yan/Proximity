@@ -35,18 +35,17 @@ module.exports = function(app) {
 
   // User Creation Routes
   app.post("/api/users", function(req, res) {
-    console.log("You got into the route");
-  //   // create takes an argument of an object describing the item we want to
-  //   // insert into our table. In this case we just we pass in an object with a text
-  //   // and complete property (req.body)
+    console.log("You're about to create a user in sql");
     db.User.create({
       fullName: req.body.fullName,
       isRecruiter: req.body.isRecruiter,
+      wantsRemote: req.body.wantsRemote,
       preferredLocation: req.body.preferredLocation,
       radius: req.body.radius,
       associatedJobs: req.body.associatedJobs,
       email: req.body.email,
-      profilePicLink: req.body.profilePicLink
+      profilePicLink: req.body.profilePicLink,
+      oktaNo: req.body.oktaNo
     })
   });
 };
