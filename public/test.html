@@ -20,14 +20,14 @@
 
 <body>
 	<div class="wrapper">
-		<nav class="navbar navbar-light">
+		<nav class="navbar">
 			<div class="container">
 				<a class="navbar-brand" href="/">
     <img src="images/geolocalization.png" height="50" class="d-inline-block" alt="">
-    Job<style="color:#55A8DD;">Locator</style>
+    JobLocator
   </a>
 				<div class="float-right">
-					<button type="button" id="registerbtn" class="btn btn-success" data-toggle="modal" data-target="#registerModal">Register</button>
+					<button type="button" id="registerbtn" class="btn" data-toggle="modal" data-target="#registerModal">Register</button>
 					<button type="button" id="loginbtn" class="btn btn-light" data-toggle="modal" data-target="#loginModal">Login</button>
 					<!-- <div class="dropdown" id="profilebtn">
 	  <button class="dropbtn"></button>
@@ -42,11 +42,13 @@
 			</div>
 		</nav>
 		<div class="main-banner">
+			<div class="main-banner-overlay">
 			<div class="container">
-				<h1>Find the job you want</h1>
+				<h1 class="heading">Find the job you want</h1>
 				<h1>where you want it</h1>
-				<p class="header-text">Search for a job within the exact radius of where you want to be
+				<div class="header-text">Search for a job within the exact radius of where you want to be</div>
 			</div>
+		</div>
 		</div>
 		<div class="container">
 			<form class="form-inline">
@@ -60,7 +62,7 @@
 			<option value="50">50 miles</option>
 				<option value="60">60 miles</option>
 </select>
-				<button type="submit" id="sendSearch" class="btn btn-primary mb-2 search-submit">Submit</button>
+				<button type="submit" id="sendSearch" class="btn mb-2 search-submit">Submit</button>
 			</form>
 		</div>
 		<div class="latest-section">
