@@ -30,7 +30,8 @@ module.exports = function(sequelize, DataTypes) {
     // },
     companyName: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
+      defaultValue: '<Company Name>',
       validate: {
         len: [1,255]
       }
