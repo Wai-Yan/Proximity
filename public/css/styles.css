@@ -298,11 +298,6 @@ h3 {
   border-top: 1px solid #ccc;
 }
 
-.jobData {
-  padding-top: 10px;
-  padding-bottom: 10px;
-}
-
 table {
   table-layout: fixed;
 }
@@ -331,16 +326,30 @@ table {
   background-image: url(../images/star.png);
   background-repeat: no-repeat;
   background-position-y: center;
+  background-position-x: center;
 }
 
 .checkedStar {
   background-image: url(../images/starchecked.png);
   background-repeat: no-repeat;
   background-position-y: center;
+  background-position-x: center;
+}
+
+p.checkedStar {
+  margin-left: 0px;
 }
 
 .checkedStar:hover, .star:hover {
   cursor: pointer;
+}
+
+.starCol {
+  width: 100px;
+}
+
+.jobDescripCol {
+  width: 450px;
 }
 
 .btn-viewPost {
@@ -429,6 +438,10 @@ table {
 
 .pagination a:hover:not(.active) {
   background-color: #ddd;
+}
+
+.modal-title-logins {
+  padding-bottom: 0px;
 }
 
 .footer {
