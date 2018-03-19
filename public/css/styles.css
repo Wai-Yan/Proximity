@@ -64,7 +64,7 @@ body {
   color: #FFF;
 }
 
-#registerbtn {
+#registerbtn, #oktaLogin, #oktaRegister, #recruiterSubmit {
   background-color: #F7B733;
 }
 
