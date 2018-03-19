@@ -6,12 +6,16 @@ module.exports = function(app) {
     res.sendFile(path.join(__dirname, "../public/test.html"));
   });
 
-  app.get("/search", function(req, res) {
-    res.sendFile(path.join(__dirname, "../public/results.html"));
+  app.get("/saved", function(req, res) {
+    res.sendFile(path.join(__dirname, "../public/saved.html"));
   });
 
   app.get("/recruiter", function(req, res) {
     res.sendFile(path.join(__dirname, "../public/recruiter.html"));
+  });
+
+  app.get("/recruiteraccount", function(req, res) {
+    res.sendFile(path.join(__dirname, "../public/recruiteraccount.html"));
   });
 
   app.get("/account", function(req, res) {

@@ -1,30 +1,19 @@
 $(document).ready(function() {
 
-  // hide map at default
-  $("#mapview").hide();
+  $('body').tooltip({
+    selector: '[class="checkedStar"]'
+  });
 
-  // hide map on click of list view
-  $("#listviewclick").on("click", function() {
-    $("#mapview").hide();
-    $("#listview").show();
-  })
-
-  // hide list on click of map view
-  $("#mapviewclick").on("click", function() {
-    $("#mapview").show();
-    $("#listview").hide();
-  })
-
-  // print rows in the table
   function initializeRows(posts) {
-    var latestPosts = posts.reverse();
+    var latestSaves = posts.reverse();
     var rowsToAdd = [];
-    for (var i = 0; i < 4; i++) {
-      rowsToAdd.push(createNewRow(latestPosts[i]));
+    for (var i = 0; i < posts.length; i++) {
+      rowsToAdd.push(createNewRow(latestSaves[i]));
     }
-    $("#recentJobs").append(rowsToAdd);
+    $("#postedJobs").append(rowsToAdd);
   }
 
+  // get posts that have been saved
   function getPosts() {
     $.get("/api/posts", function(data) {
       posts = data;
@@ -34,13 +23,26 @@ $(document).ready(function() {
   }
 
   function createNewRow(posts) {
+    // var date = moment(posts.created_at).format('MM/DD/YYYY');
     var tBody = $("tbody")
     var tRow = $("<tr>").addClass("jobRow")
-    var titleTd = $("<td>").text(posts.jobTitle).addClass("jobData")
-    var star = $("<td>")
-    var companyTd = $("<td>").text(posts.companyName).addClass("jobData")
-    var cityTd = $("<td>").text(posts.city).addClass("jobData")
-    var stateTd = $("<td>").text(posts.state).addClass("jobData")
+    var titleTd = $("<td>").text(posts.jobTitle)
+    var starTd = $("<td>")
+    var starbtn = $("<p>", {
+      class: "checkedStar",
+      "data-toggle": "tooltip",
+      "data-placement": "left",
+      "title": "Click to unfavorite and remove from list",
+      on: {
+        click: function() {
+          // call function to remove from the favorites list. delete post.id
+
+        }
+      }
+    })
+    starTd.append(starbtn)
+    var companyTd = $("<td>").text(posts.companyName)
+    var descriptionTd = $("<td>").text(posts.jobDescription).addClass("description-td overflow")
     var viewbtn = $("<td>")
     var btn = $('<input />', {
       type: "button",
@@ -55,33 +57,11 @@ $(document).ready(function() {
         }
       }
     })
-    var empty = true;
-    var starbtn = $('<p />', {
-      class: "star",
-      on: {
-        click: function() {
-          if (empty) {
-            starbtn.removeClass("star")
-            starbtn.addClass("checkedStar")
-            empty = false;
-            // then store
-          } else {
-            starbtn.removeClass("checkedStar")
-            console.log("getting here")
-            starbtn.addClass("star")
-            empty = true;
-            // then remove
-          }
-        }
-      }
-    })
     viewbtn.append(btn)
-    star.append(starbtn)
-    tRow.append(titleTd, star, companyTd, cityTd, stateTd, viewbtn)
+    // var applybtn = $("<td>").text("View").addClass("btn-apply").attr("id", "applyBtn")
+    tRow.append(titleTd, starTd, companyTd, descriptionTd, viewbtn)
     tBody.append(tRow);
   }
-
-  getPosts();
 
   // click action for view to pop up with modal on the job info
   function displayPost(id) {
@@ -120,6 +100,7 @@ $(document).ready(function() {
       var createdAt = results.created_at
       var updatedAt = results.updated_at
 
+
       var placeDetailsModal = ('<div>' + cmpName + '<br>' + '<br>' + '<h5>Job Description: </h5>' + jobDesc + '<br>' + '<br>' + '<h5>Qualifications: </h5>' + jobQual + '<br>' + '<br>' + '<h5>Additional Information: </h5>' + addInfo + '<br>' + '<br>' + '<h5>Job Address: </h5>' + adr1 + '<br>' + adr2 + ', ' + adr3 + ' ' + adr4 + '</div>');
 
       var noQualDetailsModal = ('<div>' + cmpName + '<br>' + '<br>' + '<h5>Job Description: </h5>' + jobDesc + '<br>' + '<br>' + '<h5>Additional Information: </h5>' + addInfo + '<br>' + '<br>' + '<h5>Job Address: </h5>' + adr1 + '<br>' + adr2 + ', ' + adr3 + ' ' + adr4 + '</div>');
@@ -140,28 +121,6 @@ $(document).ready(function() {
     })
   };
 
-  // print if search query is entered
-  $("#resultsPageTitleText").text("Your search results for " + "(variable)" + " jobs in " + "(variable)")
+  getPosts();
 
-  // need to include conditional if logged in
-  // $("#recruiter-btn").on("click", function() {
-  //   console.log("registering button click");
-  //   window.location = "/recruiter";
-  // })
-
-  $(".recruiter-login-text").on("click", function() {
-    starJob();
-  })
-
-  function starJob() {
-    $.ajax({
-       url: '/api/users',
-       type: 'PUT'
-    });
-    
-  }
-
-  function unstarJob() {
-    console.log("You unstarred a job");
-  }
-});
+})

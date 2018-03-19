@@ -24,17 +24,17 @@
     <img src="images/geolocalization.png" height="50" class="d-inline-block" alt="">
     JobLocator</style>
   </a>
-			<div class="float-right">
-				<div class="dropdown" id="profilebtn">
-	  <button class="dropbtn"></button>
-	  <div class="dropdown-content">
-	    <p>(dynamic name)</p>
-	    <a href="/saved">Saved Jobs</a>
-	    <a href="/account">Settings</a>
-			<a href="#">Logout</a>
-	  </div>
-	</div>
-			</div>
+  <div class="float-right">
+    <div class="dropdown" id="profilebtn">
+<button class="dropbtn"></button>
+<div class="dropdown-content">
+  <p>(dynamic name)</p>
+  <a href="/recruiter">Posted Jobs</a>
+  <a href="/recruiteraccount">Settings</a>
+  <a href="#">Logout</a>
+</div>
+</div>
+  </div>
 		</div>
 	</nav>
 	<div class="print-post-section" >
@@ -76,17 +76,12 @@
     <input type="number" class="form-control" id="mobilephone" maxlength="10">
   </div>
   <div class="form-group">
-      <label for="preferredloc">Preferred Location</label>
-      <input type="text" id="preferredloc" class="form-control">
+      <label for="companyname">Company Name</label>
+      <input type="text" id="companyname" class="form-control">
 </div>
 <div class="form-group">
-  <select id="radius">
-    <option data-size="5" value="5">5 mi radius</option>
-    <option data-size="10" value="10">10 mi radius</option>
-    <option data-size="15" value="15">15 mi radius</option>
-    <option data-size="20" value="20">20 mi radius</option>
-  </select>&nbsp;&nbsp;&nbsp;&nbsp;
-  <input type="checkbox" id="remote" name="remote" value="remote"> Include Remote?<br>
+    <label for="companysite">Company Website</label>
+    <input type="text" id="companysite" class="form-control">
 </div>
   <div class="form-group">
     <label for="exampleInputPassword1">Old Password</label>
@@ -95,7 +90,7 @@
   <div class="form-group">
     <label for="exampleInputPassword1">New Password</label>
     <input type="password" class="form-control" id="exampleInputPassword1">
-    <small id="emailHelp" class="form-text text-muted">Your password should contain at least one capital letter and one number</small>
+    <small id="emailHelp" class="form-text text-muted">Your password should contain one capital letter and one number</small>
   </div>
   <button type="submit" id="saveAccountbtn" class="btn accountBtn">Submit</button>
 </form>

@@ -64,7 +64,7 @@ body {
   color: #FFF;
 }
 
-#registerbtn {
+#registerbtn, #oktaLogin, #oktaRegister, #recruiterSubmit {
   background-color: #F7B733;
 }
 
@@ -75,9 +75,11 @@ body {
 /* Dropdown Button */
 
 .dropbtn {
-  background-image: url("../images/user.png");
+  background-image: url("../images/defaultavatar.png");
+  background-repeat: no-repeat;
+  background-size: contain;
   padding: 16px;
-  border: none;
+  border-radius: 50%;
 }
 
 /* The container <div> - needed to position the dropdown content */
@@ -92,6 +94,7 @@ body {
 .dropdown-content {
   display: none;
   position: absolute;
+  /* top: 1%; */
   background-color: #f1f1f1;
   min-width: 160px;
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
@@ -142,7 +145,7 @@ th {
 
 .main-banner {
   background-image: url("../images/main-bg.jpeg");
-  background-position: 90% 40%;
+  background-position: 60% 40%;
   background-size: cover;
   background-repeat: no-repeat;
   /* padding: 100px; */
@@ -228,7 +231,7 @@ h3 {
   font-weight: bold;
 }
 
-.search-keyword:focus, .search-location:focus, .search-radius:focus {
+.search-keyword:focus, .search-location:focus, .search-radius:focus, btn-viewPost:focus {
   outline: none;
 }
 
@@ -248,6 +251,13 @@ h3 {
 
 .recruiter-login-text {
   display: inline-block;
+}
+
+#jobState {
+  background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    height: 38px;
 }
 
 .search-submit {
@@ -288,11 +298,6 @@ h3 {
   border-top: 1px solid #ccc;
 }
 
-.jobData {
-  padding-top: 10px;
-  padding-bottom: 10px;
-}
-
 table {
   table-layout: fixed;
 }
@@ -317,6 +322,36 @@ table {
   font-weight: bold;
 }
 
+.star {
+  background-image: url(../images/star.png);
+  background-repeat: no-repeat;
+  background-position-y: center;
+  background-position-x: center;
+}
+
+.checkedStar {
+  background-image: url(../images/starchecked.png);
+  background-repeat: no-repeat;
+  background-position-y: center;
+  background-position-x: center;
+}
+
+p.checkedStar {
+  margin-left: 0px;
+}
+
+.checkedStar:hover, .star:hover {
+  cursor: pointer;
+}
+
+.starCol {
+  width: 100px;
+}
+
+.jobDescripCol {
+  width: 450px;
+}
+
 .btn-viewPost {
   background-color: #4F6367;
   /* Green */
@@ -332,25 +367,21 @@ table {
   float: right;
 }
 
-.btn-viewPost:hover {
-  opacity: .7;
-}
 
 .btn-view {
-  background-color: #4CAF50;
+  background-color: #4F6367;
   /* Green */
   border: none;
-  color: white;
+  color: #F9F9F9;
   padding: 10px 32px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
-  margin: 4px 2px;
   cursor: pointer;
   border-radius: .25rem;
 }
 
-.btn-view:hover {
+.btn-view:hover, .btn-viewPost:hover, .apply-btn:hover, .btn-addPost:hover {
   opacity: .7;
 }
 
@@ -369,15 +400,10 @@ table {
   outline: none;
 }
 
-.apply-btn:hover {
-  opacity: .7;
-}
-
 .btn-addPost {
-  background-color: #4CAF50;
+  background-color: #F7B733;
   /* Green */
   border: none;
-  color: white;
   padding: 10px 32px;
   text-align: center;
   text-decoration: none;
@@ -385,10 +411,6 @@ table {
   margin: 4px 2px;
   cursor: pointer;
   border-radius: .25rem;
-}
-
-.btn-addPost:hover {
-  opacity: .7;
 }
 
 .pagination {
@@ -418,6 +440,10 @@ table {
   background-color: #ddd;
 }
 
+.modal-title-logins {
+  padding-bottom: 0px;
+}
+
 .footer {
   background-color: #F9F9F9;
   border-top: 1.5px solid #FE5F55;
@@ -437,9 +463,46 @@ table {
   position: relative;
 }
 
+/* settings page */
+.settings-box {
+  box-shadow: 0 4px 8px 0 rgba(79, 99, 103, 0.2), 0 6px 20px 0 rgba(79, 99, 103, 0.19);
+  padding: 2% 10%;
+  margin-top: 3%;
+}
+
+.subtitle-account {
+  color: #F7B733;
+  padding-bottom: 2%;
+  border-bottom: 1px solid #4F6367;
+  margin-bottom: 2%;
+}
+
+#userImage {
+  max-width: 80%;
+}
+
+.profileimage {
+  width: 100%;
+  border-radius: 50%;
+  background-size: contain;
+}
+
+.accountBtn {
+  background-color: #F7B733;
+}
+
+.btn-outline-secondary {
+  background-color: #F7B733;
+  color: #253031;
+}
+
 img.avatar {
   width: 40%;
   border-radius: 50%;
+}
+
+.tooltip-inner {
+  text-align: left !important;
 }
 
 /* media queries */
@@ -477,7 +540,6 @@ img.avatar {
   .search-submit {
     margin-left: 2%;
   }
-}
 
 @media only screen and (max-width: 490px) {
   .search-keyword {
