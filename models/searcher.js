@@ -11,6 +11,10 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.BOOLEAN,
       allowNull: false,
     },
+    wantsRemote: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false
+    },
     preferredLocation: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -40,6 +44,13 @@ module.exports = function(sequelize, DataTypes) {
       }
     },
     profilePicLink: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        len: [1,255]
+      }
+    },
+    oktaNo: {
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
