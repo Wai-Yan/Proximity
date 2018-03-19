@@ -145,8 +145,8 @@
 		<div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel" aria-hidden="true">
 			<div class="modal-dialog modal-sm" role="document">
 				<div class="modal-content">
-					<div class="modal-header">
-						<h5 class="modal-title" id="loginModalLabel">Welcome to JobLocator!</h5>
+					<div class="modal-header modal-title-logins">
+						<h4 class="modal-title" id="loginModalLabel">Welcome Back</h4>
 						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 		          <span aria-hidden="true">&times;</span>
 		        </button>
@@ -154,7 +154,8 @@
 					<div class="modal-body">
 						<form id="frmLogin">
 							<div class="img_container">
-								<img src="images/user.png" alt="User" class="avatar">
+								<!-- <img src="images/user.png" alt="User" class="avatar"> -->
+								<img class="profileimage avatar" alt="User" src="images/defaultavatar.png">
 							</div>
 							<div class="form-group">
 								<input type="text" id="loginEmail" class="form-control" placeholder="Email" required>
@@ -184,8 +185,8 @@
 		<div class="modal fade" id="registerModal" tabindex="-1" role="dialog" aria-labelledby="registerModalLabel" aria-hidden="true">
 			<div class="modal-dialog modal-md" role="document">
 				<div class="modal-content">
-					<div class="modal-header">
-						<h5 class="modal-title" id="registerModalLabel">Welcome to JobLocator!</h5>
+					<div class="modal-header modal-title-logins">
+						<h4 class="modal-title" id="registerModalLabel">Welcome to JobLocator</h4>
 						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 		          <span aria-hidden="true">&times;</span>
 		        </button>
@@ -203,6 +204,7 @@
 							</div>
 							<div class="form-group">
 								<input type="password" id="password" class="form-control" placeholder="Password" data-toggle="password" data-placement="bottom">
+								<small id="emailHelp" class="form-text text-muted">Your password should contain at least one capital letter and one number</small>
 							</div>
 							<div class="form-group">
 								<input type="number" id="mobilephone" class="form-control" placeholder="Mobile Phone (ex. 7031234567)" maxlength="10" required>
@@ -219,9 +221,16 @@
 								</select>&nbsp;&nbsp;&nbsp;&nbsp;
 								<input type="checkbox" id="remote" name="remote" value="remote"> Include Remote?<br>
 							</div>
-							<div class="form-group">
-								<label for="userImageUploadFile">Upload Image</label>
-								<input type="file" class="form-control-file" id="userImageUploadFile">
+							<div class="mb-1">Upload Profile Picture:</div>
+								<div class="input-group">
+								<!-- <input type="file" class="form-control-file" id="userImageUploadFile"> -->
+								<div class="custom-file">
+									<input type="file" class="custom-file-input" id="userImageUploadFile">
+									<label class="custom-file-label" for="userImageUploadFile">Choose file</label>
+								</div>
+								<div class="input-group-append">
+									<button class="btn btn-outline-secondary" type="button">Upload</button>
+								</div>
 							</div>
 						</form>
 					</div>
@@ -264,26 +273,28 @@
 		<div class="modal fade" id="recruiterModal" tabindex="-1" role="dialog" aria-labelledby="recruiterModalLabel" aria-hidden="true">
 			<div class="modal-dialog">
 				<div class="modal-content">
-					<div class="modal-header">
-						<h4 class="modal-title" id="recruiterModalLabel">Welcome to JobLocator!</h4>
+					<div class="modal-header modal-title-logins">
+						<h4 class="modal-title" id="recruiterModalLabel">Welcome to JobLocator</h4>
 						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
 							</button>
 					</div>
 					<div class="modal-body">
 						<!-- Nav tabs -->
-						<ul class="nav nav-tabs" id="tabList" role="tablist">
-							<li role="presentation" class="active">
-								<a href="#recruiterRegisterTab" aria-controls="recruiterRegisterTab" role="tab" data-toggle="tab">Register</a>
+						<div class="card-header">
+						<ul class="nav nav-tabs card-header-tabs" id="tabList" role="tablist">
+							<li role="presentation" class="nav-item">
+								<a href="#recruiterRegisterTab" class="nav-link active" aria-controls="recruiterRegisterTab" role="tab" data-toggle="tab">Register</a>
 							</li>
-							<li role="presentation">
-								<a href="#recruiterLoginTab" aria-controls="recruiterLoginTab" role="tab" data-toggle="tab">Login</a>
+							<li role="presentation" class="nav-item">
+								<a href="#recruiterLoginTab" class="nav-link" aria-controls="recruiterLoginTab" role="tab" data-toggle="tab">Login</a>
 							</li>
 						</ul>
+					</div>
 						<!-- Tab panes -->
 						<div class="tab-content">
 							<div role="tabpanel" class="tab-pane active" id="recruiterRegisterTab">
 								<form>
-									<div class="form-group">
+									<div class="form-group mt-3">
 										<input type="text" id="firstname_r" class="form-control" placeholder="First Name" required>
 									</div>
 									<div class="form-group">
@@ -294,6 +305,7 @@
 									</div>
 									<div class="form-group">
 										<input type="password" id="password_r" class="form-control" placeholder="Password" data-toggle="password">
+											<small id="emailHelp" class="form-text text-muted">Your password should contain at least one capital letter and one number</small>
 									</div>
 									<div class="form-group">
 										<input type="number" id="mobilephone_r" class="form-control" placeholder="Mobile Phone (ex. 7031234567)" maxlength="10" required>
@@ -304,16 +316,27 @@
 									<div class="form-group">
 										<input type="url" id="companywebsite" class="form-control" placeholder="Company Website" required>
 									</div>
-									<div class="form-group">
+									<!-- <div class="form-group">
 										<label for="recruiterImageUploadFile">Upload Image</label>
 										<input type="file" class="form-control-file" id="recruiterImageUploadFile">
-									</div>
+									</div> -->
+									<div class="mb-1">Upload Profile Picture:</div>
+									<div class="input-group">
+								<div class="custom-file">
+									<input type="file" class="custom-file-input" id="recruiterImageUploadFile">
+									<label class="custom-file-label" for="recruiterImageUploadFile">Choose file</label>
+								</div>
+								<div class="input-group-append">
+									<button class="btn btn-outline-secondary" type="button">Upload</button>
+								</div>
+							</div>
 								</form>
 							</div>
 							<div role="tabpanel" class="tab-pane" id="recruiterLoginTab">
 								<form>
 									<div class="img_container">
-										<img src="images/user.png" alt="User" class="avatar">
+										<img class="profileimage avatar" alt="User" src="images/defaultavatar.png">
+										<!-- <img src="images/user.png" alt="User" class="avatar"> -->
 									</div>
 									<div class="form-group">
 										<input type="text" id="loginEmail_r" class="form-control" placeholder="Email" required>
@@ -335,7 +358,7 @@
 					</div>
 					<div class="modal-footer">
 						<button type="button" id="recruiterSubmit" class="btn btn-recruiter-submit">Submit</button>
-						<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancle</button>
+						<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
 					</div>
 				</div>
 			</div>

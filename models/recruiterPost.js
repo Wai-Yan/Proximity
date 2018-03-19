@@ -14,20 +14,20 @@ module.exports = function(sequelize, DataTypes) {
         len: [15,10000]
       }
     },
-    // jobQualification: {
-    //   type: DataTypes.TEXT,
-    //   allowNull: true,
-    //   validate: {
-    //     len: [15,10000]
-    //   }
-    // },
-    // additionalInfo: {
-    //   type: DataTypes.TEXT,
-    //   allowNull: true,
-    //   validate: {
-    //     len: [15,10000]
-    //   }
-    // },
+    jobQualification: {
+      type: DataTypes.TEXT,
+      allowNull: true,
+      validate: {
+        len: [15,10000]
+      }
+    },
+    additionalInfo: {
+      type: DataTypes.TEXT,
+      allowNull: true,
+      validate: {
+        len: [15,10000]
+      }
+    },
     companyName: {
       type: DataTypes.STRING,
       allowNull: true,
