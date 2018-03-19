@@ -19,7 +19,7 @@
 <body>
 	<div class="wrapper">
 		<!--- modal --->
-	<div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+	<div class="modal fade" id="addNewJobPost" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
 	  <div class="modal-dialog" role="document">
 	    <div class="modal-content">
 	      <div class="modal-header">
@@ -131,19 +131,19 @@
 	  </div>
 	</div>
 		<!--- end modal --->
-	<nav class="navbar navbar-light">
+	<nav class="navbar">
 		<div class="container">
 			<a class="navbar-brand" href="/">
     <img src="images/geolocalization.png" height="50" class="d-inline-block" alt="">
-    Job<style="color:#55A8DD;">Locator</style>
+    JobLocator</style>
   </a>
 			<div class="float-right">
 				<div class="dropdown" id="profilebtn">
 	  <button class="dropbtn"></button>
 	  <div class="dropdown-content">
 	    <p>(dynamic name)</p>
-	    <a href="#">Posted Jobs</a>
-	    <a href="#">Settings</a>
+	    <a href="/recruiter">Posted Jobs</a>
+	    <a href="/recruiteraccount">Settings</a>
 			<a href="#">Logout</a>
 	  </div>
 	</div>
@@ -154,9 +154,27 @@
 		<div class="container">
 		<h3 id="resultsRecreuiterPageTitleText"></h3>
 		<!-- Button trigger modal -->
-	<button type="button" id="addNewJob" class="btn btn-addPost mb-3" data-toggle="modal" data-target="#exampleModalLong">
+	<button type="button" id="addNewJob" class="btn btn-addPost mb-3" data-toggle="modal" data-target="#addNewJobPost">
 		Add new job
 	</button>
+
+	<!-- Modal for job view -->
+	<div class="modal fade" id="viewJobPostInfo" tabindex="-1" role="dialog" aria-labelledby="viewJobPostInfo" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h3 class="modal-title" id="viewJobPostTitle"></h3>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div id="apply-btn-area"></div>
+				<div class="modal-body">
+				</div>
+			</div>
+		</div>
+	</div>
+<!-- End Modal -->
 
 			<table style="width:100%">
   <tr id="postedJobs">
