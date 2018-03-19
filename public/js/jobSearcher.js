@@ -112,11 +112,16 @@ $(document).ready(function() {
     window.location = "/recruiter";
   })
 
+  $(".recruiter-login-text").on("click", function() {
+    starJob();
+  })
+
   function starJob() {
-    $.put("/api/users", function(data) {
-      console.log(data);
+    $.ajax({
+       url: '/api/users',
+       type: 'PUT'
     });
-    console.log("White castle infiltrated");
+    
   }
 
   function unstarJob() {

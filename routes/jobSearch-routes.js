@@ -1,4 +1,5 @@
 var db = require("../models");
+var gravatar = require("gravatar");
 
 module.exports = function(app) {
 
@@ -35,7 +36,9 @@ module.exports = function(app) {
 
   // User Creation Routes
   app.post("/api/users", function(req, res) {
-    console.log("You're about to create a user in sql");
+
+    var gravId = (gravatar.url(req.body.email)).slice(2);
+
     db.User.create({
       fullName: req.body.fullName,
       isRecruiter: req.body.isRecruiter,
@@ -44,9 +47,11 @@ module.exports = function(app) {
       radius: req.body.radius,
       associatedJobs: req.body.associatedJobs,
       email: req.body.email,
-      profilePicLink: req.body.profilePicLink,
+      profilePicLink: gravId,
       oktaNo: req.body.oktaNo
-    })
+    }).then(function() {
+        res.json(gravId);
+    });
   });
 
   app.put("/api/users", function(req, res) {
