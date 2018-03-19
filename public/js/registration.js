@@ -1,6 +1,7 @@
 //Get data from front end and connect to OKTA create users APIs in routes folder
 $(document).ready(function() {
   //$("#password").password('toggle');
+  $('#password').tooltip({'trigger':'focus', 'title': 'Password must be at least 8 characters, a lowercase letter, an uppercase letter, a number, no parts of your username.'});
 
   $(document.body).on("click", "#registerModal #oktaRegister", function() {
     //event.preventDefault();
