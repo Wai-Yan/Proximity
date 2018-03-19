@@ -14,7 +14,7 @@ $(document).ready(function() {
     var newPreferredLoc = $("#registerModal #preferredloc").val().trim();
     var newRadius = $("#registerModal #radius").find(':selected').data('size');
     var newRemote = $("#registerModal #remote").is(":checked");
-    var newImage; // = $("#registerModal #imageUploadFile");
+    var newImage; // = $("#registerModal #userImageUploadFile");
 
     var newRegistration = {
       firstName: newFirstname,
@@ -74,6 +74,6 @@ $(document).ready(function() {
         url: "/api/users/",
         data: newUser
         });
-    }); 
+    });
   });
 });
