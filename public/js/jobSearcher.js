@@ -37,6 +37,7 @@ $(document).ready(function() {
     var tBody = $("tbody")
     var tRow = $("<tr>").addClass("jobRow")
     var titleTd = $("<td>").text(posts.jobTitle).addClass("jobData")
+    var star = $("<td>")
     var companyTd = $("<td>").text(posts.companyName).addClass("jobData")
     var cityTd = $("<td>").text(posts.city).addClass("jobData")
     var stateTd = $("<td>").text(posts.state).addClass("jobData")
@@ -54,8 +55,29 @@ $(document).ready(function() {
         }
       }
     })
+    var empty = true;
+    var starbtn = $('<p />', {
+      class: "star",
+      on: {
+        click: function() {
+          if (empty) {
+            starbtn.removeClass("star")
+            starbtn.addClass("checkedStar")
+            empty = false;
+            // then store
+          } else {
+            starbtn.removeClass("checkedStar")
+            console.log("getting here")
+            starbtn.addClass("star")
+            empty = true;
+            // then remove
+          }
+        }
+      }
+    })
     viewbtn.append(btn)
-    tRow.append(titleTd, companyTd, cityTd, stateTd, viewbtn)
+    star.append(starbtn)
+    tRow.append(titleTd, star, companyTd, cityTd, stateTd, viewbtn)
     tBody.append(tRow);
   }
 

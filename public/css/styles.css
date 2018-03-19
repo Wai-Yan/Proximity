@@ -317,6 +317,26 @@ table {
   font-weight: bold;
 }
 
+.star {
+  background-image: url(../images/star.png);
+  background-repeat: no-repeat;
+  background-position-y: center;
+}
+
+.star:hover {
+  cursor: pointer;
+}
+
+.checkedStar {
+  background-image: url(../images/starchecked.png);
+  background-repeat: no-repeat;
+  background-position-y: center;
+}
+
+.checkedStar:hover {
+  cursor: pointer;
+}
+
 .btn-viewPost {
   background-color: #4F6367;
   /* Green */
@@ -435,6 +455,30 @@ table {
   text-align: center;
   margin: 24px 0 12px 0;
   position: relative;
+}
+
+/* settings page */
+.settings-box {
+  box-shadow: 0 4px 8px 0 rgba(79, 99, 103, 0.2), 0 6px 20px 0 rgba(79, 99, 103, 0.19);
+  padding: 2% 10%;
+  margin-top: 3%;
+}
+
+.subtitle-account {
+  color: #F7B733;
+  padding-bottom: 2%;
+  border-bottom: 1px solid #4F6367;
+  margin-bottom: 2%;
+}
+
+#userImage {
+  max-width: 80%;
+}
+
+.profileimage {
+  width: 100%;
+  border-radius: 50%;
+  background-size: contain;
 }
 
 img.avatar {
