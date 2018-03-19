@@ -37,6 +37,7 @@ $(document).ready(function() {
 
       if (data) {
         console.log(data);
+        userOktaId = data.id;
 
         $("#successModal").modal("show");
 
@@ -65,7 +66,6 @@ $(document).ready(function() {
         radius: newRadius,
         associatedJobs: "[1, 3, 5]",
         email: newEmail,
-        profilePicLink: "newImage.jpg",
         oktaNo: userOktaId
       };
 

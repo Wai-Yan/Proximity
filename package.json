@@ -25,6 +25,7 @@
     "express": "^4.16.3",
     "express-handlebars": "^3.0.0",
     "geocoder": "^0.2.3",
+    "gravatar": "^1.6.0",
     "load-google-maps-api": "^1.2.0",
     "moment": "^2.21.0",
     "mysql2": "^1.5.2",
