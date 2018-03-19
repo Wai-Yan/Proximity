@@ -75,9 +75,11 @@ body {
 /* Dropdown Button */
 
 .dropbtn {
-  background-image: url("../images/user.png");
+  background-image: url("../images/defaultavatar.png");
+  background-repeat: no-repeat;
+  background-size: contain;
   padding: 16px;
-  border: none;
+  border-radius: 50%;
 }
 
 /* The container <div> - needed to position the dropdown content */
@@ -92,6 +94,7 @@ body {
 .dropdown-content {
   display: none;
   position: absolute;
+  /* top: 1%; */
   background-color: #f1f1f1;
   min-width: 160px;
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
@@ -142,7 +145,7 @@ th {
 
 .main-banner {
   background-image: url("../images/main-bg.jpeg");
-  background-position: 90% 40%;
+  background-position: 60% 40%;
   background-size: cover;
   background-repeat: no-repeat;
   /* padding: 100px; */
@@ -228,7 +231,7 @@ h3 {
   font-weight: bold;
 }
 
-.search-keyword:focus, .search-location:focus, .search-radius:focus {
+.search-keyword:focus, .search-location:focus, .search-radius:focus, btn-viewPost:focus {
   outline: none;
 }
 
@@ -248,6 +251,13 @@ h3 {
 
 .recruiter-login-text {
   display: inline-block;
+}
+
+#jobState {
+  background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    height: 38px;
 }
 
 .search-submit {
@@ -323,17 +333,13 @@ table {
   background-position-y: center;
 }
 
-.star:hover {
-  cursor: pointer;
-}
-
 .checkedStar {
   background-image: url(../images/starchecked.png);
   background-repeat: no-repeat;
   background-position-y: center;
 }
 
-.checkedStar:hover {
+.checkedStar:hover, .star:hover {
   cursor: pointer;
 }
 
@@ -352,25 +358,21 @@ table {
   float: right;
 }
 
-.btn-viewPost:hover {
-  opacity: .7;
-}
 
 .btn-view {
-  background-color: #4CAF50;
+  background-color: #4F6367;
   /* Green */
   border: none;
-  color: white;
+  color: #F9F9F9;
   padding: 10px 32px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
-  margin: 4px 2px;
   cursor: pointer;
   border-radius: .25rem;
 }
 
-.btn-view:hover {
+.btn-view:hover, .btn-viewPost:hover, .apply-btn:hover, .btn-addPost:hover {
   opacity: .7;
 }
 
@@ -389,15 +391,10 @@ table {
   outline: none;
 }
 
-.apply-btn:hover {
-  opacity: .7;
-}
-
 .btn-addPost {
-  background-color: #4CAF50;
+  background-color: #F7B733;
   /* Green */
   border: none;
-  color: white;
   padding: 10px 32px;
   text-align: center;
   text-decoration: none;
@@ -405,10 +402,6 @@ table {
   margin: 4px 2px;
   cursor: pointer;
   border-radius: .25rem;
-}
-
-.btn-addPost:hover {
-  opacity: .7;
 }
 
 .pagination {
@@ -481,6 +474,15 @@ table {
   background-size: contain;
 }
 
+.accountBtn {
+  background-color: #F7B733;
+}
+
+.btn-outline-secondary {
+  background-color: #F7B733;
+  color: #253031;
+}
+
 img.avatar {
   width: 40%;
   border-radius: 50%;
@@ -521,7 +523,6 @@ img.avatar {
   .search-submit {
     margin-left: 2%;
   }
-}
 
 @media only screen and (max-width: 490px) {
   .search-keyword {
