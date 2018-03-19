@@ -129,10 +129,10 @@ $(document).ready(function() {
   $("#resultsPageTitleText").text("Your search results for " + "(variable)" + " jobs in " + "(variable)")
 
   // need to include conditional if logged in
-  $("#recruiter-btn").on("click", function() {
-    console.log("registering button click")
-    window.location = "/recruiter";
-  })
+  // $("#recruiter-btn").on("click", function() {
+  //   console.log("registering button click");
+  //   window.location = "/recruiter";
+  // })
 
   function starJob() {
     $.post("/api/people", function(data) {
