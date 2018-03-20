@@ -134,10 +134,10 @@ $(document).ready(function() {
               }
             }
             map.fitBounds(circle.getBounds());
-
-          } else {
-            alert('Geocode was not successful for the following reason: ' + status);
-          }
+          }    
+          // } else {
+          //   alert('Geocode was not successful for the following reason: ' + status);
+          // }
         })
       }
       });
