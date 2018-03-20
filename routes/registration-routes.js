@@ -48,14 +48,6 @@ module.exports = function(app) {
         email: req.body.email
       };
       res.json(dbObj);
-
-      insertToDB(dbObj);
     })
-
   });
-
-  function insertToDB(body) {
-    console.log("insertToDB is called");
-  }
-
 }

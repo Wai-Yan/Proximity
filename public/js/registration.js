@@ -59,12 +59,14 @@ $(document).ready(function() {
     then(function() {
 
       var newUser = {
-        fullName: newFirstname + " " + newLastname,
+        firstName: newFirstname,
+        lastName: newLastname,
         isRecruiter: false,
         wantsRemote: newRemote,
         preferredLocation: newPreferredLoc,
         radius: newRadius,
-        associatedJobs: "[1, 3, 5]",
+        associatedJobs: "[]",
+        phoneNo: newMobile,
         email: newEmail,
         oktaNo: userOktaId
       };

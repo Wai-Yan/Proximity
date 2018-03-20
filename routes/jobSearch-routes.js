@@ -40,13 +40,15 @@ module.exports = function(app) {
     var gravId = (gravatar.url(req.body.email)).slice(2);
 
     db.User.create({
-      fullName: req.body.fullName,
+      firstName: req.body.firstName,
+      lastName: req.body.lastName,
       isRecruiter: req.body.isRecruiter,
       wantsRemote: req.body.wantsRemote,
       preferredLocation: req.body.preferredLocation,
       radius: req.body.radius,
       associatedJobs: req.body.associatedJobs,
       email: req.body.email,
+      phoneNo: req.body.phoneNo,
       profilePicLink: gravId,
       oktaNo: req.body.oktaNo
     }).then(function() {
@@ -55,7 +57,19 @@ module.exports = function(app) {
   });
 
   app.put("/api/users", function(req, res) {
-    console.log("You're about to UPDATE a user in sql");
-    db.User.update({associatedJobs: "[4, 20]"}, {where: {id: 1}})
+
+    console.log("You're about to UPDATE a user in sql");   
+
+    var updatedPropertiesOnly = {};
+
+    for (var key in req.body) {
+       if (req.body.hasOwnProperty(key)) {
+          updatedPropertiesOnly[key] = req.body[key];
+       }
+    }
+
+    console.log(updatedPropertiesOnly);
+
+    db.User.update(updatedPropertiesOnly, {where: {id: 1}});
   });
 };
