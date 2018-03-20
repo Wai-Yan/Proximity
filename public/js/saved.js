@@ -10,7 +10,7 @@ $(document).ready(function() {
     for (var i = 0; i < posts.length; i++) {
       rowsToAdd.push(createNewRow(latestSaves[i]));
     }
-    $("#postedJobs").append(rowsToAdd);
+    $("#savedJobs").append(rowsToAdd);
   }
 
   // get posts that have been saved
@@ -110,13 +110,13 @@ $(document).ready(function() {
       var noQualorInfoDetailsModal = ('<div>' + cmpName + '<br>' + '<br>' + '<h5>Job Description: </h5>' + jobDesc + '<br>' + '<br>' + '<h5>Job Address: </h5>' + adr1 + '<br>' + adr2 + ', ' + adr3 + ' ' + adr4 + '</div>');
 
       if (addInfo === undefined && jobQual === undefined) {
-        $(".modal-body").html(noQualorInfoDetailsModal)
+        $(".job-view-body").html(noQualorInfoDetailsModal)
       } else if (addInfo === undefined) {
-        $(".modal-body").html(noAddInfoDetailsModal)
+        $(".job-view-body").html(noAddInfoDetailsModal)
       } else if (jobQual === undefined) {
-        $(".modal-body").html(noQualDetailsModal)
+        $(".job-view-body").html(noQualDetailsModal)
       } else {
-        $(".modal-body").html(placeDetailsModal)
+        $(".job-view-body").html(placeDetailsModal)
       }
     })
   };
