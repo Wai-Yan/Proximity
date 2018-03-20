@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+	<link href="https://fonts.googleapis.com/css?family=Raleway:400,800|Roboto+Condensed|Ubuntu" rel="stylesheet">
+	<link href="css/jquery-ui.css" rel="stylesheet">
+	<link rel="stylesheet" href="css/styles.css" type="text/css" />
+	<title>ProjectTwo</title>
+	<script src="https://code.jquery.com/jquery.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.0/moment.min.js" type="text/javascript"></script>
+	<script
+  src="https://ok1static.oktacdn.com/assets/js/sdk/okta-auth-js/1.11.0/okta-auth-js.min.js"
+  type="text/javascript"></script>
+	<script src="js/googlemaps.js" type="text/javascript"></script>
+	<script src="js/jobSearcher.js" type="text/javascript"></script>
+	<script src="js/registration.js" type="text/javascript"></script>
+	<script src="js/login.js" type="text/javascript"></script>
+	<!-- <script src="js/recruiter.js" type="text/javascript"></script> -->
+</head>
+
+<body>
+	<div class="wrapper">
+		<nav class="navbar">
+			<div class="container">
+				<a class="navbar-brand" href="/">
+    <img src="images/geolocalization.png" height="50" class="d-inline-block" alt="">
+    JobLocator
+  </a>
+				<div class="float-right">
+					<div class="dropdown" id="profilebtn">
+						<button class="dropbtn"></button>
+							<div class="dropdown-content">
+								<p>(dynamic name)</p>
+								<a href="/saved">Saved Jobs</a>
+								<a href="/account">Settings</a>
+								<a href="/logout">Logout</a>
+							</div>
+						</div>
+				</div>
+			</div>
+		</nav>
+		<div class="main-banner">
+			<div class="main-banner-overlay">
+				<div class="container">
+					<h1 class="heading">Find the job you want</h1>
+					<h1>where you want it</h1>
+					<div class="header-text">Search for a job within the exact radius of where you want to be</div>
+				</div>
+			</div>
+		</div>
+		<div class="container">
+			<form class="form-inline">
+				<input class="search-keyword" id="keywordVal" type="text" name="search" placeholder="Search keyword">
+				<textarea name="name" rows="8" cols="80" id="link_origin_id" hidden></textarea>
+				<input class="search-location" id="locationVal" type="text" name="search" placeholder="Location">
+				<select class="search-radius">
+  <option value="10" selected>10 miles</option>
+  <option value="20">20 miles</option>
+	<option value="30">30 miles</option>
+		<option value="40">40 miles</option>
+			<option value="50">50 miles</option>
+				<option value="60">60 miles</option>
+</select>
+				<button type="submit" id="sendSearch" class="btn mb-2 search-submit">Submit</button>
+			</form>
+		</div>
+		<div class="latest-section">
+			<div class="container">
+				<h3 class="mb-3">Latest jobs</h3>
+				<div class="mb-3"><a id="listviewclick">List View</a> | <a id="mapviewclick">Map View</a></div>
+				<table id="listview" style="width:100%">
+					<tr id="recentJobs">
+						<th>Title</th>
+						<th></th>
+						<th>Company</th>
+						<th>City</th>
+						<th>State</th>
+						<th></th>
+					</tr>
+				</table>
+				<div class="container" id="mapview">
+					<div class="row">
+						<div class="map col-md-12" id="mapContainer">
+							<!--First Map -->
+
+							<!-- <input id="pac-input" class="controls" type="text" placeholder="Search Locations"> -->
+							<div id="map"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- Modal for job view -->
+		<div class="modal fade" id="viewJobPostInfo" tabindex="-1" role="dialog" aria-labelledby="viewJobPostInfo" aria-hidden="true">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h3 class="modal-title" id="viewJobPostTitle"></h3>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+		          <span aria-hidden="true">&times;</span>
+		        </button>
+					</div>
+					<div id="apply-btn-area"></div>
+					<div class="modal-body">
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- End Modal -->
+
+		<div class="container">
+			<!-- Modal -->
+			<div class="modal fade" id="markerModal" role="dialog">
+				<div class="modal-dialog">
+
+					<!-- Modal content-->
+					<div class="modal-content">
+						<div class="modal-header">
+							<div class="row">
+								<div class="col-md-10">
+									<h4 style="color:red;" id="markerName"></h4>
+								</div>
+								<div class="col-md-2">
+									<h4 id="applyButton"></h4>
+								</div>
+							</div>
+						</div>
+						<div class="container">
+							<div class="row">
+								<div class="col-md-12">
+									<p class="modalfont" id="markerCheckins"></p>
+
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- End Wrapper -->
+
+
+
+	<!--Google Maps Script-->
+	<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+	<script src="js/jquery.js"></script>
+	<script src="js/jquery-ui.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDxfscSb8wwqM-slfCubiwM1KKt7sb1P-c&libraries=places,geometry&callback=googleMain"></script>
+</body>
+
+</html>
