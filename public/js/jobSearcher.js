@@ -46,7 +46,7 @@ $(document).ready(function() {
   function initializeRows(posts) {
     var latestPosts = posts.reverse();
     var rowsToAdd = [];
-    for (var i = 0; i < 10; i++) {
+    for (var i = 0; i < 4; i++) {
       rowsToAdd.push(createNewRow(latestPosts[i]));
     }
     $("#recentJobs").append(rowsToAdd);
@@ -83,6 +83,7 @@ $(document).ready(function() {
       url: queryURL,
       method: "GET",
     }).done(function(results) {
+      $(".jobRow").remove()
       initializeResultsRows(results)
       console.log(results)
     });
