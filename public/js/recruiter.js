@@ -148,7 +148,6 @@ $("#addPost").on("click", function(event) {
 });
 
 $("#saveAccountbtn").on("click", function(event) {
-  console.log("Made edits, yo");
 
   var alteredRecruiter = {
     firstName: $("#firstname").val().trim(),
