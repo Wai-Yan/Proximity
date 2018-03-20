@@ -125,7 +125,7 @@ $(document).ready(function() {
             var bounds = new google.maps.LatLngBounds();
             for (var i=0; i < gMarkers.length;i++) {
               if (google.maps.geometry.spherical.computeDistanceBetween(gMarkers[i].getPosition(),marker.getPosition()) < radius) {
-                bounds.extend(gMarkers[i].getPosition())
+                // bounds.extend(gMarkers[i].getPosition())
                 gMarkers[i].setMap(map);
                 radiusMarkers.push(gMarkers[i])
                 console.log("radius Markers selection:", radiusMarkers)
@@ -133,7 +133,7 @@ $(document).ready(function() {
                 gMarkers[i].setMap(null);
               }
             }
-            map.fitBounds(bounds);
+            map.fitBounds(circle.getBounds());
 
           } else {
             alert('Geocode was not successful for the following reason: ' + status);
