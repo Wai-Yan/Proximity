@@ -29,6 +29,10 @@ module.exports = function(app) {
   app.get("/googletest", function(req, res) {
     res.sendFile(path.join(__dirname, "../public/googlemapstest.html"));
   });
+
+  app.get("/logout", function(req, res) {
+    res.sendFile(path.join(__dirname, "../public/logout.html"));
+  });
 }
 
 function checkUser(req, res){
