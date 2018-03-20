@@ -1,46 +1,102 @@
 $(document).ready(function() {
 
+  var resultsArr = [];
+
+  // initalize the latest jobs list
+  getPosts();
+
+  // hide search results at default
+  $(".results-section").hide();
+
   // hide map at default
   $("#mapview").hide();
+  $("#mapviewResults").hide();
 
   // hide map on click of list view
   $("#listviewclick").on("click", function() {
     $("#mapview").hide();
+    $("#mapviewResults").hide();
     $("#listview").show();
+    $("#listviewResults").show();
   })
 
   // hide list on click of map view
   $("#mapviewclick").on("click", function() {
     $("#mapview").show();
+    $("#mapviewResults").show();
     $("#listview").hide();
+    $("#listviewResults").hide();
   })
 
-  // print rows in the table
+  //grab value upon hitting submit button
+  //if the button has been clicked
+  $("#sendSearch").on("click", function(event) {
+    event.preventDefault();
+    $(".latest-section").hide();
+    $(".results-section").show();
+    var keywordInput = $("#keywordVal").val().trim();
+    // var qstring= keywordInput.replace(/ /g,"+");
+    // console.log("this is the query string" + qstring)
+    getResults(keywordInput);
+    // ("#keywordVal").val("")
+  });
+
+
+  // print latest ten items to rows in the table
   function initializeRows(posts) {
     var latestPosts = posts.reverse();
     var rowsToAdd = [];
-    for (var i = 0; i < 4; i++) {
+    for (var i = 0; i < 10; i++) {
       rowsToAdd.push(createNewRow(latestPosts[i]));
     }
     $("#recentJobs").append(rowsToAdd);
   }
 
+  // print all results that match the query
+  function initializeResultsRows(results) {
+    var latestResults = results.reverse();
+    console.log(latestResults)
+    var resultsToAdd = [];
+    console.log("here is the array" + resultsToAdd)
+    for (var i = 0; i < latestResults.length; i++) {
+      resultsToAdd.push(createNewRow(latestResults[i]));
+    }
+    console.log("new array" + JSON.stringify(resultsToAdd))
+    $("#foundJobs").append(resultsToAdd);
+  }
+
+  // get all posts with no limit on the query
   function getPosts() {
     $.get("/api/posts", function(data) {
       posts = data;
       initializeRows(posts);
       console.log(posts)
     });
+    $("#latestJobsText").text("Latest jobs")
+  }
+
+  // get posts based on the queries entered
+  function getResults(keywordInput) {
+    queryURL = "/api/results/" + keywordInput
+    console.log(queryURL)
+    $.ajax({
+      url: queryURL,
+      method: "GET",
+    }).done(function(results) {
+      initializeResultsRows(results)
+      console.log(results)
+    });
+    $("#sectionResultsTitle").text("Your search results for " + keywordInput + " jobs in " + "(variable)")
   }
 
   function createNewRow(posts) {
     var tBody = $("tbody")
     var tRow = $("<tr>").addClass("jobRow")
-    var titleTd = $("<td>").text(posts.jobTitle).addClass("jobData")
+    var titleTd = $("<td>").text(posts.jobTitle)
     var star = $("<td>")
-    var companyTd = $("<td>").text(posts.companyName).addClass("jobData")
-    var cityTd = $("<td>").text(posts.city).addClass("jobData")
-    var stateTd = $("<td>").text(posts.state).addClass("jobData")
+    var companyTd = $("<td>").text(posts.companyName)
+    var cityTd = $("<td>").text(posts.city)
+    var stateTd = $("<td>").text(posts.state)
     var viewbtn = $("<td>")
     var btn = $('<input />', {
       type: "button",
@@ -81,12 +137,9 @@ $(document).ready(function() {
     tBody.append(tRow);
   }
 
-  getPosts();
-
   // click action for view to pop up with modal on the job info
   function displayPost(id) {
-    console.log("hi")
-    queryURL = 'http://localhost:8080/api/posts/' + id
+    queryURL = "api/posts/" + id
     console.log(queryURL)
     $.ajax({
       url: queryURL,
@@ -129,19 +182,17 @@ $(document).ready(function() {
       var noQualorInfoDetailsModal = ('<div>' + cmpName + '<br>' + '<br>' + '<h5>Job Description: </h5>' + jobDesc + '<br>' + '<br>' + '<h5>Job Address: </h5>' + adr1 + '<br>' + adr2 + ', ' + adr3 + ' ' + adr4 + '</div>');
 
       if (addInfo === undefined && jobQual === undefined) {
-        $(".modal-body").html(noQualorInfoDetailsModal)
+        $(".job-view-body").html(noQualorInfoDetailsModal)
       } else if (addInfo === undefined) {
-        $(".modal-body").html(noAddInfoDetailsModal)
+        $(".job-view-body").html(noAddInfoDetailsModal)
       } else if (jobQual === undefined) {
-        $(".modal-body").html(noQualDetailsModal)
+        $(".job-view-body").html(noQualDetailsModal)
       } else {
-        $(".modal-body").html(placeDetailsModal)
+        $(".job-view-body").html(placeDetailsModal)
       }
     })
   };
 
-  // print if search query is entered
-  $("#resultsPageTitleText").text("Your search results for " + "(variable)" + " jobs in " + "(variable)")
 
   // need to include conditional if logged in
   // $("#recruiter-btn").on("click", function() {
@@ -155,10 +206,10 @@ $(document).ready(function() {
 
   function starJob() {
     $.ajax({
-       url: '/api/users',
-       type: 'PUT'
+      url: '/api/users',
+      type: 'PUT'
     });
-    
+
   }
 
   function unstarJob() {

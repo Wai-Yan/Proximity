@@ -27,6 +27,47 @@ module.exports = function(app) {
     });
   });
 
+  // app.get("/api/posts/search?q=", function(req, res) {
+  //   db.Post.findAll({
+  //     where: {
+  //       q: {
+  //         $like: "%" + req.query.jobTitle + "%"
+  //       }
+  //       },
+  //       logging: console.log
+  //   }).then(function(dbPost) {
+  //     res.json(dbPost);
+  //   });
+  // });
+
+  // search routes
+  app.get("/api/results", function(req, res) {
+    db.Post.findAll({})
+      .then(function(dbPost) {
+        res.json(dbPost);
+      });
+  });
+
+  app.post("/api/results", function(req, res) {
+    db.Post.create(req.body).then(function(dbPost) {
+      res.json(dbPost);
+    });
+  });
+
+  app.get("/api/results/:jobTitle", function(req, res) {
+    db.Post.findAll({
+      where: {
+        jobTitle: {
+          $like: "%" + req.params.jobTitle + "%"
+        }
+        },
+        logging: console.log
+    }).then(function(dbPost) {
+      res.json(dbPost);
+    });
+  });
+
+  // user routes
   app.get("/api/users", function(req, res) {
     db.Post.findAll({})
       .then(function(dbPost) {
