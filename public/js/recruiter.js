@@ -120,7 +120,7 @@ $("#addPost").on("click", function(event) {
       lng = results[0].geometry.location.lng()
       console.log(lat, lng)
       newPost(lat, lng)
-    })
+    });
   }
   function newPost(lat, lng) {
     var newPost = {
@@ -141,12 +141,33 @@ $("#addPost").on("click", function(event) {
   }
   function submitPost(newPost) {
     $.post("/api/posts", newPost, function() {
-      console.log(newPost)
+      console.log(newPost);
+      console.log("This should only show up if you made a new job");
       location.reload();
     });
   }
 });
-})
+
+$("#saveAccountbtn").on("click", function(event) {
+  console.log("Made edits, yo");
+
+  var alteredRecruiter = {
+    firstName: $("#firstname").val().trim(),
+    lastName: $("#lastname").val().trim(),
+    email: $("#email").val().trim(),
+    phone: $("#mobilephone").val().trim(),
+    companyName: $("#companyname").val().trim(),
+    companyWebsite: $("#companysite").val().trim(),
+  };
+
+  // Send to DB
+  $.ajax({
+    method: "PUT",
+    url: "/api/users",
+    data: alteredRecruiter
+    });
+});
+
 //------------------------------------------------------------------------------
 function googleRecruiter() {
 var washingtonDC = new google.maps.LatLng(38.9072, -77.0369)
@@ -228,3 +249,4 @@ if (searchMarkersLatLng != []) {
   }
 }
 }
+});
