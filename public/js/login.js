@@ -9,6 +9,7 @@ $(document).ready(function() {
       password: newPassword,
     };
 
+    getUserID(newLogin);
     userLogin(newLogin);
   });
 
@@ -22,9 +23,19 @@ $(document).ready(function() {
       password: newPassword,
     };
 
+    getUserID(newLogin);
     userLogin(newLogin);
   });
 
+  function getUserID(newLogin) {
+    console.log("In User ID");
+    console.log(newLogin);
+    $.ajax({
+      method: "GET",
+      url: "/api/login",
+      data: newLogin
+    });
+  }
 
   function userLogin(loginObj) {
     // Bootstrap the AuthJS Client
