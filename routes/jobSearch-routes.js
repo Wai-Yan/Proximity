@@ -77,6 +77,13 @@ module.exports = function(app) {
   });
   });
 
+  app.get("/api/users", function(req, res) {
+    db.Post.findAll({})
+      .then(function(dbPost) {
+        res.json(dbPost);
+      });
+  });
+
   // User Creation Routes
   app.post("/api/users", function(req, res) {
 
