@@ -62,6 +62,12 @@ $(document).ready(function() {
     $("#savedJobs").append(rowsToAdd);
   }
   function getPosts() {
+    // $.get("/api/posts", function(data) {
+    //   posts = data;
+    //   initializeRows(posts);
+    //   console.log(posts)
+    // });    
+    
     $.get("/api/posts", function(data) {
       posts = data;
       initializeRows(posts);
@@ -185,7 +191,7 @@ $(document).ready(function() {
         $(".job-view-body").html(placeDetailsModal)
       }
     })
-  };
+  }
 
   function displayMap() {
     mapLat;
@@ -227,7 +233,19 @@ $(document).ready(function() {
     })
   };
   getPosts();
-})
+
+  fillGravatar();
+
+  function fillGravatar() {
+
+    var id = localStorage.getItem("id")
+
+    $.get("/api/users/" + id, function(data) {
+
+      $(".dropbtn").css('background-image', 'url("https://' + data.profilePicLink + '")');
+    });
+  }
+
 function googleMain() {
   map = new google.maps.Map(document.getElementById('map'), {
     center: {

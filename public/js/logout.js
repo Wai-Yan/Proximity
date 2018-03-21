@@ -14,4 +14,6 @@ $(document).ready(function() {
       console.error(err);
       window.location.href = 'http://localhost:8080';
     });
+
+  localStorage.clear();
 });
