@@ -23,12 +23,13 @@ var circle;
 var radiusMarkers=[];
 var keyWordSearch=[];
 var keywordInput =[];
+var marker;
 
 //TO DO LIST:
-//Focus on the mySQL search algorithm and find the best way to query out the job titles that match and then
-//cont...   compare against the mySQL database and then use Location and Radius
-// Job Search query with jQueryUI--then posting those items to /api/SearchQuery with mySQL
-//Have main page map display the latest 10 jobs to display on page load
+//Querying the saved information and storing into format for markers
+//Checking conflicts with map displays, between logins and authentication--map view with listener
+//Updating the info windows information
+//Updating the modules information
 
 //WISH LIST:
 //User search--- if they put in a Location
@@ -77,6 +78,8 @@ $(document).ready(function() {
     searchMarkerAry = []
     gMarkers = []
     radiusMarkers=[]
+    marker;
+
     keywordInput = $("#keywordVal").val().trim();
     $.ajax({
       url: "api/results/" + keywordInput,
