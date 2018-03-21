@@ -17,6 +17,7 @@ function getPosts() {
     console.log(posts)
   });
 }
+
 function createNewRow(posts) {
   var date = moment(posts.created_at).format('MM/DD/YYYY');
   var tBody = $("tbody")
@@ -84,7 +85,7 @@ function displayPost(id) {
     var updatedAt = results.updated_at
 
     var placeDetailsModal = ('<div>' + cmpName + '<br>' + '<br>' + '<h5>Job Description: </h5>' + jobDesc + '<br>' + '<br>' + '<h5>Qualifications: </h5>' + jobQual + '<br>' + '<br>' + '<h5>Additional Information: </h5>' + addInfo + '<br>' + '<br>' + '<h5>Job Address: </h5>' + adr1 + '<br>' + adr2 + ', ' + adr3 + ' ' + adr4 + '</div>');
-    $(".modal-body").html(placeDetailsModal)
+    $(".job-view-body").html(placeDetailsModal)
   })
 };
 

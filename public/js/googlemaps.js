@@ -22,6 +22,7 @@ var gMarkers = [];
 var circle;
 var radiusMarkers=[];
 var keyWordSearch=[];
+var keywordInput =[];
 
 //TO DO LIST:
 //Focus on the mySQL search algorithm and find the best way to query out the job titles that match and then
@@ -76,9 +77,9 @@ $(document).ready(function() {
     searchMarkerAry = []
     gMarkers = []
     radiusMarkers=[]
-
+    keywordInput = $("#keywordVal").val().trim();
     $.ajax({
-      url: 'http://localhost:8080/api/posts',
+      url: "api/results/" + keywordInput,
       method: "GET",
     }).done(function(results) {
       console.log(results)
@@ -101,6 +102,7 @@ $(document).ready(function() {
         var address = $('#locationVal').val().trim();
         var radius = parseInt($('.search-radius').val())*(1609.34);
         geocoder.geocode( { 'address': address}, function(results, status) {
+          console.log("geocode results", results)
           if (status == google.maps.GeocoderStatus.OK) {
             map.setCenter(results[0].geometry.location);
             var icon = {
@@ -134,10 +136,10 @@ $(document).ready(function() {
               }
             }
             map.fitBounds(circle.getBounds());
-
-          } else {
-            alert('Geocode was not successful for the following reason: ' + status);
           }
+          // } else {
+          //   alert('Geocode was not successful for the following reason: ' + status);
+          // }
         })
       }
       });

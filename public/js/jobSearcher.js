@@ -1,5 +1,11 @@
 $(document).ready(function() {
 
+  var resultsArr = [];
+
+  // initalize the latest jobs list
+  getPosts();
+
+
   // hide map at default
   $("#mapview").hide();
 
@@ -15,7 +21,18 @@ $(document).ready(function() {
     $("#listview").hide();
   })
 
-  // print rows in the table
+  //grab value upon hitting submit button
+  $("#sendSearch").on("click", function(event) {
+    event.preventDefault();
+    var keywordInput = $("#keywordVal").val().trim();
+    // var qstring= keywordInput.replace(/ /g,"+");
+    // console.log("this is the query string" + qstring)
+    getResults(keywordInput);
+    // ("#keywordVal").val("")
+  });
+
+
+  // print latest ten items to rows in the table
   function initializeRows(posts) {
     var latestPosts = posts.reverse();
     var rowsToAdd = [];
@@ -25,12 +42,43 @@ $(document).ready(function() {
     $("#recentJobs").append(rowsToAdd);
   }
 
+  // print all results that match the query
+  function initializeResultsRows(results) {
+    var latestResults = results.reverse();
+    console.log(latestResults)
+    var resultsToAdd = [];
+    console.log("here is the array" + resultsToAdd)
+    for (var i = 0; i < latestResults.length; i++) {
+      resultsToAdd.push(createNewRow(latestResults[i]));
+    }
+    console.log("new array" + JSON.stringify(resultsToAdd))
+    $("#recentJobs").append(resultsToAdd);
+  }
+
+  // get all posts with no limit on the query
   function getPosts() {
     $.get("/api/posts", function(data) {
       posts = data;
       initializeRows(posts);
       console.log(posts)
     });
+    $("#latestJobsText").text("Latest jobs")
+  }
+
+  // get posts based on the queries entered
+  function getResults(keywordInput) {
+    queryURL = "/api/results/" + keywordInput
+    console.log(queryURL)
+    $.ajax({
+      url: queryURL,
+      method: "GET",
+    }).done(function(results) {
+      $(".jobRow").remove()
+      initializeResultsRows(results)
+      // pagination(results)
+      console.log(results)
+    });
+    $("#sectionResultsTitle").text("Your search results for " + keywordInput + " jobs in " + "(variable)")
   }
 
   function createNewRow(posts) {
@@ -84,12 +132,9 @@ $(document).ready(function() {
     tBody.append(tRow);
   }
 
-  getPosts();
-
   // click action for view to pop up with modal on the job info
   function displayPost(id) {
-    console.log("hi")
-    queryURL = 'http://localhost:8080/api/posts/' + id
+    queryURL = "api/posts/" + id
     console.log(queryURL)
     $.ajax({
       url: queryURL,
@@ -132,19 +177,17 @@ $(document).ready(function() {
       var noQualorInfoDetailsModal = ('<div>' + cmpName + '<br>' + '<br>' + '<h5>Job Description: </h5>' + jobDesc + '<br>' + '<br>' + '<h5>Job Address: </h5>' + adr1 + '<br>' + adr2 + ', ' + adr3 + ' ' + adr4 + '</div>');
 
       if (addInfo === undefined && jobQual === undefined) {
-        $(".modal-body").html(noQualorInfoDetailsModal)
+        $(".job-view-body").html(noQualorInfoDetailsModal)
       } else if (addInfo === undefined) {
-        $(".modal-body").html(noAddInfoDetailsModal)
+        $(".job-view-body").html(noAddInfoDetailsModal)
       } else if (jobQual === undefined) {
-        $(".modal-body").html(noQualDetailsModal)
+        $(".job-view-body").html(noQualDetailsModal)
       } else {
-        $(".modal-body").html(placeDetailsModal)
+        $(".job-view-body").html(placeDetailsModal)
       }
     })
   };
 
-  // print if search query is entered
-  $("#resultsPageTitleText").text("Your search results for " + "(variable)" + " jobs in " + "(variable)")
 
   // need to include conditional if logged in
   // $("#recruiter-btn").on("click", function() {
@@ -154,6 +197,42 @@ $(document).ready(function() {
 
   $(".checkedStar").on("click", function() {
     unstarJob();
+
+  // pagination function
+  //   var table =  $('#myTable');
+  // var b = (array of objects from the result)
+  // var max_size=b.length;
+  // var sta = 0;
+  // var elements_per_page = 4;
+  // var limit = elements_per_page;
+  // goFun(sta,limit);
+  // function goFun(sta,limit) {
+  //  for (var i =sta ; i < limit; i++) {
+  //
+  //    var $nr = $('<tr><td>A-' + b[i]['play_id'] + '</td><td>B-' + b[i]['question1']  + '</td></tr>');
+  //    table.append($nr);
+  //  }
+  //  }
+  //  $('#nextValue').click(function(){
+  //
+  //  var next = limit;
+  //  if(max_size>=next) {
+  //  limit = limit+elements_per_page;
+  //  table.empty();
+  //  goFun(next,limit);
+  //  }
+  //  });
+  //  $('#PreeValue').click(function(){
+  //  var pre = limit-(2*elements_per_page);
+  //  if(pre>=0) {
+  //  limit = limit-elements_per_page;
+  //  table.empty();
+  //  goFun(pre,limit);
+  //  }
+  //  });
+  //
+  // });
+  //
   })
 
   function starJob(id) {

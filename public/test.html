@@ -56,6 +56,7 @@
 		</div>
 		<div class="container">
 			<form class="form-inline">
+				<!-- action="search" method="post" -->
 				<input class="search-keyword" id="keywordVal" type="text" name="search" placeholder="Search keyword">
 				<textarea name="name" rows="8" cols="80" id="link_origin_id" hidden></textarea>
 				<input class="search-location" id="locationVal" type="text" name="search" placeholder="Location">
@@ -70,12 +71,15 @@
 				<button type="submit" id="sendSearch" class="btn mb-2 search-submit">Submit</button>
 			</form>
 		</div>
+
+		<!-- container for latest section -->
 		<div class="latest-section">
 			<div class="container">
-				<h3 class="mb-3">Latest jobs</h3>
+				<h3 class="mb-3" id="latestJobsText"></h3>
 				<div class="mb-3"><a id="listviewclick">List View</a> | <a id="mapviewclick">Map View</a></div>
+				<!-- table list for latest jobs -->
 				<table id="listview" style="width:100%">
-					<tr id="recentJobs">
+					<tr>
 						<th>Title</th>
 						<th></th>
 						<th>Company</th>
@@ -83,19 +87,57 @@
 						<th>State</th>
 						<th></th>
 					</tr>
+					<tr id="recentJobs">
+					</tr>
 				</table>
+				<!-- end table list for latest jobs -->
+				<!-- container for map --->
 				<div class="container" id="mapview">
 					<div class="row">
 						<div class="map col-md-12" id="mapContainer">
 							<!--First Map -->
-
 							<!-- <input id="pac-input" class="controls" type="text" placeholder="Search Locations"> -->
 							<div id="map"></div>
 						</div>
 					</div>
 				</div>
+				<!-- end container for map -->
 			</div>
 		</div>
+		<!-- end container for latest section --->
+
+		<!-- container for searched results section -->
+		<!-- <div class="results-section">
+			<div class="container">
+				<h3 class="mb-3" id="sectionResultsTitle"></h3>
+				<div class="mb-3"><a id="listviewclick">List View</a> | <a id="mapviewclick">Map View</a></div> -->
+				<!-- table list for searched results -->
+				<!-- <table id="listview" style="width:100%">
+					<tr>
+						<th>Title</th>
+						<th></th>
+						<th>Company</th>
+						<th>City</th>
+						<th>State</th>
+						<th></th>
+					</tr>
+					<tr id="foundJobs">
+					</tr>
+				</table> -->
+				<!-- end table list for searched results -->
+				<!-- <div id="pagination-area" class="pagination justify-content-center">
+				  <a href="#">&laquo;</a>
+				  <a class="active" href="#">1</a>
+				  <a href="#">2</a>
+				  <a href="#">3</a>
+				  <a href="#">4</a>
+				  <a href="#">5</a>
+				  <a href="#">6</a>
+				  <a href="#">&raquo;</a>
+				</div>
+			</div>
+		</div> -->
+		<!-- end of searched results section -->
 
 		<!-- Modal for job view -->
 		<div class="modal fade" id="viewJobPostInfo" tabindex="-1" role="dialog" aria-labelledby="viewJobPostInfo" aria-hidden="true">
@@ -108,7 +150,7 @@
 		        </button>
 					</div>
 					<div id="apply-btn-area"></div>
-					<div class="modal-body">
+					<div class="modal-body job-view-body">
 					</div>
 				</div>
 			</div>
@@ -273,6 +315,7 @@
 				<p>© Copyright JobLocator 2018 | <a href="#" target="_blank">About</a></p>
 			</div>
 		</div>
+
 		<!-- Recruiter Modal -->
 		<div class="modal fade" id="recruiterModal" tabindex="-1" role="dialog" aria-labelledby="recruiterModalLabel" aria-hidden="true">
 			<div class="modal-dialog">
