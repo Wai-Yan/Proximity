@@ -15,6 +15,12 @@ $(document).ready(function() {
 
   // get posts that have been saved
   function getPosts() {
+    // $.get("/api/posts", function(data) {
+    //   posts = data;
+    //   initializeRows(posts);
+    //   console.log(posts)
+    // });    
+    
     $.get("/api/posts", function(data) {
       posts = data;
       initializeRows(posts);
@@ -119,7 +125,7 @@ $(document).ready(function() {
         $(".modal-body").html(placeDetailsModal)
       }
     })
-  };
+  }
 
   getPosts();
 

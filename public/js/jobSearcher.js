@@ -36,11 +36,11 @@ $(document).ready(function() {
   function createNewRow(posts) {
     var tBody = $("tbody")
     var tRow = $("<tr>").addClass("jobRow")
-    var titleTd = $("<td>").text(posts.jobTitle).addClass("jobData")
-    var star = $("<td>")
-    var companyTd = $("<td>").text(posts.companyName).addClass("jobData")
-    var cityTd = $("<td>").text(posts.city).addClass("jobData")
-    var stateTd = $("<td>").text(posts.state).addClass("jobData")
+    var titleTd = $("<td>").text(posts.jobTitle)
+    var star = $("<td id='" + posts.id + "'>")
+    var companyTd = $("<td>").text(posts.companyName)
+    var cityTd = $("<td>").text(posts.city)
+    var stateTd = $("<td>").text(posts.state)
     var viewbtn = $("<td>")
     var btn = $('<input />', {
       type: "button",
@@ -61,14 +61,17 @@ $(document).ready(function() {
       on: {
         click: function() {
           if (empty) {
+            var clickedJobId = $(this).parent().attr("id");
             starbtn.removeClass("star")
             starbtn.addClass("checkedStar")
+            starJob(clickedJobId)
+            console.log(clickedJobId)
             empty = false;
             // then store
           } else {
             starbtn.removeClass("checkedStar")
-            console.log("getting here")
             starbtn.addClass("star")
+            unstarJob()
             empty = true;
             // then remove
           }
@@ -149,19 +152,37 @@ $(document).ready(function() {
   //   window.location = "/recruiter";
   // })
 
-  $(".recruiter-login-text").on("click", function() {
-    starJob();
+  $(".checkedStar").on("click", function() {
+    unstarJob();
   })
 
-  function starJob() {
+  function starJob(id) {
+
+    console.log("You're about to star a job! Hopefully");
+    var request = {
+      id: id,
+      change: "starring"
+    }
+  
     $.ajax({
-       url: '/api/users',
-       type: 'PUT'
+      url: '/api/users/star',
+      type: 'PUT',
+      data: request
     });
-    
+
   }
 
   function unstarJob() {
-    console.log("You unstarred a job");
+    console.log("You've unstarred a job");
+    var request = {
+      id: id,
+      change: "unstarring"
+    }
+
+    $.ajax({
+      url: '/api/users/star',
+      type: 'PUT',
+      data: request
+    });
   }
 });
