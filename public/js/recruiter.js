@@ -166,6 +166,18 @@ $("#saveAccountbtn").on("click", function(event) {
     });
 });
 
+fillGravatar();
+
+function fillGravatar() {
+
+  var id = localStorage.getItem("id")
+
+  $.get("/api/users/" + id, function(data) {
+
+    $(".dropbtn").css('background-image', 'url("https://' + data.profilePicLink + '")');
+  });
+}
+
 //------------------------------------------------------------------------------
 function googleRecruiter() {
 var washingtonDC = new google.maps.LatLng(38.9072, -77.0369)

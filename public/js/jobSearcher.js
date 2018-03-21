@@ -172,7 +172,7 @@ $(document).ready(function() {
 
   }
 
-  function unstarJob() {
+  function unstarJob(id) {
     console.log("You've unstarred a job");
     var request = {
       id: id,
@@ -183,6 +183,18 @@ $(document).ready(function() {
       url: '/api/users/star',
       type: 'PUT',
       data: request
+    });
+  }
+
+  fillGravatar();
+
+  function fillGravatar() {
+
+    var id = localStorage.getItem("id")
+
+    $.get("/api/users/" + id, function(data) {
+
+      $(".dropbtn").css('background-image', 'url("https://' + data.profilePicLink + '")');
     });
   }
 });

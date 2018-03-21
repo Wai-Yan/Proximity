@@ -1,4 +1,5 @@
 $(document).ready(function() {
+
   $(document.body).on("click", "#loginModal #oktaLogin", function() {
     console.log("I'm here login");
     var newEmail = $("#loginModal #loginEmail").val().trim();
@@ -60,6 +61,9 @@ $(document).ready(function() {
         })
         .then(res => {
           console.log(res);
+          // localStorage.setItem("sessionId", res._embedded.user.id);
+          localStorage.setItem("id", res.user.id);
+
           if (res.status === 'SUCCESS') {
             authClient.token.getWithRedirect({
               sessionToken: res.sessionToken,
@@ -69,7 +73,4 @@ $(document).ready(function() {
         });
     }
   }
-
-  
-
 });
