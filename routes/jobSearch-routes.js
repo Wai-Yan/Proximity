@@ -27,6 +27,15 @@ module.exports = function(app) {
     });
   });
 
+  app.get("/api/users/:id", function(req, res) {
+    db.User.findOne({
+      where: {
+        oktaNo: req.params.id
+      },
+    }).then(function(dbPost) {
+      res.json(dbPost);
+    });
+
   // app.get("/api/posts/search?q=", function(req, res) {
   //   db.Post.findAll({
   //     where: {
@@ -66,8 +75,8 @@ module.exports = function(app) {
       res.json(dbPost);
     });
   });
+  });
 
-  // user routes
   app.get("/api/users", function(req, res) {
     db.Post.findAll({})
       .then(function(dbPost) {
@@ -112,5 +121,14 @@ module.exports = function(app) {
     console.log(updatedPropertiesOnly);
 
     db.User.update(updatedPropertiesOnly, {where: {id: 1}});
+  });
+
+  app.put("/api/users/star", function(req, res) {
+
+    console.log("You're about to change a job's STAR STATUS");   
+    console.log(req.body.id);
+    var newList = "[" + req.body.id + "]";
+
+    db.User.update({associatedJobs: newList}, {where: {id: 1}});
   });
 };

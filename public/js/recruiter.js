@@ -149,7 +149,6 @@ $("#addPost").on("click", function(event) {
 });
 
 $("#saveAccountbtn").on("click", function(event) {
-  console.log("Made edits, yo");
 
   var alteredRecruiter = {
     firstName: $("#firstname").val().trim(),
@@ -167,6 +166,18 @@ $("#saveAccountbtn").on("click", function(event) {
     data: alteredRecruiter
     });
 });
+
+fillGravatar();
+
+function fillGravatar() {
+
+  var id = localStorage.getItem("id")
+
+  $.get("/api/users/" + id, function(data) {
+
+    $(".dropbtn").css('background-image', 'url("https://' + data.profilePicLink + '")');
+  });
+}
 
 //------------------------------------------------------------------------------
 function googleRecruiter() {
