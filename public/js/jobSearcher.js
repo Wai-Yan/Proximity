@@ -85,7 +85,7 @@ $(document).ready(function() {
     var tBody = $("tbody")
     var tRow = $("<tr>").addClass("jobRow")
     var titleTd = $("<td>").text(posts.jobTitle)
-    var star = $("<td>")
+    var star = $("<td id='" + posts.id + "'>")
     var companyTd = $("<td>").text(posts.companyName)
     var cityTd = $("<td>").text(posts.city)
     var stateTd = $("<td>").text(posts.state)
@@ -109,14 +109,17 @@ $(document).ready(function() {
       on: {
         click: function() {
           if (empty) {
+            var clickedJobId = $(this).parent().attr("id");
             starbtn.removeClass("star")
             starbtn.addClass("checkedStar")
+            starJob(clickedJobId)
+            console.log(clickedJobId)
             empty = false;
             // then store
           } else {
             starbtn.removeClass("checkedStar")
-            console.log("getting here")
             starbtn.addClass("star")
+            unstarJob()
             empty = true;
             // then remove
           }
@@ -192,6 +195,9 @@ $(document).ready(function() {
   //   window.location = "/recruiter";
   // })
 
+  $(".checkedStar").on("click", function() {
+    unstarJob();
+
   // pagination function
   //   var table =  $('#myTable');
   // var b = (array of objects from the result)
@@ -227,20 +233,47 @@ $(document).ready(function() {
   //
   // });
   //
-  //
-  $(".recruiter-login-text").on("click", function() {
-    starJob();
   })
 
-  function starJob() {
+  function starJob(id) {
+
+    console.log("You're about to star a job! Hopefully");
+    var request = {
+      id: id,
+      change: "starring"
+    }
+  
     $.ajax({
-      url: '/api/users',
-      type: 'PUT'
+      url: '/api/users/star',
+      type: 'PUT',
+      data: request
     });
 
   }
 
-  function unstarJob() {
-    console.log("You unstarred a job");
+  function unstarJob(id) {
+    console.log("You've unstarred a job");
+    var request = {
+      id: id,
+      change: "unstarring"
+    }
+
+    $.ajax({
+      url: '/api/users/star',
+      type: 'PUT',
+      data: request
+    });
+  }
+
+  fillGravatar();
+
+  function fillGravatar() {
+
+    var id = localStorage.getItem("id")
+
+    $.get("/api/users/" + id, function(data) {
+
+      $(".dropbtn").css('background-image', 'url("https://' + data.profilePicLink + '")');
+    });
   }
 });
