@@ -5,35 +5,25 @@ $(document).ready(function() {
   // initalize the latest jobs list
   getPosts();
 
-  // hide search results at default
-  $(".results-section").hide();
 
   // hide map at default
   $("#mapview").hide();
-  $("#mapviewResults").hide();
 
   // hide map on click of list view
   $("#listviewclick").on("click", function() {
     $("#mapview").hide();
-    $("#mapviewResults").hide();
     $("#listview").show();
-    $("#listviewResults").show();
   })
 
   // hide list on click of map view
   $("#mapviewclick").on("click", function() {
     $("#mapview").show();
-    $("#mapviewResults").show();
     $("#listview").hide();
-    $("#listviewResults").hide();
   })
 
   //grab value upon hitting submit button
-  //if the button has been clicked
   $("#sendSearch").on("click", function(event) {
     event.preventDefault();
-    $(".latest-section").hide();
-    $(".results-section").show();
     var keywordInput = $("#keywordVal").val().trim();
     // var qstring= keywordInput.replace(/ /g,"+");
     // console.log("this is the query string" + qstring)
@@ -62,7 +52,7 @@ $(document).ready(function() {
       resultsToAdd.push(createNewRow(latestResults[i]));
     }
     console.log("new array" + JSON.stringify(resultsToAdd))
-    $("#foundJobs").append(resultsToAdd);
+    $("#recentJobs").append(resultsToAdd);
   }
 
   // get all posts with no limit on the query
@@ -85,6 +75,7 @@ $(document).ready(function() {
     }).done(function(results) {
       $(".jobRow").remove()
       initializeResultsRows(results)
+      // pagination(results)
       console.log(results)
     });
     $("#sectionResultsTitle").text("Your search results for " + keywordInput + " jobs in " + "(variable)")
@@ -201,6 +192,42 @@ $(document).ready(function() {
   //   window.location = "/recruiter";
   // })
 
+  // pagination function
+  //   var table =  $('#myTable');
+  // var b = (array of objects from the result)
+  // var max_size=b.length;
+  // var sta = 0;
+  // var elements_per_page = 4;
+  // var limit = elements_per_page;
+  // goFun(sta,limit);
+  // function goFun(sta,limit) {
+  //  for (var i =sta ; i < limit; i++) {
+  //
+  //    var $nr = $('<tr><td>A-' + b[i]['play_id'] + '</td><td>B-' + b[i]['question1']  + '</td></tr>');
+  //    table.append($nr);
+  //  }
+  //  }
+  //  $('#nextValue').click(function(){
+  //
+  //  var next = limit;
+  //  if(max_size>=next) {
+  //  limit = limit+elements_per_page;
+  //  table.empty();
+  //  goFun(next,limit);
+  //  }
+  //  });
+  //  $('#PreeValue').click(function(){
+  //  var pre = limit-(2*elements_per_page);
+  //  if(pre>=0) {
+  //  limit = limit-elements_per_page;
+  //  table.empty();
+  //  goFun(pre,limit);
+  //  }
+  //  });
+  //
+  // });
+  //
+  //
   $(".recruiter-login-text").on("click", function() {
     starJob();
   })
