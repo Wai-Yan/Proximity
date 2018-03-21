@@ -157,35 +157,23 @@
 		</div>
 		<!-- End Modal -->
 
-		<div class="container">
-			<!-- Modal -->
-			<div class="modal fade" id="markerModal" role="dialog">
-				<div class="modal-dialog">
-
-					<!-- Modal content-->
-					<div class="modal-content">
-						<div class="modal-header">
-							<div class="row">
-								<div class="col-md-10">
-									<h4 style="color:red;" id="markerName"></h4>
-								</div>
-								<div class="col-md-2">
-									<h4 id="applyButton"></h4>
-								</div>
-							</div>
-						</div>
-						<div class="container">
-							<div class="row">
-								<div class="col-md-12">
-									<p class="modalfont" id="markerCheckins"></p>
-
-								</div>
-							</div>
-						</div>
+		<!-- Modal for job view -->
+		<div class="modal fade" id="markerModal" tabindex="-1" role="dialog" aria-labelledby="viewJobPostInfo" aria-hidden="true">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h3 class="modal-title" id="markerName"></h3>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div id="applyButton"></div>
+					<div class="modal-body job-view-body">
 					</div>
 				</div>
 			</div>
 		</div>
+		<!-- End Modal -->
 
 		<!-- The Modal for Login-->
 		<div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel" aria-hidden="true">
