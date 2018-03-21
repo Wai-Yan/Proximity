@@ -293,6 +293,9 @@ h3 {
   cursor: pointer;
   text-decoration: underline;
 }
+.savedSearch {
+  padding: 1rem;
+}
 
 .jobRow {
   border-top: 1px solid #ccc;

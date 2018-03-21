@@ -24,6 +24,9 @@ var radiusMarkers=[];
 var keyWordSearch=[];
 var keywordInput =[];
 var marker;
+var circlCenter;
+var circleCenterLat;
+var circleCenterLng;
 
 //TO DO LIST:
 //Querying the saved information and storing into format for markers
@@ -40,36 +43,9 @@ var marker;
 
 $(document).ready(function() {
 
-    // $("#keywordVal").on("focus", function(event){
-    //   event.preventDefault();
-    //   keyWordSearch=[];
-    //   $.ajax({
-    //   url: 'http://localhost:8080/api/posts',
-    //   method: "GET",
-    //   }).done(function(results) {
-    //   console.log(results)
-    //     keyWordSearch = results
-    //   });
-    //
-    //   $('#keywordVal').autocomplete({
-    //     minLength: 2,
-    //     source: function (request, response) {
-    //          var keySearch = $.makeArray(keyWordSearch)
-    //          response($.map(keySearch, function (value, key) {
-    //               return {
-    //                   label: value.jobTitle,
-    //                   value: value.id
-    //               }
-    //           }));
-    //   },
-    //   select: function(event, ui) {
-    //           $('#keywordVal').val(ui.item.label);
-    //           $('#link_origin_id').val(ui.item.value);
-    //           console.log("KeyWord Search mSQL ID:", $('#link_origin_id').val().trim())
-    //           return false;
-    //       }
-    //   });
-    // });
+    $("#mapviewclick").on("click", function(){
+        map.setZoom(8)
+    })
   //job Searcher request this will need to be taken from results page of query post
   $("#sendSearch").on("click", function(event) {
     event.preventDefault();
@@ -127,6 +103,10 @@ $(document).ready(function() {
                                            fillOpacity: 0.35,
                                            fillColor: "#FFA07A", //https://developers.google.com/maps/documentation/javascript/examples/circle-simple
                                            map: map});
+            circleCenter = circle.center
+            circleCenterLat = circle.center.lat()
+            circleCenterLng = circle.center.lng()
+            // console.log("Circle Lat/Lng:", circleCenterLat, circleCenterLng)
             var bounds = new google.maps.LatLngBounds();
             for (var i=0; i < gMarkers.length;i++) {
               if (google.maps.geometry.spherical.computeDistanceBetween(gMarkers[i].getPosition(),marker.getPosition()) < radius) {
@@ -147,8 +127,6 @@ $(document).ready(function() {
       }
       });
     });
-
-
   //recruiter post, and taking address to geocode Latitude & Longitude in mySQL
   $("#addPost").on("click", function(event) {
     event.preventDefault();
@@ -209,8 +187,6 @@ $(document).ready(function() {
 })
 //------------------------------------------------------------------------------
 
-
-
 function googleMain() {
   var washingtonDC = new google.maps.LatLng(38.9072, -77.0369)
   //Creates map in HTML centered on Washington, D.C.
@@ -259,33 +235,54 @@ function googleMaps() {
             infowindow.open(map, this);
       })
       google.maps.event.addListener(marker, 'click', function() {
-          queryURL = 'http://localhost:8080/api/posts/' + $(".moreInfoUrl").data("value")
+          queryURL = '/api/posts/' + $(".moreInfoUrl").data("value")
           console.log(queryURL)
           $.ajax({
             url: queryURL,
             method: "GET",
           }).done(function(results) {
             console.log(results)
-              $("#markerName").empty()
-              $("#markerCheckins").empty()
-              $("#applyButton").empty()
-              var jbTit = results.jobTitle
-              var cmpName = results.companyName
-              var jobDesc = results.jobDescription
-              var adr1 = results.address
-              var adr2 = results.city
-              var adr3 = results.state
-              var adr4 = results.zipCode
-              var fullAddress = adr1 + " " + adr2 + " " + adr3 + " " + adr4
-              var createdAt = results.created_at
-              var updatedAt = results.updated_at
-
-              var placeDetailsModal = ('<div>'+ 'Company: <COMPANY NAME>' + '<br>' + 'Job Description:'+ jobDesc + '<br>' + 'Job Address:'+ fullAddress + '<br>' +'Created At:'+ createdAt + '<br>' +'Updated At:'+ updatedAt+ '<br>' +'</div>');
-              $("#markerName").text('Job Title: ' + jbTit)
-              $("#markerCheckins").append(placeDetailsModal)
-              $("#applyButton").append('<button type="submit" id="apply" class="btn btn-success">Apply</button>')
-              jQuery.noConflict();
-              $("#markerModal").modal()
+            var applybtn = $('<input />', {
+              type: "button",
+              value: "Apply",
+              class: "apply-btn",
+              on: {
+                click: function() {
+                  window.open(postLink, '_blank');
+                  // window.open("http://www.facebook.com", '_blank');
+                  console.log("click to go to url")
+                }
+              }
+            })
+            $("#markerName").text(results.jobTitle)
+            $("#applyButton").html(applybtn)
+            // var jbTit = results.jobTitle
+            jobId = results.id
+            var cmpName = results.companyName
+            var jobDesc = results.jobDescription
+            var jobQual = results.jobQualification
+            var addInfo = results.additionalInfo
+            var adr1 = results.address
+            var adr2 = results.city
+            var adr3 = results.state
+            var adr4 = results.zipCode
+            var fullAddress = adr1 + " " + adr2 + " " + adr3 + " " + adr4
+            var createdAt = results.created_at
+            var updatedAt = results.updated_at
+            var placeDetailsModal = ('<div>' + '<h5>Job Description: </h5>' + jobDesc + '<br>' + '<br>' + '<h5>Qualifications: </h5>' + jobQual + '<br>' + '<br>' + '<h5>Additional Information: </h5>' + addInfo + '<br>' + '<br>' + '<h5>Job Address: </h5>' + adr1 + '<br>' + adr2 + ', ' + adr3 + ' ' + adr4 + '</div>');
+            var noQualDetailsModal = ('<div>' + '<h5>Job Description: </h5>' + jobDesc + '<br>' + '<br>' + '<h5>Additional Information: </h5>' + addInfo + '<br>' + '<br>' + '<h5>Job Address: </h5>' + adr1 + '<br>' + adr2 + ', ' + adr3 + ' ' + adr4 + '</div>');
+            var noAddInfoDetailsModal = ('<div>' + '<h5>Job Description: </h5>' + jobDesc + '<br>' + '<br>' + '<h5>Qualifications: </h5>' + jobQual + '<br>' + '<br>' + '<h5>Job Address: </h5>' + adr1 + '<br>' + adr2 + ', ' + adr3 + ' ' + adr4 + '</div>');
+            var noQualorInfoDetailsModal = ('<div>' + '<h5>Job Description: </h5>' + jobDesc + '<br>' + '<br>' + '<h5>Job Address: </h5>' + adr1 + '<br>' + adr2 + ', ' + adr3 + ' ' + adr4 + '</div>');
+            if (addInfo === undefined && jobQual === undefined) {
+              $(".job-view-body").html(noQualorInfoDetailsModal)
+            } else if (addInfo === undefined) {
+              $(".job-view-body").html(noAddInfoDetailsModal)
+            } else if (jobQual === undefined) {
+              $(".job-view-body").html(noQualDetailsModal)
+            } else {
+              $(".job-view-body").html(placeDetailsModal)
+            }
+            $("#markerModal").modal()
           })
         });
     }
