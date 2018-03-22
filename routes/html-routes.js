@@ -11,10 +11,10 @@ module.exports = function(app) {
     res.sendFile(path.join(__dirname, "../public/saved.html"));
   });
 
-  app.get("/recruiter", function(req, res) {
-    checkUser(req,res);
-    res.sendFile(path.join(__dirname, "../public/recruiter.html"));
-  });
+  // app.get("/recruiter", function(req, res) {
+  //   checkUser(req,res);
+  //   res.sendFile(path.join(__dirname, "../public/recruiter.html"));
+  // });
 
   app.get("/recruiteraccount", function(req, res) {
     checkUser(req,res);

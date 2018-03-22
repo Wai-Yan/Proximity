@@ -8,6 +8,7 @@ $(document).ready(function() {
     var newLogin = {
       email: newEmail,
       password: newPassword,
+      userType: "jobsearcher"
     };
 
     userLogin(newLogin);
@@ -21,6 +22,7 @@ $(document).ready(function() {
     var newLogin = {
       email: newEmail,
       password: newPassword,
+      userType: "recruiter"
     };
 
     userLogin(newLogin);
@@ -41,7 +43,14 @@ $(document).ready(function() {
         if (transaction.status === 'SUCCESS') {
           localStorage.setItem("id", transaction.user.id);
 
-          authClient.session.setCookieAndRedirect(transaction.sessionToken, 'http://localhost:8080/authorizeduser?token='+transaction.sessionToken+"&userid="+transaction.user.id+"&email="+loginObj.email);
+          var redirectURL;
+          if(loginObj.userType === "recruiter"){
+            redirectURL = 'http://localhost:8080/recruiter?token='+transaction.sessionToken+"&userid="+transaction.user.id+"&email="+loginObj.email+"&type="+loginObj.userType;
+          } else {
+            redirectURL = 'http://localhost:8080/authorizeduser?token='+transaction.sessionToken+"&userid="+transaction.user.id+"&email="+loginObj.email+"&type="+loginObj.userType;
+          }
+
+          authClient.session.setCookieAndRedirect(transaction.sessionToken, redirectURL);
         } else {
           throw 'We cannot handle the ' + transaction.status + ' status';
         }
