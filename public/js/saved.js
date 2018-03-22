@@ -270,3 +270,4 @@ function googleMaps() {
             infowindow.open(map, this);
   })
 }
+})
