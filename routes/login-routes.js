@@ -6,15 +6,12 @@ require('dotenv').config();
 module.exports = function(app) {
 
   app.get("/authorizeduser", function(req, res) {
-    //console.log("process.env.apiKey "+ process.env.apiKey);
-    console.log("Start");
-    console.log("okta-oauth-state: " + req.cookies['okta-oauth-state']);
+    console.log("Start Authorization");
 
-    if (req.cookies['okta-oauth-state'] !== undefined) {
-      res.sendFile(path.join(__dirname, '../public/authorizeduser.html'));
-    } else {
-      res.sendFile(path.join(__dirname, '../public/test.html'));
-    }
+    res.cookie('token', req.query.token);
+    res.cookie('userid', req.query.userid);
+
+    res.sendFile(path.join(__dirname, '../public/authorizeduser.html'));
   });
 
   app.get("/api/login", function(req, res) {

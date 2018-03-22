@@ -31,12 +31,15 @@ module.exports = function(app) {
   });
 
   app.get("/logout", function(req, res) {
+    res.clearCookie('token');
+    res.clearCookie('userid');
+    res.clearCookie('email');
     res.sendFile(path.join(__dirname, "../public/logout.html"));
   });
 }
 
 function checkUser(req, res){
-  if(req.cookies['okta-oauth-state'] === undefined){
-    res.sendFile(path.join(__dirname, "../public/test.html"));
+  if(req.cookies['token'] === undefined){
+    res.redirect("/");
   }
 }
