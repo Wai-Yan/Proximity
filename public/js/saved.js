@@ -61,17 +61,32 @@ $(document).ready(function() {
     }
     $("#savedJobs").append(rowsToAdd);
   }
+
   function getPosts() {
-    // $.get("/api/posts", function(data) {
-    //   posts = data;
-    //   initializeRows(posts);
-    //   console.log(posts)
-    // });    
-    
-    $.get("/api/posts", function(data) {
-      posts = data;
-      initializeRows(posts);
-      console.log(posts)
+    // Get the user's associated Jobs
+    var id = localStorage.getItem("id");
+    var personalPostings;
+
+    $.get("/api/users/" + id, function(data) {
+      personalPostings = JSON.parse("[" + data.associatedJobs + "]");
+      personalPostings = personalPostings[0];
+
+      localStorage.setItem("theirJobs", personalPostings);
+
+    }).then(function() {
+
+      var package = {
+        wantedJobs: personalPostings
+      };
+
+      $.ajax({
+        method: "GET",
+        url: "/api/favs",
+        data: package
+      }).then(function(res) {
+        
+        initializeRows(res);
+      });
     });
   }
 
@@ -82,7 +97,7 @@ $(document).ready(function() {
     var tBody = $("tbody")
     var tRow = $("<tr>").addClass("jobRow")
     var titleTd = $("<td>").text(posts.jobTitle)
-    var starTd = $("<td>")
+    var starTd = $("<td id='" + posts.id + "'>")
     var starbtn = $("<p>", {
       class: "checkedStar",
       "data-toggle": "tooltip",
@@ -91,10 +106,38 @@ $(document).ready(function() {
       on: {
         click: function() {
           // call function to remove from the favorites list. delete post.id
+          var unselectedJob = $(this).parent().attr("id");
 
+          var currentSaved = localStorage.getItem("theirJobs");
+
+          console.log(currentSaved);
+
+          savedArray = JSON.parse("[" + currentSaved + "]");
+
+          var index = savedArray.indexOf(parseInt(unselectedJob));
+
+          if (index > -1) {
+              savedArray.splice(index, 1);
+          }
+
+          localStorage.setItem("theirJobs", savedArray);
+          console.log("These should be different")
+          
+          var data = {
+            newList: localStorage.getItem("theirJobs"),
+            id: localStorage.getItem("id")
+          };
+
+          $.ajax({
+            method: "PUT",
+            url: "/api/users/star",
+            data: data
+          }).then(function () {
+            console.log("Check the DB and terminal");
+          });
         }
       }
-    })
+    });
     starTd.append(starbtn)
     var companyTd = $("<td>").text(posts.companyName)
     var descriptionTd = $("<td>").text(posts.jobDescription).addClass("description-td overflow")
@@ -270,3 +313,4 @@ function googleMaps() {
             infowindow.open(map, this);
   })
 }
+})

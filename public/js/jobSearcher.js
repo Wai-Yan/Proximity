@@ -240,7 +240,8 @@ $(document).ready(function() {
     console.log("You're about to star a job! Hopefully");
     var request = {
       id: id,
-      change: "starring"
+      change: "starring",
+      okta: localStorage.getItem("id")
     }
   
     $.ajax({
@@ -255,7 +256,8 @@ $(document).ready(function() {
     console.log("You've unstarred a job");
     var request = {
       id: id,
-      change: "unstarring"
+      change: "unstarring",
+      okta: localStorage.getItem("id")
     }
 
     $.ajax({
