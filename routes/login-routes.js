@@ -6,12 +6,18 @@ require('dotenv').config();
 module.exports = function(app) {
 
   app.get("/authorizeduser", function(req, res) {
-    console.log("Start Authorization");
-
+    console.log("Start Job Searcher Authorization");
     res.cookie('token', req.query.token);
     res.cookie('userid', req.query.userid);
 
     res.sendFile(path.join(__dirname, '../public/authorizeduser.html'));
+  });
+
+  app.get("/recruiter", function(req, res) {
+    console.log("Start Recruiter Authorization");
+    res.cookie('token', req.query.token);
+    res.cookie('userid', req.query.userid);
+    res.sendFile(path.join(__dirname, '../public/recruiter.html'));
   });
 
   app.get("/api/login", function(req, res) {
