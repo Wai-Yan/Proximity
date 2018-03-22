@@ -27,7 +27,18 @@ module.exports = function(app) {
     });
   });
 
+  app.get("/api/favs", function(req, res) {
+    console.log("SIR LIONHART YO");
+    console.log(req.query.wantedJobs);
+
+    db.Post.findAll({where : {id: req.query.wantedJobs}})
+      .then(function(dbPost) {
+        res.json(dbPost);
+      });
+  });
+
   app.get("/api/users/:id", function(req, res) {
+
     db.User.findOne({
       where: {
         oktaNo: req.params.id
@@ -35,6 +46,7 @@ module.exports = function(app) {
     }).then(function(dbPost) {
       res.json(dbPost);
     });
+  });
 
   // app.get("/api/posts/search?q=", function(req, res) {
   //   db.Post.findAll({
@@ -74,7 +86,6 @@ module.exports = function(app) {
     }).then(function(dbPost) {
       res.json(dbPost);
     });
-  });
   });
 
   app.get("/api/users", function(req, res) {
@@ -129,6 +140,6 @@ module.exports = function(app) {
     console.log(req.body.id);
     var newList = "[" + req.body.id + "]";
 
-    db.User.update({associatedJobs: newList}, {where: {id: 1}});
+    db.User.update({associatedJobs: newList}, {where: {oktaId: req.body.id}});
   });
 };
