@@ -340,10 +340,10 @@
 									</div>
 									<div class="form-group">
 										<input type="password" id="password_r" class="form-control" placeholder="Password" data-toggle="password">
-											<small id="emailHelp" class="form-text text-muted">Your password should contain at least one capital letter and one number</small>
+											<small id="emailHelp" class="form-text text-muted">Password must be at least 8 characters, a lowercase letter, an uppercase letter, a number, no parts of your username.</small>
 									</div>
 									<div class="form-group">
-										<input type="number" id="mobilephone_r" class="form-control" placeholder="Mobile Phone (ex. 7031234567)" maxlength="10" required>
+										<input type="number" id="mobilephone_r" class="form-control" placeholder="Mobile Phone (ex. 7031234567)" oninput="if(value.length>10)value=value.slice(0,10)" required>
 									</div>
 									<div class="form-group">
 										<input type="text" id="companyname" class="form-control" placeholder="Company Name" required>
