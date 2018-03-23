@@ -98,9 +98,9 @@ module.exports = function(app) {
   });
 
   app.get("/api/users", function(req, res) {
-    db.Post.findAll({})
-      .then(function(dbPost) {
-        res.json(dbPost);
+    db.User.findAll({})
+      .then(function(dbUser) {
+        res.json(dbUser);
       });
   });
 

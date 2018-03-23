@@ -148,6 +148,7 @@ $("#addPost").on("click", function(event) {
   }
 });
 
+
 $("#saveAccountbtn").on("click", function(event) {
 
   var alteredRecruiter = {
@@ -189,6 +190,22 @@ function fillProfilePic() {
     $(".profileimage").attr("src","https://" + data.profilePicLink);
   });
 }
+
+// function to prepopulate user information on account settings page
+function fillSettingsPage() {
+  var id = localStorage.getItem("id")
+  $.get("/api/users/" + id, function(data) {
+    $("#firstname").val(data.firstName),
+    $("#lastname").val(data.lastName),
+    $("#email").val(data.email)
+    $("#mobilephone").val(data.phoneNo),
+    $("#companyname").val(data.companyName),
+    $("#companysite").val(data.companySiteLink),
+    console.log(data);
+  });
+}
+
+fillSettingsPage();
 
 //------------------------------------------------------------------------------
 function googleRecruiter() {
