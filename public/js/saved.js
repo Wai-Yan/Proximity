@@ -68,6 +68,7 @@ $(document).ready(function() {
     var personalPostings;
 
     $.get("/api/users/" + id, function(data) {
+
       personalPostings = JSON.parse("[" + data.associatedJobs + "]");
       personalPostings = personalPostings[0];
 
@@ -121,7 +122,7 @@ $(document).ready(function() {
           }
 
           localStorage.setItem("theirJobs", savedArray);
-          console.log("These should be different")
+
           
           var data = {
             newList: localStorage.getItem("theirJobs"),
@@ -130,10 +131,10 @@ $(document).ready(function() {
 
           $.ajax({
             method: "PUT",
-            url: "/api/users/star",
+            url: "/api/star",
             data: data
-          }).then(function () {
-            console.log("Check the DB and terminal");
+          }).then(function(res) { 
+            location.reload();
           });
         }
       }

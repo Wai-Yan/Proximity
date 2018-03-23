@@ -5,6 +5,8 @@ $(document).ready(function() {
   // initalize the latest jobs list
   getPosts();
 
+  // Retrieve their saved jobs
+  getTheirFavs();
 
   // hide map at default
   $("#mapview").hide();
@@ -36,8 +38,11 @@ $(document).ready(function() {
   function initializeRows(posts) {
     var latestPosts = posts.reverse();
     var rowsToAdd = [];
+    var saved = localStorage.getItem("theirJobs");
+    saved = saved.split(',').map(Number);
+
     for (var i = 0; i < 4; i++) {
-      rowsToAdd.push(createNewRow(latestPosts[i]));
+      rowsToAdd.push(createNewRow(latestPosts[i], saved));
     }
     $("#recentJobs").append(rowsToAdd);
   }
@@ -48,8 +53,10 @@ $(document).ready(function() {
     console.log(latestResults)
     var resultsToAdd = [];
     console.log("here is the array" + resultsToAdd)
+    var saved = localStorage.getItem("theirJobs");
+    saved = saved.split(',').map(Number);
     for (var i = 0; i < latestResults.length; i++) {
-      resultsToAdd.push(createNewRow(latestResults[i]));
+      resultsToAdd.push(createNewRow(latestResults[i]), saved);
     }
     console.log("new array" + JSON.stringify(resultsToAdd))
     $("#recentJobs").append(resultsToAdd);
@@ -81,7 +88,7 @@ $(document).ready(function() {
     $("#sectionResultsTitle").text("Your search results for " + keywordInput + " jobs in " + "(variable)")
   }
 
-  function createNewRow(posts) {
+  function createNewRow(posts, savedJobs) {
     var tBody = $("tbody")
     var tRow = $("<tr>").addClass("jobRow")
     var titleTd = $("<td>").text(posts.jobTitle)
@@ -103,7 +110,28 @@ $(document).ready(function() {
         }
       }
     })
-    var empty = true;
+
+    var empty;
+    // Check whether or not this specific job is in user's saved jobs
+    if (savedJobs.includes(posts.id)) {
+      console.log("This job should be starred");
+      empty = false;
+    }
+
+    else {
+      empty = true;
+    }
+
+    // Make row a seperate function
+    // Create row in dom, then 
+
+    // When clicked check state if on, turn off
+    // if off turn on
+
+    // Rework the way you build the rows to make it simpler
+    // Function that takes specific 
+
+    // var empty = true;
     var starbtn = $('<p />', {
       class: "star",
       on: {
@@ -112,8 +140,8 @@ $(document).ready(function() {
             var clickedJobId = $(this).parent().attr("id");
             starbtn.removeClass("star")
             starbtn.addClass("checkedStar")
-            starJob(clickedJobId)
-            console.log(clickedJobId)
+            starJob(clickedJkbobId)
+
             empty = false;
             // then store
           } else {
@@ -188,6 +216,18 @@ $(document).ready(function() {
     })
   };
 
+  function getTheirFavs() {
+    var id = localStorage.getItem("id");
+    var personalPostings;
+
+    $.get("/api/users/" + id, function(data) {
+
+      personalPostings = JSON.parse("[" + data.associatedJobs + "]");
+      personalPostings = personalPostings[0];
+
+      localStorage.setItem("theirJobs", personalPostings);
+    })
+  }
 
   // need to include conditional if logged in
   // $("#recruiter-btn").on("click", function() {
@@ -235,36 +275,57 @@ $(document).ready(function() {
   //
   })
 
-  function starJob(id) {
+  function starJob(jobId) {
 
     console.log("You're about to star a job! Hopefully");
-    var request = {
-      id: id,
-      change: "starring",
-      okta: localStorage.getItem("id")
-    }
+
+    var currentSaved = localStorage.getItem("theirJobs");
+
+    console.log(currentSaved);
+
+    // if (!currentSaved) {
+    //   currentSaved = [jobId];
+    //   console.log(currentSaved);
+    //   localStorage.setItem("theirJobs", currentSaved);
+    // }
+
+    // else {
+    //   console.log(typeof currentSaved);
+    //   var madeArray = currentSaved;
+    //   console.log(madeArray);
+    //   console.log("This is the type of the array you made " + typeof madeArray);
+
+
+    //   currentSaved.push(jobId);
+    //   localStorage.setItem("theirJobs", currentSaved);
+    // }
+
+    // var request = {
+    //   newJob: ,
+    //   id: localStorage.getItem("id")
+    // }
   
-    $.ajax({
-      url: '/api/users/star',
-      type: 'PUT',
-      data: request
-    });
+    // $.ajax({
+    //   url: '/api/star',
+    //   type: 'PUT',
+    //   data: request
+    // });
 
   }
 
   function unstarJob(id) {
     console.log("You've unstarred a job");
-    var request = {
-      id: id,
-      change: "unstarring",
-      okta: localStorage.getItem("id")
-    }
+    // var request = {
+    //   id: id,
+    //   newJob: localStorage.getItem("theirJobs"),
+    //   okta: localStorage.getItem("id")
+    // }
 
-    $.ajax({
-      url: '/api/users/star',
-      type: 'PUT',
-      data: request
-    });
+    // $.ajax({
+    //   url: '/api/star',
+    //   type: 'PUT',
+    //   data: request
+    // });
   }
 
   fillGravatar();
