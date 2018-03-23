@@ -42,14 +42,15 @@ $(document).ready(function() {
         console.log(transaction);
         if (transaction.status === 'SUCCESS') {
           localStorage.setItem("id", transaction.user.id);
-
+          localStorage.setItem("firstName", transaction.user.profile.firstName);
+          
           var redirectURL;
           if(loginObj.userType === "recruiter"){
             redirectURL = 'http://localhost:8080/recruiter?token='+transaction.sessionToken+"&userid="+transaction.user.id+"&email="+loginObj.email+"&type="+loginObj.userType;
           } else {
             redirectURL = 'http://localhost:8080/authorizeduser?token='+transaction.sessionToken+"&userid="+transaction.user.id+"&email="+loginObj.email+"&type="+loginObj.userType;
           }
-          localStorage.setItem("firstName", transaction.user.profile.firstName);
+
           authClient.session.setCookieAndRedirect(transaction.sessionToken, redirectURL);
         } else {
           throw 'We cannot handle the ' + transaction.status + ' status';
