@@ -382,6 +382,20 @@ p.checkedStar {
   display: inline-block;
   cursor: pointer;
   border-radius: .25rem;
+    margin-left: 50px;
+}
+
+.btn-delete {
+  background-color: #fe5f55;
+  /* Green */
+  border: none;
+  color: #F9F9F9;
+  padding: 10px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  cursor: pointer;
+  border-radius: .25rem;
 }
 
 .btn-view:hover, .btn-viewPost:hover, .apply-btn:hover, .btn-addPost:hover {

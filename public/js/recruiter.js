@@ -43,8 +43,21 @@ function createNewRow(posts) {
       }
     }
   })
+  var deletebtn = $("<td>")
+  var btndelete = $('<input />', {
+    type: "button",
+    value: "Delete",
+    class: "btn-delete",
+    on: {
+      click: function() {
+        // console.log ( posts.id );
+        deletePost(posts.id)
+      }
+    }
+  })
   viewbtn.append(btn)
-  tRow.append(titleTd, descriptionTd, createdDateTd, viewbtn)
+  deletebtn.append(btndelete)
+  tRow.append(titleTd, descriptionTd, createdDateTd, viewbtn, deletebtn)
   tBody.append(tRow);
 }
 getPosts();
@@ -52,28 +65,14 @@ getPosts();
 // print post info
 function displayPost(id) {
   console.log("hi")
-  queryURL = 'http://localhost:8080/api/posts/' + id
+  queryURL = "/api/posts/" + id
   console.log(queryURL)
   $.ajax({
     url: queryURL,
     method: "GET",
   }).done(function(results) {
     console.log(results)
-    var applybtn = $('<input />', {
-      type: "button",
-      value: "Apply",
-      class: "apply-btn",
-      on: {
-        click: function() {
-          window.open(postLink, '_blank');
-          // window.open("http://www.facebook.com", '_blank');
-          console.log("click to go to url")
-        }
-      }
-    })
     $("#viewJobPostTitle").text(results.jobTitle)
-    $("#apply-btn-area").html(applybtn)
-    // var jbTit = results.jobTitle
     var cmpName = results.companyName
     var jobDesc = results.jobDescription
     var jobQual = results.jobQualification
@@ -89,6 +88,23 @@ function displayPost(id) {
     var placeDetailsModal = ('<div>' + cmpName + '<br>' + '<br>' + '<h5>Job Description: </h5>' + jobDesc + '<br>' + '<br>' + '<h5>Qualifications: </h5>' + jobQual + '<br>' + '<br>' + '<h5>Additional Information: </h5>' + addInfo + '<br>' + '<br>' + '<h5>Job Address: </h5>' + adr1 + '<br>' + adr2 + ', ' + adr3 + ' ' + adr4 + '</div>');
     $(".job-view-body").html(placeDetailsModal)
   })
+};
+
+// delete post
+function deletePost(id) {
+  queryURL = "/api/posts/" + id
+  console.log(queryURL)
+  $.ajax({
+    url: queryURL,
+    method: "DELETE",
+}).done(function(results) {
+  console.log("a job has just been deleted")
+  location.reload();
+  $("#deleteSuccessAlert").append("<div id='alertdiv' class='alert alert-warning' role='alert>You've successfulle removed " + results.jobTitle + " from your postsings.</div>")
+  setTimeout(function() {
+      $("#alertdiv").remove();
+    }, 5000);
+})
 };
 
 //recruiter post, and taking address to geocode Latitude & Longitude in mySQL
@@ -172,7 +188,7 @@ $("#saveAccountbtn").on("click", function(event) {
 
 fillGravatar();
 fillProfilePic();
-fillSettingsPage();
+// fillSettingsPage();
 
 function fillGravatar() {
 
