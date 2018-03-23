@@ -52,6 +52,9 @@ $(document).ready(function() {
   finalSearchQuary = []
   searchMarkersLatLng = []
   searchMarkerAry = []
+  for (var i=0; i < gMarkers.length; i++){
+    gMarkers[i].setMap(null)
+  }
   gMarkers = []
   radiusMarkers=[]
   marker;
@@ -78,9 +81,9 @@ $(document).ready(function() {
       if (status == google.maps.GeocoderStatus.OK) {
         map.setCenter(res[0].geometry.location);
         var icon = {
-          url: 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png',
+          url: 'https://image.flaticon.com/icons/svg/33/33622.svg',
           // https://developers.google.com/maps/documentation/javascript/markers#icons
-          size: new google.maps.Size(50, 50),
+          size: new google.maps.Size(500, 500),
           origin: new google.maps.Point(0, 0),
           anchor: new google.maps.Point(17, 34),
           scaledSize: new google.maps.Size(25, 25)
@@ -139,7 +142,7 @@ function googleMapsMarkers(marker,radius){
       // } 2538 N. Greenbrier St. ARlington, VA 22207
 
 function addList() {
-  
+
   // if (otherCounter === finalSearchQuary.length){
   //   return;
   // } else {
@@ -548,7 +551,18 @@ $("#addPost").on("click", function(event) {
 
 
 //------------------------------------------------------------------------------
+allMarkers()
 
+function allMarkers(){
+    $.ajax({
+      url: "api/posts",
+      method: "GET"
+    }).done(function(results) {
+      apiResults = results
+      googleMaps()
+
+  })
+}
 function googleMain() {
   var washingtonDC = new google.maps.LatLng(38.9072, -77.0369)
   //Creates map in HTML centered on Washington, D.C.
@@ -584,7 +598,7 @@ function googleMaps() {
                         placeId: marksLatLng.placeID,
                         content: '<div><strong>' + marksLatLng.companyName + '</strong><br>' +
                           'Job Title: ' + marksLatLng.jobTitle + '<br>' + 'Address: ' +
-                          marksLatLng.address + " " + marksLatLng.city + " " + marksLatLng.state + " " + marksLatLng.zipCode + '</div>' + 'More Info: ' + '<a class="moreInfoUrl" data-value='+ marksLatLng.id +'" href="api/posts/'+ marksLatLng.id +'">testURL</a>' + '<br>',
+                          marksLatLng.address + " " + marksLatLng.city + " " + marksLatLng.state + " " + marksLatLng.zipCode + '</div>' + '<a class="moreInfoUrl" data-value='+ marksLatLng.id +'" href="api/posts/'+ marksLatLng.id +'"></a>',
                         zIndex: 999999
           })
       gMarkers.push(marker)
