@@ -1,4 +1,9 @@
 $(document).ready(function() {
+  $(".error").text("");
+
+  $(document.body).on("keypress", "#loginEmail", function() {
+    $(".error").text("");
+  });
 
   $(document.body).on("click", "#loginModal #oktaLogin", function() {
     console.log("I'm here login");
@@ -43,7 +48,7 @@ $(document).ready(function() {
         if (transaction.status === 'SUCCESS') {
           localStorage.setItem("id", transaction.user.id);
           localStorage.setItem("firstName", transaction.user.profile.firstName);
-          
+
           var redirectURL;
           if(loginObj.userType === "recruiter"){
             redirectURL = 'http://localhost:8080/recruiter?token='+transaction.sessionToken+"&userid="+transaction.user.id+"&email="+loginObj.email+"&type="+loginObj.userType;
@@ -58,6 +63,13 @@ $(document).ready(function() {
       })
       .fail(function(err) {
         console.error(err);
+        var errorMessage;
+        if(err.errorCode === "E0000004"){
+          errorMessage = "Invalid email or password.";
+        } else {
+          errorMessage = err.message;
+        }
+        $(".error").text(errorMessage);
       });
   }
 
