@@ -37,6 +37,7 @@ var check;
 
 
 $(document).ready(function() {
+  $( ".dropdown-content" ).find("p:first").text(localStorage.getItem("firstName"));
 
   $("#mapviewclick").on("click", function(){
       map.setZoom(8)
