@@ -26,15 +26,7 @@ module.exports = function(app) {
       res.json(dbPost);
     });
   });
-  app.get("/api/users/:id", function(req, res) {
-    db.User.findOne({
-      where: {
-        oktaNo: req.params.id
-      },
-    }).then(function(dbPost) {
-      res.json(dbPost);
-    });
-  })
+
 
   app.get("/api/favs", function(req, res) {
     console.log("SIR LIONHART YO");
@@ -45,17 +37,17 @@ module.exports = function(app) {
         res.json(dbPost);
       });
   });
-
-  app.get("/api/users/:id", function(req, res) {
-
-    db.User.findOne({
-      where: {
-        oktaNo: req.params.id
-      },
-    }).then(function(dbPost) {
-      res.json(dbPost);
-    });
-  });
+  //
+  // app.get("/api/users/:id", function(req, res) {
+  //
+  //   db.User.findOne({
+  //     where: {
+  //       oktaNo: req.params.id
+  //     },
+  //   }).then(function(dbPost) {
+  //     res.json(dbPost);
+  //   });
+  // });
 
   // app.get("/api/posts/search?q=", function(req, res) {
   //   db.Post.findAll({
@@ -99,8 +91,8 @@ module.exports = function(app) {
 
   app.get("/api/users", function(req, res) {
     db.User.findAll({})
-      .then(function(dbUser) {
-        res.json(dbUser);
+      .then(function(dbPost) {
+        res.json(dbPost);
       });
   });
 
