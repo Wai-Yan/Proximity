@@ -39,8 +39,6 @@ module.exports = function(app) {
 
 
   app.get("/api/favs", function(req, res) {
-    console.log("SIR LIONHART YO");
-    console.log(req.query.wantedJobs);
 
     db.Post.findAll({where : {id: req.query.wantedJobs}})
       .then(function(dbPost) {
@@ -145,12 +143,16 @@ module.exports = function(app) {
     db.User.update(updatedPropertiesOnly, {where: {id: 1}});
   });
 
-  app.put("/api/users/star", function(req, res) {
+  app.put("/api/star", function(req, res) {
 
     console.log("You're about to change a job's STAR STATUS");
     console.log(req.body.id);
     var newList = "[" + req.body.id + "]";
 
-    db.User.update({associatedJobs: newList}, {where: {oktaId: req.body.id}});
+    var madeArray = "[" + req.body.newList + "]";
+
+    db.User.update({associatedJobs: madeArray}, {where: {oktaNo: req.body.id}}).then(function() {
+        res.send();
+    });
   });
 };

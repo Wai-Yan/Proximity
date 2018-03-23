@@ -30,10 +30,31 @@ $(document).ready(function() {
 
   // get posts that have been saved
   function getPosts() {
-    $.get("/api/favs", function(data) {
-      posts = data;
-      initializeRows(posts);
-      console.log(posts)
+    // Get the user's associated Jobs
+    var id = localStorage.getItem("id");
+    var personalPostings;
+
+    $.get("/api/users/" + id, function(data) {
+
+      personalPostings = JSON.parse("[" + data.associatedJobs + "]");
+      personalPostings = personalPostings[0];
+
+      localStorage.setItem("theirJobs", personalPostings);
+
+    }).then(function() {
+
+      var package = {
+        wantedJobs: personalPostings
+      };
+
+      $.ajax({
+        method: "GET",
+        url: "/api/favs",
+        data: package
+      }).then(function(res) {
+        
+        initializeRows(res);
+      });
     });
   }
 
@@ -51,7 +72,27 @@ $(document).ready(function() {
       on: {
         click: function() {
           // call function to remove from the favorites list. delete post.id
+          var index = savedArray.indexOf(parseInt(unselectedJob));
 
+          if (index > -1) {
+              savedArray.splice(index, 1);
+          }
+
+          localStorage.setItem("theirJobs", savedArray);
+
+          
+          var data = {
+            newList: localStorage.getItem("theirJobs"),
+            id: localStorage.getItem("id")
+          };
+
+          $.ajax({
+            method: "PUT",
+            url: "/api/star",
+            data: data
+          }).then(function(res) { 
+            location.reload();
+          });
         }
       }
     })

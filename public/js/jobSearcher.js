@@ -264,6 +264,8 @@ $("#addPost").on("click", function(event) {
   // initalize the latest jobs list
   getPosts();
 
+  // Retrieve their saved jobs
+  getTheirFavs();
 
   // hide map at default
   $("#mapview").hide();
@@ -295,10 +297,32 @@ $("#addPost").on("click", function(event) {
   function initializeRows(posts) {
     var latestPosts = posts.reverse();
     var rowsToAdd = [];
+
+    // var saved = localStorage.getItem("theirJobs");
+    // saved = saved.split(',').map(Number);
+
+    // for (var i = 0; i < 4; i++) {
+    //   rowsToAdd.push(createNewRow(latestPosts[i], saved));
+
     for (var i = 0; i < 10; i++) {
       rowsToAdd.push(createNewRow(latestPosts[i]));
     }
     $("#recentJobs").append(rowsToAdd);
+  }
+
+  // print all results that match the query
+  function initializeResultsRows(results) {
+    var latestResults = results.reverse();
+    console.log(latestResults)
+    var resultsToAdd = [];
+    console.log("here is the array" + resultsToAdd)
+    var saved = localStorage.getItem("theirJobs");
+    saved = saved.split(',').map(Number);
+    for (var i = 0; i < latestResults.length; i++) {
+      resultsToAdd.push(createNewRow(latestResults[i]), saved);
+    }
+    console.log("new array" + JSON.stringify(resultsToAdd))
+    $("#recentJobs").append(resultsToAdd);
   }
 
   // // print all results that match the query
@@ -341,7 +365,7 @@ $("#addPost").on("click", function(event) {
   //   }
   // }
 
-  function createNewRow(posts) {
+  function createNewRow(posts, savedJobs) {
     var tBody = $("tbody")
     var tRow = $("<tr>").addClass("jobRow")
     var titleTd = $("<td>").text(posts.jobTitle)
@@ -368,7 +392,28 @@ $("#addPost").on("click", function(event) {
         }
       }
     })
-    var empty = true;
+
+    var empty;
+    // Check whether or not this specific job is in user's saved jobs
+    if (savedJobs.includes(posts.id)) {
+      console.log("This job should be starred");
+      empty = false;
+    }
+
+    else {
+      empty = true;
+    }
+
+    // Make row a seperate function
+    // Create row in dom, then 
+
+    // When clicked check state if on, turn off
+    // if off turn on
+
+    // Rework the way you build the rows to make it simpler
+    // Function that takes specific 
+
+    // var empty = true;
     var starbtn = $('<p />', {
       class: "star",
       on: {
@@ -377,8 +422,8 @@ $("#addPost").on("click", function(event) {
             var clickedJobId = $(this).parent().attr("id");
             starbtn.removeClass("star")
             starbtn.addClass("checkedStar")
-            starJob(clickedJobId)
-            console.log(clickedJobId)
+            starJob(clickedJkbobId)
+
             empty = false;
             // then store
           } else {
@@ -453,6 +498,18 @@ $("#addPost").on("click", function(event) {
     })
   };
 
+  function getTheirFavs() {
+    var id = localStorage.getItem("id");
+    var personalPostings;
+
+    $.get("/api/users/" + id, function(data) {
+
+      personalPostings = JSON.parse("[" + data.associatedJobs + "]");
+      personalPostings = personalPostings[0];
+
+      localStorage.setItem("theirJobs", personalPostings);
+    })
+  }
 
   // need to include conditional if logged in
   // $("#recruiter-btn").on("click", function() {
@@ -500,9 +557,42 @@ $("#addPost").on("click", function(event) {
   //
 
 
-  function starJob(id) {
+  function starJob(jobId) {
 
     console.log("You're about to star a job! Hopefully");
+
+    var currentSaved = localStorage.getItem("theirJobs");
+
+    console.log(currentSaved);
+
+    // if (!currentSaved) {
+    //   currentSaved = [jobId];
+    //   console.log(currentSaved);
+    //   localStorage.setItem("theirJobs", currentSaved);
+    // }
+
+    // else {
+    //   console.log(typeof currentSaved);
+    //   var madeArray = currentSaved;
+    //   console.log(madeArray);
+    //   console.log("This is the type of the array you made " + typeof madeArray);
+
+
+    //   currentSaved.push(jobId);
+    //   localStorage.setItem("theirJobs", currentSaved);
+    // }
+
+    // var request = {
+    //   newJob: ,
+    //   id: localStorage.getItem("id")
+    // }
+  
+    // $.ajax({
+    //   url: '/api/star',
+    //   type: 'PUT',
+    //   data: request
+    // });
+
     var request = {
       id: id,
       change: "starring",
@@ -514,22 +604,21 @@ $("#addPost").on("click", function(event) {
       type: 'PUT',
       data: request
     });
-
   }
 
   function unstarJob(id) {
     console.log("You've unstarred a job");
-    var request = {
-      id: id,
-      change: "unstarring",
-      okta: localStorage.getItem("id")
-    }
+    // var request = {
+    //   id: id,
+    //   newJob: localStorage.getItem("theirJobs"),
+    //   okta: localStorage.getItem("id")
+    // }
 
-    $.ajax({
-      url: '/api/users/star',
-      type: 'PUT',
-      data: request
-    });
+    // $.ajax({
+    //   url: '/api/star',
+    //   type: 'PUT',
+    //   data: request
+    // });
   }
 
   fillGravatar();
@@ -543,8 +632,6 @@ $("#addPost").on("click", function(event) {
       $(".dropbtn").css('background-image', 'url("https://' + data.profilePicLink + '")');
     });
   }
-
-})
 
 fillSettingsPage()
 // function to prepopulate user information on account settings page
@@ -666,3 +753,4 @@ function googleMaps() {
 
   }
 }
+})
