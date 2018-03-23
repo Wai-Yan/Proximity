@@ -1,5 +1,7 @@
 $(document).ready(function() {
 
+$( ".dropdown-content" ).find("p:first").text(localStorage.getItem("firstName"));
+
 $("#resultsRecreuiterPageTitleText").text("Your posted jobs")
 
 function initializeRows(posts) {

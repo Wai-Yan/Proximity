@@ -1,5 +1,4 @@
 $(document).ready(function() {
-
   $(document.body).on("keypress", "#email_r", function() {
     console.log("Register Tab");
     $("#recruiterSubmit").addClass("bind-register-btn");

@@ -37,6 +37,7 @@ var check;
 
 
 $(document).ready(function() {
+  $( ".dropdown-content" ).find("p:first").text(localStorage.getItem("firstName"));
 
   $("#mapviewclick").on("click", function(){
       map.setZoom(8)
@@ -294,7 +295,7 @@ $("#addPost").on("click", function(event) {
   function initializeRows(posts) {
     var latestPosts = posts.reverse();
     var rowsToAdd = [];
-    for (var i = 0; i < 4; i++) {
+    for (var i = 0; i < 10; i++) {
       rowsToAdd.push(createNewRow(latestPosts[i]));
     }
     $("#recentJobs").append(rowsToAdd);
