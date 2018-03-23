@@ -30,7 +30,7 @@ $(document).ready(function() {
 
   // get posts that have been saved
   function getPosts() {
-    $.get("/api/posts", function(data) {
+    $.get("/api/favs", function(data) {
       posts = data;
       initializeRows(posts);
       console.log(posts)
