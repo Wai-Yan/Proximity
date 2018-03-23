@@ -33,6 +33,7 @@ var testCounter = 0;
 var otherCounter= 0;
 var apiResults;
 var check;
+var finalSearchQuary;
 
 
 
@@ -41,10 +42,14 @@ $(document).ready(function() {
   $("#mapviewclick").on("click", function(){
       map.setZoom(8)
   })
+
+  $( ".dropdown-content" ).find("p:first").text(localStorage.getItem("firstName"));
+
   //job Searcher request this will need to be taken from results page of query post
   $("#sendSearch").on("click", function(event) {
   event.preventDefault();
   //emptySearchMarkersArray
+  finalSearchQuary = []
   searchMarkersLatLng = []
   searchMarkerAry = []
   gMarkers = []
@@ -134,6 +139,7 @@ function googleMapsMarkers(marker,radius){
       // } 2538 N. Greenbrier St. ARlington, VA 22207
 
 function addList() {
+  
   // if (otherCounter === finalSearchQuary.length){
   //   return;
   // } else {
