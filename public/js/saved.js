@@ -32,6 +32,7 @@ var markerId;
 var jobId;
 
 $(document).ready(function() {
+  $( ".dropdown-content" ).find("p:first").text(localStorage.getItem("firstName"));
 
   // hide map at default
   $("#mapview").hide();
@@ -84,7 +85,7 @@ $(document).ready(function() {
         url: "/api/favs",
         data: package
       }).then(function(res) {
-        
+
         initializeRows(res);
       });
     });
@@ -122,7 +123,7 @@ $(document).ready(function() {
 
           localStorage.setItem("theirJobs", savedArray);
           console.log("These should be different")
-          
+
           var data = {
             newList: localStorage.getItem("theirJobs"),
             id: localStorage.getItem("id")

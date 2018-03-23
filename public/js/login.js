@@ -42,6 +42,7 @@ $(document).ready(function() {
         console.log(transaction);
         if (transaction.status === 'SUCCESS') {
           localStorage.setItem("id", transaction.user.id);
+          localStorage.setItem("firstName", transaction.user.profile.firstName);
 
           var redirectURL;
           if(loginObj.userType === "recruiter"){
@@ -59,6 +60,8 @@ $(document).ready(function() {
         console.error(err);
       });
   }
+
+  $( ".dropdown-content" ).find("p:first").text(localStorage.getItem("firstName"));
 
   function getUserID(newLogin) {
     console.log("In User ID");
