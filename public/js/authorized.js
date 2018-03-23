@@ -1,4 +1,5 @@
 $(document).ready(function() {
+  $( ".dropdown-content" ).find("p:first").text(localStorage.getItem("firstName"));
 
   fillGravatar();
 

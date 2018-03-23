@@ -7,16 +7,25 @@ module.exports = function(app) {
 
   app.get("/authorizeduser", function(req, res) {
     console.log("Start Job Searcher Authorization");
-    res.cookie('token', req.query.token);
-    res.cookie('userid', req.query.userid);
 
+    if (Object.keys(req.query).length !== 0) {
+      res.cookie('token', req.query.token);
+      res.cookie('userid', req.query.userid);
+      res.cookie('userid', req.query.email);
+      res.cookie('type', req.query.type);
+    }
     res.sendFile(path.join(__dirname, '../public/authorizeduser.html'));
   });
 
   app.get("/recruiter", function(req, res) {
     console.log("Start Recruiter Authorization");
-    res.cookie('token', req.query.token);
-    res.cookie('userid', req.query.userid);
+
+    if (Object.keys(req.query).length !== 0) {
+      res.cookie('token', req.query.token);
+      res.cookie('userid', req.query.userid);
+      res.cookie('userid', req.query.email);
+      res.cookie('type', req.query.type);
+    }
     res.sendFile(path.join(__dirname, '../public/recruiter.html'));
   });
 

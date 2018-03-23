@@ -27,6 +27,17 @@ module.exports = function(app) {
     });
   });
 
+  app.delete("/api/posts/:id", function(req, res) {
+    db.Post.findOne({
+      where: {
+        id: req.params.id
+      },
+    }).then(function(dbPost) {
+      res.json(dbPost);
+    });
+  });
+
+
   app.get("/api/favs", function(req, res) {
 
     db.Post.findAll({where : {id: req.query.wantedJobs}})
@@ -34,17 +45,17 @@ module.exports = function(app) {
         res.json(dbPost);
       });
   });
-
-  app.get("/api/users/:id", function(req, res) {
-
-    db.User.findOne({
-      where: {
-        oktaNo: req.params.id
-      },
-    }).then(function(dbPost) {
-      res.json(dbPost);
-    });
-  });
+  //
+  // app.get("/api/users/:id", function(req, res) {
+  //
+  //   db.User.findOne({
+  //     where: {
+  //       oktaNo: req.params.id
+  //     },
+  //   }).then(function(dbPost) {
+  //     res.json(dbPost);
+  //   });
+  // });
 
   // app.get("/api/posts/search?q=", function(req, res) {
   //   db.Post.findAll({
@@ -87,7 +98,7 @@ module.exports = function(app) {
   });
 
   app.get("/api/users", function(req, res) {
-    db.Post.findAll({})
+    db.User.findAll({})
       .then(function(dbPost) {
         res.json(dbPost);
       });
@@ -117,7 +128,7 @@ module.exports = function(app) {
 
   app.put("/api/users", function(req, res) {
 
-    console.log("You're about to UPDATE a user in sql");  
+    console.log("You're about to UPDATE a user in sql");
 
     var updatedPropertiesOnly = {};
 
@@ -134,7 +145,9 @@ module.exports = function(app) {
 
   app.put("/api/star", function(req, res) {
 
-    console.log(typeof req.body.newList[0]);
+    console.log("You're about to change a job's STAR STATUS");
+    console.log(req.body.id);
+    var newList = "[" + req.body.id + "]";
 
     var madeArray = "[" + req.body.newList + "]";
 

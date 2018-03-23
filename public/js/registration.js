@@ -1,15 +1,18 @@
 $(document).ready(function() {
+  $(".error").text("");
 
   $(document.body).on("keypress", "#email_r", function() {
     console.log("Register Tab");
     $("#recruiterSubmit").addClass("bind-register-btn");
     $("#recruiterSubmit").removeClass("bind-login-btn");
+    $(".error").text("");
   });
 
   $(document.body).on("keypress", "#loginEmail_r", function() {
     console.log("Register Tab");
     $("#recruiterSubmit").addClass("bind-login-btn");
     $("#recruiterSubmit").removeClass("bind-register-btn");
+    $(".error").text("");
   });
 
   $(document.body).on("click", "#registerModal #oktaRegister", function() {
@@ -174,9 +177,6 @@ $(document).ready(function() {
           } else {
             redirectURL = 'http://localhost:8080/authorizeduser?token='+transaction.sessionToken+"&userid="+transaction.user.id+"&email="+loginObj.email+"&type="+loginObj.userType;
           }
-          //addProfileName(transaction.user.profile.firstName);
-          //$( ".dropdown-content" ).find("p").text("HI").attr("value");
-          console.log("URL", redirectURL);
           authClient.session.setCookieAndRedirect(transaction.sessionToken, redirectURL); // Sets a cookie on redirect
         } else {
           throw 'We cannot handle the ' + transaction.status + ' status';
@@ -184,6 +184,13 @@ $(document).ready(function() {
       })
       .fail(function(err) {
         console.error(err);
+        var errorMessage;
+        if(err.errorCode === "E0000004"){
+          errorMessage = "Invalid email or password.";
+        } else {
+          errorMessage = err.message;
+        }
+        $(".error").text(errorMessage);
       });
   }
 

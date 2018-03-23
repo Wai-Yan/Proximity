@@ -12,10 +12,8 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.0/moment.min.js" type="text/javascript"></script>
-	<script
-  src="https://ok1static.oktacdn.com/assets/js/sdk/okta-auth-js/1.11.0/okta-auth-js.min.js"
-  type="text/javascript"></script>
-	<script src="js/googlemaps.js" type="text/javascript"></script>
+	<script src="https://ok1static.oktacdn.com/assets/js/sdk/okta-auth-js/1.11.0/okta-auth-js.min.js" type="text/javascript"></script>
+	<!-- <script src="js/googlemaps.js" type="text/javascript"></script> -->
 	<script src="js/jobSearcher.js" type="text/javascript"></script>
 	<script src="js/registration.js" type="text/javascript"></script>
 	<script src="js/login.js" type="text/javascript"></script>
@@ -111,8 +109,8 @@
 			<div class="container">
 				<h3 class="mb-3" id="sectionResultsTitle"></h3>
 				<div class="mb-3"><a id="listviewclick">List View</a> | <a id="mapviewclick">Map View</a></div> -->
-				<!-- table list for searched results -->
-				<!-- <table id="listview" style="width:100%">
+		<!-- table list for searched results -->
+		<!-- <table id="listview" style="width:100%">
 					<tr>
 						<th>Title</th>
 						<th></th>
@@ -124,8 +122,8 @@
 					<tr id="foundJobs">
 					</tr>
 				</table> -->
-				<!-- end table list for searched results -->
-				<!-- <div id="pagination-area" class="pagination justify-content-center">
+		<!-- end table list for searched results -->
+		<!-- <div id="pagination-area" class="pagination justify-content-center">
 				  <a href="#">&laquo;</a>
 				  <a class="active" href="#">1</a>
 				  <a href="#">2</a>
@@ -206,6 +204,8 @@
 								<label for="help"><a href="#">Need help signing in?</a></label>
 							</div>
 						</form>
+						<div id="errLoginSearcher" class="error">
+						</div>
 					</div>
 					<div class="modal-footer">
 						<button type="button" id="oktaLogin" class="btn">Login</button>
@@ -256,7 +256,7 @@
 								<input type="checkbox" id="remote" name="remote" value="remote"> Include Remote?<br>
 							</div>
 							<div class="mb-1">Upload Profile Picture:</div>
-								<div class="input-group">
+							<div class="input-group">
 								<!-- <input type="file" class="form-control-file" id="userImageUploadFile"> -->
 								<div class="custom-file">
 									<input type="file" class="custom-file-input" id="userImageUploadFile">
@@ -267,6 +267,8 @@
 								</div>
 							</div>
 						</form>
+						<div id="errRegisterSearcher" class="error">
+						</div>
 					</div>
 					<div class="modal-footer">
 						<button type="button" id="oktaRegister" class="btn" data-dismiss="modal">Register</button>
@@ -296,6 +298,27 @@
 			</div>
 		</div>
 
+		<!-- if user doesn't exit when clicked on view, redirect to login or reg -->
+		<!-- Modal -->
+		<div class="modal fade" id="redirectModal" tabindex="-1" role="dialog" aria-labelledby="redirectModal" aria-hidden="true">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title">Woops!</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+					</div>
+					<div class="modal-body">
+						You must <a data-dismiss="modal" data-toggle="modal" href="#registerModal">register</a> or <a data-dismiss="modal" data-toggle="modal" href="#loginModal">login</a> first to view this job posting.
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
 		<div class="footer">
 			<div class="container text-center">
 				<p class="recruiter-login-text">Are you a recruiter?</p>
@@ -316,15 +339,15 @@
 					<div class="modal-body">
 						<!-- Nav tabs -->
 						<div class="card-header">
-						<ul class="nav nav-tabs card-header-tabs" id="tabList" role="tablist">
-							<li role="presentation" class="nav-item">
-								<a href="#recruiterRegisterTab" class="nav-link active" aria-controls="recruiterRegisterTab" role="tab" data-toggle="tab">Register</a>
-							</li>
-							<li role="presentation" class="nav-item">
-								<a href="#recruiterLoginTab" class="nav-link" aria-controls="recruiterLoginTab" role="tab" data-toggle="tab">Login</a>
-							</li>
-						</ul>
-					</div>
+							<ul class="nav nav-tabs card-header-tabs" id="tabList" role="tablist">
+								<li role="presentation" class="nav-item">
+									<a href="#recruiterRegisterTab" class="nav-link active" aria-controls="recruiterRegisterTab" role="tab" data-toggle="tab">Register</a>
+								</li>
+								<li role="presentation" class="nav-item">
+									<a href="#recruiterLoginTab" class="nav-link" aria-controls="recruiterLoginTab" role="tab" data-toggle="tab">Login</a>
+								</li>
+							</ul>
+						</div>
 						<!-- Tab panes -->
 						<div class="tab-content">
 							<div role="tabpanel" class="tab-pane active" id="recruiterRegisterTab">
@@ -340,7 +363,7 @@
 									</div>
 									<div class="form-group">
 										<input type="password" id="password_r" class="form-control" placeholder="Password" data-toggle="password">
-											<small id="emailHelp" class="form-text text-muted">Password must be at least 8 characters, a lowercase letter, an uppercase letter, a number, no parts of your username.</small>
+										<small id="emailHelp" class="form-text text-muted">Password must be at least 8 characters, a lowercase letter, an uppercase letter, a number, no parts of your username.</small>
 									</div>
 									<div class="form-group">
 										<input type="number" id="mobilephone_r" class="form-control" placeholder="Mobile Phone (ex. 7031234567)" oninput="if(value.length>10)value=value.slice(0,10)" required>
@@ -357,15 +380,17 @@
 									</div> -->
 									<div class="mb-1">Upload Profile Picture:</div>
 									<div class="input-group">
-								<div class="custom-file">
-									<input type="file" class="custom-file-input" id="recruiterImageUploadFile">
-									<label class="custom-file-label" for="recruiterImageUploadFile">Choose file</label>
-								</div>
-								<div class="input-group-append">
-									<button class="btn btn-outline-secondary" type="button">Upload</button>
-								</div>
-							</div>
+										<div class="custom-file">
+											<input type="file" class="custom-file-input" id="recruiterImageUploadFile">
+											<label class="custom-file-label" for="recruiterImageUploadFile">Choose file</label>
+										</div>
+										<div class="input-group-append">
+											<button class="btn btn-outline-secondary" type="button">Upload</button>
+										</div>
+									</div>
 								</form>
+								<div id="errRegisterRecruiter" class="error">
+								</div>
 							</div>
 							<div role="tabpanel" class="tab-pane" id="recruiterLoginTab">
 								<form>
@@ -388,6 +413,8 @@
 										<label for="help"><a href="#">Need help signing in?</a></label>
 									</div>
 								</form>
+								<div id="errLoginRecruiter" class="error">
+								</div>
 							</div>
 						</div>
 					</div>

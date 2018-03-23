@@ -7,11 +7,11 @@
 	<link href="https://fonts.googleapis.com/css?family=Raleway:400,800|Roboto+Condensed|Ubuntu" rel="stylesheet">
 	<link rel="stylesheet" href="css/styles.css" type="text/css" />
 	<title>ProjectTwo</title>
-	<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+	<script src="https://code.jquery.com/jquery.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.0/moment.min.js" type="text/javascript"></script>
-	<!-- <script src="js/googlemaps.js" type="text/javascript"></script> -->
+	<script src="js/googlemaps.js" type="text/javascript"></script>
 	<!-- <script src="js/jobSearcher.js" type="text/javascript"></script> -->
 	<script src="js/saved.js" type="text/javascript"></script>
 	<!-- <script src="js/recruiter.js" type="text/javascript"></script> -->
@@ -21,7 +21,7 @@
 	<div class="wrapper">
 		<nav class="navbar">
 			<div class="container">
-				<a class="navbar-brand" href="/authorizeduser">
+				<a class="navbar-brand" href="/">
 		<img src="images/geolocalization.png" height="50" class="d-inline-block" alt="">
 		JobLocator
 		</a>
@@ -32,7 +32,7 @@
 				<p>(dynamic name)</p>
 				<a href="/saved">Saved Jobs</a>
 				<a href="/account">Settings</a>
-				<a href="/logout">Logout</a>
+				<a href="#">Logout</a>
 			</div>
 		</div>
 				</div>
@@ -50,20 +50,9 @@
 		        </button>
 					</div>
 					<div id="apply-btn-area"></div>
-					<div class="savedSearch"><a id="listviewclick">List View</a> | <a id="mapviewclick">Map View</a></div>
-					<div class="modal-body job-view-body" id="listview">
-
+					<div class="modal-body job-view-body">
 					</div>
-					<!-- container for map --->
-						<div class="container" id="mapview">
-							<div class="row">
-								<div class="map col-md-12" id="mapContainer">
-									<div id="map"></div>
-								</div>
-							</div>
-						</div>
 				</div>
-				<!-- end container for map -->
 			</div>
 		</div>
 		<!-- End Modal -->
@@ -71,7 +60,8 @@
 	<!-- <div class="results-section" > -->
 		<div class="container mb-5">
 		<h2 class="mt-5 mb-4">Your Favorited Jobs</h2>
-			<table style="width:100%">
+		<div class="mb-3"><a id="listviewclick">List View</a> | <a id="mapviewclick">Map View</a></div>
+			<table id="listview" style="width:100%">
   <tr id="savedJobs">
     <th>Title</th>
 		<th class="starCol"></th>
@@ -80,6 +70,17 @@
 		<th></th>
   </tr>
 </table>
+<!-- container for map --->
+<div class="container" id="mapview">
+	<div class="row">
+		<div class="map col-md-12" id="mapContainer">
+			<!--First Map -->
+			<!-- <input id="pac-input" class="controls" type="text" placeholder="Search Locations"> -->
+			<div id="map"></div>
+		</div>
+	</div>
+</div>
+<!-- end container for map -->
 </div>
 	<!-- </div> -->
 </div>
@@ -88,9 +89,6 @@
 			<p>© Copyright JobLocator 2018 | <a href="#" target="_blank">About</a></p>
 		</div>
 	</div>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
-	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDxfscSb8wwqM-slfCubiwM1KKt7sb1P-c&libraries=places,geometry"></script>
 </body>
 
 </html>
