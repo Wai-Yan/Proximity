@@ -150,6 +150,7 @@ $("#addPost").on("click", function(event) {
   }
 });
 
+
 $("#saveAccountbtn").on("click", function(event) {
 
   var alteredRecruiter = {
@@ -171,6 +172,7 @@ $("#saveAccountbtn").on("click", function(event) {
 
 fillGravatar();
 fillProfilePic();
+fillSettingsPage();
 
 function fillGravatar() {
 
@@ -191,6 +193,23 @@ function fillProfilePic() {
     $(".profileimage").attr("src","https://" + data.profilePicLink);
   });
 }
+
+// function to prepopulate user information on account settings page (not working)
+// function fillSettingsPage() {
+//   var id = localStorage.getItem("id")
+//   console.log("this is the id: " + id)
+//   $.get("/api/users/" + id, function(data) {
+//     console.log(data);
+//     $("#firstname").val(data.firstName)
+//     $("#lastname").val(data.lastName)
+//     $("#email").val(data.email)
+//     $("#mobilephone").val(data.phoneNo)
+//     $("#companyname").val(data.companyName)
+//     $("#companysite").val(data.companySiteLink)
+//   });
+// }
+
+
 
 //------------------------------------------------------------------------------
 function googleRecruiter() {
