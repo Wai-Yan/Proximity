@@ -26,6 +26,15 @@ module.exports = function(app) {
       res.json(dbPost);
     });
   });
+  app.get("/api/users/:id", function(req, res) {
+    db.User.findOne({
+      where: {
+        oktaNo: req.params.id
+      },
+    }).then(function(dbPost) {
+      res.json(dbPost);
+    });
+  })
 
   app.get("/api/favs", function(req, res) {
     console.log("SIR LIONHART YO");
@@ -119,7 +128,7 @@ module.exports = function(app) {
 
   app.put("/api/users", function(req, res) {
 
-    console.log("You're about to UPDATE a user in sql");   
+    console.log("You're about to UPDATE a user in sql");
 
     var updatedPropertiesOnly = {};
 
@@ -136,7 +145,7 @@ module.exports = function(app) {
 
   app.put("/api/users/star", function(req, res) {
 
-    console.log("You're about to change a job's STAR STATUS");   
+    console.log("You're about to change a job's STAR STATUS");
     console.log(req.body.id);
     var newList = "[" + req.body.id + "]";
 
