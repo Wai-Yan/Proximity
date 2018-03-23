@@ -27,7 +27,7 @@ module.exports = function(app) {
     });
   });
 
-  app.destroy("/api/posts/:id", function(req, res) {
+  app.delete("/api/posts/:id", function(req, res) {
     db.Post.findOne({
       where: {
         id: req.params.id
