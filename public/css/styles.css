@@ -518,9 +518,10 @@ img.avatar {
   border-radius: 50%;
 }
 
-.tooltip-inner {
-  text-align: left !important;
+.error {
+  color: red;
 }
+
 
 /* media queries */
 @media only screen and (max-width: 992px) {
