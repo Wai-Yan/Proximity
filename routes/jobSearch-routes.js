@@ -27,6 +27,16 @@ module.exports = function(app) {
     });
   });
 
+  app.delete("/api/posts/:id", function(req, res) {
+    db.Post.findOne({
+      where: {
+        id: req.params.id
+      },
+    }).then(function(dbPost) {
+      res.json(dbPost);
+    });
+  });
+
 
   app.get("/api/favs", function(req, res) {
     console.log("SIR LIONHART YO");
