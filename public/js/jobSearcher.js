@@ -167,8 +167,8 @@ function addList() {
             click: function() {
               // console.log ( posts.id );
               displayPost(results.id)
-            }
           }
+        }
         })
         var empty = true;
         var starbtn = $('<p />', {
@@ -358,8 +358,13 @@ $("#addPost").on("click", function(event) {
       "data-target": "#viewJobPostInfo",
       on: {
         click: function() {
-          // console.log ( posts.id );
+          var id = localStorage.getItem("id")
+          if (id === null) {
+            $("#redirectModal").modal();
+            $(btn).removeAttr("data-toggle")
+          } else {
           displayPost(posts.id)
+        }
         }
       }
     })
@@ -540,6 +545,22 @@ $("#addPost").on("click", function(event) {
   }
 
 })
+
+fillSettingsPage()
+// function to prepopulate user information on account settings page
+function fillSettingsPage() {
+  var id = localStorage.getItem("id")
+  console.log("this is the id: " + id)
+  $.get("/api/users/" + id, function(data) {
+    console.log(data);
+    $("#firstname").val(data.firstName)
+    $("#lastname").val(data.lastName)
+    $("#email").val(data.email)
+    $("#mobilephone").val(data.phoneNo)
+    $("#companyname").val(data.companyName)
+    $("#companysite").val(data.companySiteLink)
+  });
+}
 
 
 //------------------------------------------------------------------------------
