@@ -34,6 +34,7 @@ module.exports = function(app) {
     }).then(function(dbPost) {
       res.json(dbPost);
     });
+  })
 
   app.get("/api/users/:id", function(req, res) {
     db.User.findOne({
@@ -43,6 +44,7 @@ module.exports = function(app) {
     }).then(function(dbPost) {
       res.json(dbPost);
     });
+  })
 
   // app.get("/api/posts/search?q=", function(req, res) {
   //   db.Post.findAll({
@@ -82,7 +84,6 @@ module.exports = function(app) {
     }).then(function(dbPost) {
       res.json(dbPost);
     });
-  });
   });
 
   app.get("/api/users", function(req, res) {

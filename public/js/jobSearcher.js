@@ -37,6 +37,7 @@ var check;
 
 
 $(document).ready(function() {
+
   $("#mapviewclick").on("click", function(){
       map.setZoom(8)
   })
@@ -53,123 +54,100 @@ $(document).ready(function() {
   otherCounter= 0;
   apiResults;
   check=false
-
   keywordInput = $("#keywordVal").val().trim();
-  $.ajax({
+
+
+    $.ajax({
     url: "api/results/" + keywordInput,
     method: "GET",
-  }).done(function(results) {
+    }).done(function(results) {
     $(".jobRow").remove()
     console.log(results)
     apiResults = results
     console.log("apiResults", apiResults)
-    googleMaps()
-    for (var i = 0; i < results.length; i++) {
-      //work on adding custom information from mySQL to the markers!
-      jobId = results[i].id
-      var jbTit = results[i].jobTitle
-      var cmpName = results[i].companyName
-      var adr1 = results[i].address
-      var adr2 = results[i].city
-      var adr3 = results[i].state
-      var adr4 = results[i].zipCode
-      var fullAddress = adr1 + " " + adr2 + " " + adr3 + " " + adr4
-      var latitude = results[i].latitude
-      var longitude = results[i].longitude
-      var placeIdentifier = results[i].placeID
-      // searchMarkersLatLng.push([parseFloat(latitude), parseFloat(longitude), placeIdentifier,fullAddress,cmpName,jbTit,jobId])
-      // console.log("searchMarkers", searchMarkersLatLng)
-      var address = $('#locationVal').val().trim();
-      var radius = parseInt($('.search-radius').val())*(1609.34);
-      geocoder.geocode( { 'address': address}, function(res, status) {
-        // console.log("geocode results", results)
+    var address = $('#locationVal').val().trim();
+    var radius = parseInt($('.search-radius').val())*(1609.34);
+    geocoder = new google.maps.Geocoder();
+    geocoder.geocode( { 'address': address}, function(res, status) {
+      // console.log("geocode results", results)
       if (status == google.maps.GeocoderStatus.OK) {
-          map.setCenter(res[0].geometry.location);
-          var icon = {
-            url: 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png',
-            // https://developers.google.com/maps/documentation/javascript/markers#icons
-            size: new google.maps.Size(50, 50),
-            origin: new google.maps.Point(0, 0),
-            anchor: new google.maps.Point(17, 34),
-            scaledSize: new google.maps.Size(25, 25)
-          };
-          var marker = new google.maps.Marker({
-            map: map,
-            icon: icon,
-            position: res[0].geometry.location
-          });
-          if (circle) circle.setMap(null);
-          circle = new google.maps.Circle({center:marker.getPosition(),
-                                         radius: radius,
-                                         fillOpacity: 0.35,
-                                         fillColor: "#FFA07A", //https://developers.google.com/maps/documentation/javascript/examples/circle-simple
-                                         map: map});
-          circleCenter = circle.center
-          circleCenterLat = circle.center.lat()
-          circleCenterLng = circle.center.lng()
-          // console.log("Circle Lat/Lng:", circleCenterLat, circleCenterLng)
-          var bounds = new google.maps.LatLngBounds();
-          for (var m=0; m < gMarkers.length; m++) {
-            if (google.maps.geometry.spherical.computeDistanceBetween(gMarkers[m].getPosition(),marker.getPosition()) < radius) {
-              // bounds.extend(gMarkers[i].getPosition())
-              gMarkers[m].setMap(map);
-              radiusMarkers.push(gMarkers[m])
-
-                for (var e = 0; e < apiResults.length; e++ ) {
-                                testCounter++
-                                console.log("testCounter",testCounter)
-                                if (testCounter < apiResults.length){
-                                  for (var j = 0; j < radiusMarkers.length; j++){
-                                    if ((radiusMarkers[j].position.lat() === parseFloat(apiResults[e].latitude)) && (radiusMarkers[j].position.lng() === parseFloat(apiResults[e].longitude))) {
-                                      finalSearchQuary.indexOf(apiResults[e].id) === -1 ? finalSearchQuary.push(apiResults[e].id) : console.log("This item already exists");
-                                      console.log(finalSearchQuary)
-                                      pleasework()
-                                      }
-                                    }
-                                } else {
-                                  return
-                                }
-                                }
-              // console.log("radius Markers selection:", radiusMarkers)
-            } else {
-              gMarkers[m].setMap(null);
-            }
-          }
-          map.fitBounds(circle.getBounds());
-
-          //---------------------------------IN WORK---------------------------------------------
-
-
-                          }
-          //---------------------------------IN WORK---------------------------------------------
-        })
-
-        // } else {
-        //   alert('Geocode was not successful for the following reason: ' + status);
-        // } 2538 N. Greenbrier St. ARlington, VA 22207
+        map.setCenter(res[0].geometry.location);
+        var icon = {
+          url: 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png',
+          // https://developers.google.com/maps/documentation/javascript/markers#icons
+          size: new google.maps.Size(50, 50),
+          origin: new google.maps.Point(0, 0),
+          anchor: new google.maps.Point(17, 34),
+          scaledSize: new google.maps.Size(25, 25)
+        };
+        var marker = new google.maps.Marker({
+          map: map,
+          icon: icon,
+          position: res[0].geometry.location
+        });
+        googleMaps()
+        googleMapsMarkers(marker,radius)
+        for (var e = 0; e < results.length; e++ ) {
+            for (var j = 0; j < radiusMarkers.length; j++){
+              if ((radiusMarkers[j].position.lat() === parseFloat(results[e].latitude)) && (radiusMarkers[j].position.lng() === parseFloat(results[e].longitude))) {
+              finalSearchQuary.indexOf(results[e].id) === -1 ? finalSearchQuary.push(results[e].id) : console.log("This item already exists");
+              console.log(finalSearchQuary)
+                                                  }
+                                                }
+                                            }
       }
+      addList()
     })
-
+    })
   })
 
+function googleMapsMarkers(marker,radius){
+        if (circle) circle.setMap(null);
+        circle = new google.maps.Circle({center:marker.getPosition(),
+                                       radius: radius,
+                                       fillOpacity: 0.35,
+                                       fillColor: "#FFA07A", //https://developers.google.com/maps/documentation/javascript/examples/circle-simple
+                                       map: map});
+        circleCenter = circle.center
+        circleCenterLat = circle.center.lat()
+        circleCenterLng = circle.center.lng()
+        // console.log("Circle Lat/Lng:", circleCenterLat, circleCenterLng)
+        // var bounds = new google.maps.LatLngBounds();
+        for (var m=0; m < gMarkers.length; m++) {
+          if (google.maps.geometry.spherical.computeDistanceBetween(gMarkers[m].getPosition(),marker.getPosition()) < radius) {
+            // bounds.extend(gMarkers[i].getPosition())
+            gMarkers[m].setMap(map);
+            radiusMarkers.push(gMarkers[m])
 
-function pleasework() {
+
+            // console.log("radius Markers selection:", radiusMarkers)
+          } else {
+            gMarkers[m].setMap(null);
+          }
+        }
+        map.fitBounds(circle.getBounds());
+      }
+
+
+      // } else {
+      //   alert('Geocode was not successful for the following reason: ' + status);
+      // } 2538 N. Greenbrier St. ARlington, VA 22207
+
+function addList() {
   // if (otherCounter === finalSearchQuary.length){
   //   return;
   // } else {
     console.log("FINALSEARCH & TEST=TRUE:",finalSearchQuary )
   for (var q = 0; q < finalSearchQuary.length; q++) {
-    otherCounter++;
     queryURL = "/api/posts/" + finalSearchQuary[q]
       console.log(queryURL)
-      if (q === finalSearchQuary.length){
-        return
-      }
+      // if (q === finalSearchQuary.length){
+      //   return
+      // }
       $.ajax({
         url: queryURL,
         method: "GET",
       }).done(function(results) {
-      for (var r = 0; r < 4; r++){
         var tBody = $("tbody")
         var tRow = $("<tr>").addClass("jobRow")
         var titleTd = $("<td>").text(results.jobTitle)
@@ -218,7 +196,6 @@ function pleasework() {
         star.append(starbtn)
         tRow.append(titleTd, star, companyTd, cityTd, stateTd, viewbtn)
         tBody.append(tRow);
-          }
       })
     }
   }
@@ -243,6 +220,7 @@ $("#addPost").on("click", function(event) {
   var jobZipInput = $("#jobZip");
   var address = "'" + jobAdrsInput.val().trim() + "," + " " + jobCityInput.val().trim() + "," + " " + String(jobStateInput) + " " + jobZipInput.val().trim() + "'"
   geocodeAddress()
+})
 
   function geocodeAddress() {
     geocoder.geocode({
@@ -279,7 +257,7 @@ $("#addPost").on("click", function(event) {
       location.reload();
     });
   }
-});
+
   var resultsArr = [];
 
   // initalize the latest jobs list
@@ -478,7 +456,7 @@ $("#addPost").on("click", function(event) {
 
   $(".checkedStar").on("click", function() {
     unstarJob();
-
+      })
   // pagination function
   //   var table =  $('#myTable');
   // var b = (array of objects from the result)
@@ -514,7 +492,7 @@ $("#addPost").on("click", function(event) {
   //
   // });
   //
-  })
+
 
   function starJob(id) {
 
@@ -557,7 +535,9 @@ $("#addPost").on("click", function(event) {
       $(".dropbtn").css('background-image', 'url("https://' + data.profilePicLink + '")');
     });
   }
-});
+
+})
+
 
 //------------------------------------------------------------------------------
 
@@ -573,9 +553,6 @@ function googleMain() {
   });
 }
 function googleMaps() {
-  //geocoder for recruiter posting for latitude/longitude
-  geocoder = new google.maps.Geocoder();
-  // Display Search Markers
   if (apiResults != []) {
     // console.log("working!")
     image = {
@@ -660,5 +637,8 @@ function googleMaps() {
           })
         });
     }
+
+
+
   }
 }
