@@ -37,6 +37,7 @@ module.exports = function(app) {
     res.clearCookie('token');
     res.clearCookie('userid');
     res.clearCookie('email');
+    res.clearCookie('type');
     res.sendFile(path.join(__dirname, "../public/logout.html"));
   });
 }
