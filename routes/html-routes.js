@@ -11,10 +11,10 @@ module.exports = function(app) {
     res.sendFile(path.join(__dirname, "../public/saved.html"));
   });
 
-  app.get("/recruiter", function(req, res) {
-    checkUser(req,res);
-    res.sendFile(path.join(__dirname, "../public/recruiter.html"));
-  });
+  // app.get("/recruiter", function(req, res) {
+  //   checkUser(req,res);
+  //   res.sendFile(path.join(__dirname, "../public/recruiter.html"));
+  // });
 
   app.get("/recruiteraccount", function(req, res) {
     checkUser(req,res);
@@ -31,12 +31,15 @@ module.exports = function(app) {
   });
 
   app.get("/logout", function(req, res) {
+    res.clearCookie('token');
+    res.clearCookie('userid');
+    res.clearCookie('email');
     res.sendFile(path.join(__dirname, "../public/logout.html"));
   });
 }
 
 function checkUser(req, res){
-  if(req.cookies['okta-oauth-state'] === undefined){
-    res.sendFile(path.join(__dirname, "../public/test.html"));
+  if(req.cookies['token'] === undefined){
+    res.redirect("/");
   }
 }

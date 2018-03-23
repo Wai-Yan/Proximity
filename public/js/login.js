@@ -8,9 +8,9 @@ $(document).ready(function() {
     var newLogin = {
       email: newEmail,
       password: newPassword,
+      userType: "jobsearcher"
     };
 
-    getUserID(newLogin);
     userLogin(newLogin);
   });
 
@@ -22,11 +22,43 @@ $(document).ready(function() {
     var newLogin = {
       email: newEmail,
       password: newPassword,
+      userType: "recruiter"
     };
 
-    getUserID(newLogin);
     userLogin(newLogin);
   });
+
+  function userLogin(loginObj) {
+    var authClient = new OktaAuth({
+      url: 'https://dev-975345.oktapreview.com',
+      clientId: '0oaebzwcf9OKAHbHh0h7'
+    });
+
+    authClient.signIn({
+        username: loginObj.email,
+        password: loginObj.password
+      })
+      .then(function(transaction) {
+        console.log(transaction);
+        if (transaction.status === 'SUCCESS') {
+          localStorage.setItem("id", transaction.user.id);
+
+          var redirectURL;
+          if(loginObj.userType === "recruiter"){
+            redirectURL = 'http://localhost:8080/recruiter?token='+transaction.sessionToken+"&userid="+transaction.user.id+"&email="+loginObj.email+"&type="+loginObj.userType;
+          } else {
+            redirectURL = 'http://localhost:8080/authorizeduser?token='+transaction.sessionToken+"&userid="+transaction.user.id+"&email="+loginObj.email+"&type="+loginObj.userType;
+          }
+
+          authClient.session.setCookieAndRedirect(transaction.sessionToken, redirectURL);
+        } else {
+          throw 'We cannot handle the ' + transaction.status + ' status';
+        }
+      })
+      .fail(function(err) {
+        console.error(err);
+      });
+  }
 
   function getUserID(newLogin) {
     console.log("In User ID");
@@ -38,50 +70,4 @@ $(document).ready(function() {
     });
   }
 
-  function userLogin(loginObj) {
-    // Bootstrap the AuthJS Client
-    var authClient = new OktaAuth({
-      url: 'https://dev-975345.oktapreview.com',
-      clientId: '0oaebzwcf9OKAHbHh0h7',
-      redirectUri: 'http://localhost:8080/authorizeduser'
-    });
-    // Attempt to retrieve ID Token from Token Manager
-    var idToken = authClient.tokenManager.get('idToken');
-    console.log("idToken " + idToken);
-    // If ID Token exists, return it in console.log
-    if (idToken) {
-      console.log(`hi ${idToken.claims.email}!`);
-
-      // If ID Token isn't found, try to parse it from the current URL
-    } else if (location.hash) {
-      authClient.token.parseFromUrl()
-        .then(idToken => {
-          console.log(`hi ${idToken.claims.email}!`);
-          // Store parsed token in Token Manager
-          authClient.tokenManager.add('idToken', idToken);
-          console.log(idToken);
-        });
-    } else {
-      // You're not logged in, you need a sessionToken
-      var username = loginObj.email;
-      var password = loginObj.password;
-
-      authClient.signIn({
-          username,
-          password
-        })
-        .then(res => {
-          console.log(res);
-          // localStorage.setItem("sessionId", res._embedded.user.id);
-          localStorage.setItem("id", res.user.id);
-
-          if (res.status === 'SUCCESS') {
-            authClient.token.getWithRedirect({
-              sessionToken: res.sessionToken,
-              responseType: 'id_token'
-            });
-          }
-        });
-    }
-  }
 });

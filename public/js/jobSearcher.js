@@ -499,7 +499,8 @@ $("#addPost").on("click", function(event) {
     console.log("You're about to star a job! Hopefully");
     var request = {
       id: id,
-      change: "starring"
+      change: "starring",
+      okta: localStorage.getItem("id")
     }
 
     $.ajax({
@@ -514,7 +515,8 @@ $("#addPost").on("click", function(event) {
     console.log("You've unstarred a job");
     var request = {
       id: id,
-      change: "unstarring"
+      change: "unstarring",
+      okta: localStorage.getItem("id")
     }
 
     $.ajax({

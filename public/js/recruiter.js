@@ -168,6 +168,7 @@ $("#saveAccountbtn").on("click", function(event) {
 });
 
 fillGravatar();
+fillProfilePic();
 
 function fillGravatar() {
 
@@ -176,6 +177,16 @@ function fillGravatar() {
   $.get("/api/users/" + id, function(data) {
 
     $(".dropbtn").css('background-image', 'url("https://' + data.profilePicLink + '")');
+  });
+}
+
+function fillProfilePic() {
+
+  var id = localStorage.getItem("id")
+
+  $.get("/api/users/" + id, function(data) {
+
+    $(".profileimage").attr("src","https://" + data.profilePicLink);
   });
 }
 
