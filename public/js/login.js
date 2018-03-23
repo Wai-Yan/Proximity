@@ -49,7 +49,7 @@ $(document).ready(function() {
           } else {
             redirectURL = 'http://localhost:8080/authorizeduser?token='+transaction.sessionToken+"&userid="+transaction.user.id+"&email="+loginObj.email+"&type="+loginObj.userType;
           }
-
+          localStorage.setItem("firstName", transaction.user.profile.firstName);
           authClient.session.setCookieAndRedirect(transaction.sessionToken, redirectURL);
         } else {
           throw 'We cannot handle the ' + transaction.status + ' status';
@@ -59,6 +59,8 @@ $(document).ready(function() {
         console.error(err);
       });
   }
+
+  $( ".dropdown-content" ).find("p:first").text(localStorage.getItem("firstName"));
 
   function getUserID(newLogin) {
     console.log("In User ID");
