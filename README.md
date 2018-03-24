@@ -8,33 +8,31 @@ Designed to use the node.js & express.js for server-side code accessing informat
  * Object-Oriented Programming (OOP)
 
 ## **Code Example**
-  * Geo-Coding:
-	    function geocodeAddress() {
-	      geocoder.geocode({
-		address: address
-	      }, function(results, status) {
-		// console.log("placeID", results[0].place_id)
-		placePostId = results[0].place_id
-		lat = results[0].geometry.location.lat()
-		lng = results[0].geometry.location.lng()
-		// console.log(lat, lng)
-		newPost(lat, lng)
-	      })
-	    }
-  * Local Storage Use:
-		function fillProfilePic() {
+	function geocodeAddress() {
+		      geocoder.geocode({
+			address: address
+		      }, function(results, status) {
+			// console.log("placeID", results[0].place_id)
+			placePostId = results[0].place_id
+			lat = results[0].geometry.location.lat()
+			lng = results[0].geometry.location.lng()
+			// console.log(lat, lng)
+			newPost(lat, lng)
+		      })
+	}
+	function fillProfilePic() {
 		      var id = localStorage.getItem("id")
-		      $.get("/api/users/" + id, function(data) {
+			$.get("/api/users/" + id, function(data) {
 			$(".profileimage").attr("src","https://" + data.profilePicLink);
-		      });
-		    }
+			});
+	 }
 
 ## **Screen Shots**
-  ![Home Page](Home Page.png?raw=true "Home Page")
+	![Home Page](Home Page.png?raw=true "Home Page")
   
-  ![Map View](Map View.png?raw=true "Map View")
+  	![Map View](Map View.png?raw=true "Map View")
   
-  ![Register & Login](Register Login.png?raw=true "Register Login")
+  	![Register & Login](Register Login.png?raw=true "Register Login")
 
 
 ## **Tech Used**
@@ -59,32 +57,32 @@ Designed to use the node.js & express.js for server-side code accessing informat
   ![Entity-Relationship Diagram(ERD)](ERD.jpg?raw=true "ERD")
 
 ## **MVC Compliance**
-	├── config
-	|     └── config.js
-	├── db
-	|     ├── schema.sql
-	|     └── seeds.sql
-	├── models
-	|     ├── index.js
-  |     ├── recruiterPost.js
-	|     └── searcher.js
-	├── public
-	|     ├── css
-  |           ├── styles.css
-  |           └── etc.
-  |     ├── images
-  |           ├── contact.png
-  |           └── etc.
-	|     └── js
-	|           ├── jobSearcher.js
-  |           ├── recruiter.js
-	|           └── etc.
-	├── routes
-	|     ├── jobSearch-routes.js
-  |     ├── recruiterPost-routes.js
-	|     └── etc.
-	├── package.json
-	└── server.js
+		├── config
+		|     └── config.js
+		├── db
+		|     ├── schema.sql
+		|     └── seeds.sql
+		├── models
+		|     ├── index.js
+	  	|     ├── recruiterPost.js
+		|     └── searcher.js
+		├── public
+		|     ├── css
+	  	|           ├── styles.css
+	  	|           └── etc.
+	  	|     ├── images
+	  	|           ├── contact.png
+	  	|           └── etc.
+		|     └── js
+		|           ├── jobSearcher.js
+	  	|           ├── recruiter.js
+		|           └── etc.
+		├── routes
+		|     ├── jobSearch-routes.js
+	  	|     ├── recruiterPost-routes.js
+		|     └── etc.
+		├── package.json
+		└── server.js
 
 ## **Installation**
   - Deployed to Heroku, installation on local machine is not required: https://arcane-refuge-81320.herokuapp.com/
@@ -94,7 +92,7 @@ Designed to use the node.js & express.js for server-side code accessing informat
 
 	    for (var e = 0; e < results.length; e++ ) {
 		for (var j = 0; j < radiusMarkers.length; j++){
-		  if ((radiusMarkers[j].position.lat() === parseFloat(results[e].latitude)) && (radiusMarkers[j].position.lng() === 					parseFloat(results[e].longitude))) {
+		  if ((radiusMarkers[j].position.lat() === parseFloat(results[e].latitude)) && (radiusMarkers[j].position.lng() === parseFloat(results[e].longitude))) {
 		  finalSearchQuary.indexOf(results[e].id) === -1 ? finalSearchQuary.push(results[e].id) : console.log("This item already 			exists");
 		  console.log(finalSearchQuary)
 						      }
