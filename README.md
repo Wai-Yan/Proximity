@@ -8,29 +8,24 @@ Designed to use the node.js & express.js for server-side code accessing informat
  * Object-Oriented Programming (OOP)
 
 ## **Code Example**
-  * Geo-Coding:
-    function geocodeAddress() {
-      geocoder.geocode({
-        address: address
-      }, function(results, status) {
-        // console.log("placeID", results[0].place_id)
-        placePostId = results[0].place_id
-        lat = results[0].geometry.location.lat()
-        lng = results[0].geometry.location.lng()
-        // console.log(lat, lng)
-        newPost(lat, lng)
-      })
-    }
-  * Local Storage Use:
-    function fillProfilePic() {
-
-      var id = localStorage.getItem("id")
-
-      $.get("/api/users/" + id, function(data) {
-
-        $(".profileimage").attr("src","https://" + data.profilePicLink);
-      });
-    }
+	function geocodeAddress() {
+		      geocoder.geocode({
+			address: address
+		      }, function(results, status) {
+			// console.log("placeID", results[0].place_id)
+			placePostId = results[0].place_id
+			lat = results[0].geometry.location.lat()
+			lng = results[0].geometry.location.lng()
+			// console.log(lat, lng)
+			newPost(lat, lng)
+		      })
+	}
+	function fillProfilePic() {
+		      var id = localStorage.getItem("id")
+			$.get("/api/users/" + id, function(data) {
+			$(".profileimage").attr("src","https://" + data.profilePicLink);
+			});
+	 }
 
 ## **Screen Shots**
 
@@ -40,22 +35,24 @@ Designed to use the node.js & express.js for server-side code accessing informat
   <img src="RegisterLogin.PNG" width="350"/>
 </p>
 
+	![Home Page](https://raw.github.com/Wai-Yan/ProjectTwo/blob/master/HomePage.PNG)
+  
+  	![Map View](MapView.PNG?raw=true "Map View")
+  
+  	![Register & Login](RegisterLogin.PNG?raw=true "Register Login")
 
-  ![Home Page](Home Page.PNG?raw=true "Home Page")
-  ![Map View](Map View.png?raw=true "Map View")
-  ![Register & Login](Register Login.png?raw=true "Register Login")
 
 
 ## **Tech Used**
-  -	HTML
-  -	Bootstrap
-  -	Javascript
+  - HTML
+  - Bootstrap
+  - Javascript
   - CSS
-  -	Node.js
-  -	Sequelize
-  -	MySQL
-  -	Express.js
-  -	jQuery
+  - Node.js
+  - Sequelize
+  - MySQL
+  - Express.js
+  - jQuery
   - Heroku
   - Okta Authentication (API)
   - Google Maps API (API)
@@ -68,32 +65,32 @@ Designed to use the node.js & express.js for server-side code accessing informat
   ![Entity-Relationship Diagram(ERD)](ERD.jpg?raw=true "ERD")
 
 ## **MVC Compliance**
-	├── config
-	|     └── config.js
-	├── db
-	|     ├── schema.sql
-	|     └── seeds.sql
-	├── models
-	|     ├── index.js
-  |     ├── recruiterPost.js
-	|     └── searcher.js
-	├── public
-	|     ├── css
-  |           ├── styles.css
-  |           └── etc.
-  |     ├── images
-  |           ├── contact.png
-  |           └── etc.
-	|     └── js
-	|           ├── jobSearcher.js
-  |           ├── recruiter.js
-	|           └── etc.
-	├── routes
-	|     ├── jobSearch-routes.js
-  |     ├── recruiterPost-routes.js
-	|     └── etc.
-	├── package.json
-	└── server.js
+		├── config
+		|     └── config.js
+		├── db
+		|     ├── schema.sql
+		|     └── seeds.sql
+		├── models
+		|     ├── index.js
+	  	|     ├── recruiterPost.js
+		|     └── searcher.js
+		├── public
+		|     ├── css
+	  	|           ├── styles.css
+	  	|           └── etc.
+	  	|     ├── images
+	  	|           ├── contact.png
+	  	|           └── etc.
+		|     └── js
+		|           ├── jobSearcher.js
+	  	|           ├── recruiter.js
+		|           └── etc.
+		├── routes
+		|     ├── jobSearch-routes.js
+	  	|     ├── recruiterPost-routes.js
+		|     └── etc.
+		├── package.json
+		└── server.js
 
 ## **Installation**
   - Deployed to Heroku, installation on local machine is not required: https://arcane-refuge-81320.herokuapp.com/
@@ -101,14 +98,16 @@ Designed to use the node.js & express.js for server-side code accessing informat
 ## **Tests**
   - Most tests for this application are run with a simple console.log() method. If the correct/expected information returns, then the team knows that the program is functioning as intended.
 
-    for (var e = 0; e < results.length; e++ ) {
-        for (var j = 0; j < radiusMarkers.length; j++){
-          if ((radiusMarkers[j].position.lat() === parseFloat(results[e].latitude)) && (radiusMarkers[j].position.lng() === parseFloat(results[e].longitude))) {
-          finalSearchQuary.indexOf(results[e].id) === -1 ? finalSearchQuary.push(results[e].id) : console.log("This item already exists");
-          console.log(finalSearchQuary)
-                                              }
-                                            }
-    }
+	    for (var e = 0; e < results.length; e++ ) {
+		for (var j = 0; j < radiusMarkers.length; j++){
+		  if ((radiusMarkers[j].position.lat() === parseFloat(results[e].latitude)) && 
+		  (radiusMarkers[j].position.lng() === parseFloat(results[e].longitude))) {
+		  finalSearchQuary.indexOf(results[e].id) === -1 ? 
+		  finalSearchQuary.push(results[e].id) : console.log("This item already exists");
+		  console.log(finalSearchQuary)
+						      }
+						    }
+	    }
 
 ## **How to use?**
 
