@@ -28,11 +28,11 @@ Designed to use the node.js & express.js for server-side code accessing informat
 	 }
 
 ## **Screen Shots**
-	![Home Page](https://github.com/Wai-Yan/ProjectTwo/blob/master/HomePage.PNG?raw=true "Home Page")
+	![Home Page](https://raw.github.com/Wai-Yan/ProjectTwo/blob/master/HomePage.PNG)
   
-  	![Map View](MapView.png?raw=true "Map View")
+  	![Map View](MapView.PNG?raw=true "Map View")
   
-  	![Register & Login](RegisterLogin.png?raw=true "Register Login")
+  	![Register & Login](RegisterLogin.PNG?raw=true "Register Login")
 
 
 ## **Tech Used**
