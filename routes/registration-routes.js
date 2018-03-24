@@ -35,9 +35,7 @@ module.exports = function(app) {
         console.error(error);
         return res.send(500, "Server Error");
       }
-      // console.log('Status:', response.statusCode);
-      // console.log('Headers:', JSON.stringify(response.headers));
-      // console.log('Response:', body);
+
       var json = JSON.parse(body);
       console.log(json);
 

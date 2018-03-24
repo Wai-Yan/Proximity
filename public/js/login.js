@@ -1,4 +1,25 @@
 $(document).ready(function() {
+  $(".error").text("");
+
+  $(document.body).on("keypress", "#loginEmail", function() {
+    $(".error").text("");
+  });
+
+  $(document.body).on("keypress", "#loginPassword", function() {
+    $(".error").text("");
+  });
+
+  $(document.body).on("click", "#registerbtn", function() {
+    $(".error").text("");
+  });
+
+  $(document.body).on("click", "#loginbtn", function() {
+    $(".error").text("");
+  });
+
+  $(document.body).on("click", "#recruiter-btn", function() {
+    $(".error").text("");
+  });
 
   $(document.body).on("click", "#loginModal #oktaLogin", function() {
     console.log("I'm here login");
@@ -50,7 +71,7 @@ $(document).ready(function() {
           } else {
             redirectURL = 'http://localhost:8080/authorizeduser?token='+transaction.sessionToken+"&userid="+transaction.user.id+"&email="+loginObj.email+"&type="+loginObj.userType;
           }
-
+          sendUserInfo(transaction, loginObj.userType);
           authClient.session.setCookieAndRedirect(transaction.sessionToken, redirectURL);
         } else {
           throw 'We cannot handle the ' + transaction.status + ' status';
@@ -58,10 +79,37 @@ $(document).ready(function() {
       })
       .fail(function(err) {
         console.error(err);
+        var errorMessage;
+        if(err.errorCode === "E0000004"){
+          errorMessage = "Invalid email or password.";
+        } else {
+          errorMessage = err.message;
+        }
+        $(".error").text(errorMessage);
       });
   }
 
   $( ".dropdown-content" ).find("p:first").text(localStorage.getItem("firstName"));
+
+  function sendUserInfo(loginTransaction, userType){
+    console.log("Line 79");
+    console.log(loginTransaction);
+    $(document.body).on("click", ".dropdown-content", function() {
+      if(userType === "recruiter"){
+        $("#firstname").val(data.firstName),
+        $("#lastname").val(data.lastName),
+        $("#email").val(data.email)
+        $("#mobilephone").val(data.phoneNo),
+        $("#companyname").val(data.companyName),
+        $("#companysite").val(data.companySiteLink)
+      } else {
+        $("#firstname").val(data.firstName),
+        $("#lastname").val(data.lastName),
+        $("#email").val(data.email),
+        $("#mobilephone").val(data.phoneNo)
+      }
+    });
+  }
 
   function getUserID(newLogin) {
     console.log("In User ID");

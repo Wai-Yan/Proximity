@@ -1,15 +1,30 @@
 $(document).ready(function() {
+  $(".error").text("");
+
+  $(document.body).on("click", "#registerbtn", function() {
+    $(".error").text("");
+  });
+
+  $(document.body).on("click", "#loginbtn", function() {
+    $(".error").text("");
+  });
+
+  $(document.body).on("click", "#recruiter-btn", function() {
+    $(".error").text("");
+  });
 
   $(document.body).on("keypress", "#email_r", function() {
     console.log("Register Tab");
     $("#recruiterSubmit").addClass("bind-register-btn");
     $("#recruiterSubmit").removeClass("bind-login-btn");
+    $(".error").text("");
   });
 
   $(document.body).on("keypress", "#loginEmail_r", function() {
     console.log("Register Tab");
     $("#recruiterSubmit").addClass("bind-login-btn");
     $("#recruiterSubmit").removeClass("bind-register-btn");
+    $(".error").text("");
   });
 
   $(document.body).on("click", "#registerModal #oktaRegister", function() {
@@ -23,7 +38,9 @@ $(document).ready(function() {
     var newRadius = $("#registerModal #radius").find(':selected').data('size');
     var newRemote = $("#registerModal #remote").is(":checked");
     var newUserType = "jobsearcher";
-    var newImage; // = $("#registerModal #userImageUploadFile");
+    var newCompanyName = "none";
+    var newCompanyWebsite = "none";
+    var newImage;
 
     var newRegistration = {
       firstName: newFirstname,
@@ -35,52 +52,11 @@ $(document).ready(function() {
       radius: newRadius,
       remote: newRemote,
       userType: newUserType,
+      companyname: newCompanyName,
+      companywebsite: newCompanyWebsite,
       image: newImage
     };
-
-    console.log(newRegistration);
-
-    var userOktaId;
-
-    $.post("/api/register", newRegistration).done(function(data) {
-
-      if (data) {
-        if(data.id !== undefined || data.id !== null){
-          userOktaId = data.id;
-          userLogin(newRegistration);
-        }
-        //$("#successModal").modal("show");
-
-      } else {
-        alert("Oop! something went wrong. Please try again soon.");
-      }
-
-      $('#registerModal').on('hidden.bs.modal', function() {
-        console.log("reset form");
-        $(this).find('form').trigger('reset');
-      });
-    }).
-    then(function() {
-      var newUser = {
-        firstName: newFirstname,
-        lastName: newLastname,
-        isRecruiter: false,
-        wantsRemote: newRemote,
-        preferredLocation: newPreferredLoc,
-        radius: newRadius,
-        associatedJobs: "[]",
-        phoneNo: newMobile,
-        email: newEmail,
-        oktaNo: userOktaId
-      };
-
-      // Send to DB
-      $.ajax({
-        method: "POST",
-        url: "/api/users/",
-        data: newUser
-        });
-    });
+    postRegistration(newRegistration, false);
   });
 
   $(document.body).on("click", ".bind-register-btn", function() {
@@ -93,7 +69,7 @@ $(document).ready(function() {
     var newCompanyName = $("#recruiterModal #companyname").val().trim();
     var newCompanyWebsite = $("#recruiterModal #companywebsite").val().trim();
     var newUserType = "recruiter";
-    var newImage; // = getUserImage();
+    var newImage;
 
     var newRegistration = {
       firstName: newFirstname,
@@ -106,32 +82,33 @@ $(document).ready(function() {
       userType: newUserType,
       image: newImage
     };
+    postRegistration(newRegistration, true);
+  });
 
-    console.log(newRegistration);
+  function postRegistration(newRegistration, isrecruiter) {
+    console.log("postRegistration function");
+    var userOktaId;
 
-    $.post("/api/register", newRegistration).done(function(data) {
+    $.post("/api/register", newRegistration).done(function(error, data) {
       console.log(data);
-      if (data) {
-        console.log("Back from Register");
-        if(data.id !== undefined || data.id !== null){
-          userOktaId = data.id;
-          userLogin(newRegistration);
-        }
-
+      if (data.hasOwnProperty('errorCauses')) {
+        $(".error").text(error.errorCauses[0].errorSummary);
       } else {
-        alert("Oop! something went wrong. Please try again soon.");
+        userOktaId = data.id;
+        userLogin(newRegistration);
       }
 
-      $('#recruiterModal').on('hidden.bs.modal', function() {
+      $('#registerModal').on('hidden.bs.modal', function() {
         console.log("reset form");
         $(this).find('form').trigger('reset');
+        $(".error").text("");
       });
     }).
     then(function() {
       var newUser = {
         firstName: newFirstname,
         lastName: newLastname,
-        isRecruiter: true,
+        isRecruiter: newIsRecruiter,
         wantsRemote: newRemote,
         preferredLocation: newPreferredLoc,
         radius: newRadius,
@@ -146,9 +123,9 @@ $(document).ready(function() {
         method: "POST",
         url: "/api/users/",
         data: newUser
-        });
+      });
     });
-  });
+  }
 
   function userLogin(loginObj) {
     var authClient = new OktaAuth({
@@ -165,26 +142,52 @@ $(document).ready(function() {
       })
       .then(function(transaction) {
         if (transaction.status === 'SUCCESS') {
-          console.log(transaction.user.profile.firstName);
-          console.log("usertype", loginObj.userType);
-          console.log(loginObj.userType === "recruiter");
+          localStorage.setItem("id", transaction.user.id);
+          localStorage.setItem("firstName", transaction.user.profile.firstName);
           var redirectURL;
           if(loginObj.userType === "recruiter"){
             redirectURL = 'http://localhost:8080/recruiter?token='+transaction.sessionToken+"&userid="+transaction.user.id+"&email="+loginObj.email+"&type="+loginObj.userType;
           } else {
             redirectURL = 'http://localhost:8080/authorizeduser?token='+transaction.sessionToken+"&userid="+transaction.user.id+"&email="+loginObj.email+"&type="+loginObj.userType;
           }
-          //addProfileName(transaction.user.profile.firstName);
-          //$( ".dropdown-content" ).find("p").text("HI").attr("value");
-          console.log("URL", redirectURL);
-          authClient.session.setCookieAndRedirect(transaction.sessionToken, redirectURL); // Sets a cookie on redirect
+          sendUserInfo(transaction, loginObj.userType);
+          authClient.session.setCookieAndRedirect(transaction.sessionToken, redirectURL);
         } else {
           throw 'We cannot handle the ' + transaction.status + ' status';
         }
       })
       .fail(function(err) {
         console.error(err);
+        var errorMessage;
+        if (err.errorCode === "E0000004") {
+          errorMessage = "Invalid email or password.";
+        } else {
+          errorMessage = err.message;
+        }
+        $(".error").text(errorMessage);
       });
+  }
+
+  $( ".dropdown-content" ).find("p:first").text(localStorage.getItem("firstName"));
+
+  function sendUserInfo(loginTransaction, userType){
+    console.log("Line 79");
+    console.log(loginTransaction);
+    $(document.body).on("click", ".dropdown-content", function() {
+      if(userType === "recruiter"){
+        $("#firstname").val(data.firstName),
+        $("#lastname").val(data.lastName),
+        $("#email").val(data.email)
+        $("#mobilephone").val(data.phoneNo),
+        $("#companyname").val(data.companyName),
+        $("#companysite").val(data.companySiteLink)
+      } else {
+        $("#firstname").val(data.firstName),
+        $("#lastname").val(data.lastName),
+        $("#email").val(data.email),
+        $("#mobilephone").val(data.phoneNo)
+      }
+    });
   }
 
 });
