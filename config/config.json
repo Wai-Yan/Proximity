@@ -1,28 +1,20 @@
 {
-  "name": "Proximity",
-  "version": "1.0.0",
-  "private": true,
-  "scripts": {
-    "start": "node server.js"
+  "development": {
+    "username": "root",
+    "password": "",
+    "database": "jobPostDB",
+    "host": "localhost",
+    "dialect": "mysql"
   },
-  "dependencies": {
-    "@google/maps": "^0.4.5",
-    "body-parser": "^1.18.2",
-    "cookie-parser": "^1.4.3",
-    "dotenv": "^5.0.1",
-    "express": "^4.16.3",
-    "express-handlebars": "^3.0.0",
-    "geocoder": "^0.2.3",
-    "gravatar": "^1.6.0",
-    "load-google-maps-api": "^1.2.0",
-    "moment": "^2.21.0",
-    "mysql2": "^1.5.2",
-    "npm": "^5.7.1",
-    "request": "^2.85.0",
-    "sequelize": "^4.36.1"
+  "test": {
+    "username": "root",
+    "password": "",
+    "database": "jobPostDB",
+    "host": "localhost",
+    "dialect": "mysql"
   },
-  "engines": {
-    "node": "6.12.x",
-    "npm": "3.10.x"
+  "production": {
+    "use_env_variable": "JAWSDB_URL",
+    "dialect": "mysql"
   }
 }
