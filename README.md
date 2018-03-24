@@ -1,24 +1,41 @@
+# Proximity
+
+Proximity is an application built for job searchers looking for new employment with a specified location and radius of that address. The job's the user searches for are based on the recruiter's posting jobs opportunities for job searchers.
+
+Designed to use the node.js & express.js for server-side code accessing information contained within mySQL using Sequelize to interact with the front-end user interactions and Heroku displaying the front-end deployment product:
+
+## **Code Style**
+ * Object-Oriented Programming (OOP).
+
+## **Code Example**
+  The application allows users to also input gender, and they can be compared to their closest friends of similar gender.
+
+
+
 ## **Tech Used**
   -	HTML
   -	Bootstrap
   -	Javascript
+  - CSS
   -	Node.js
   -	Sequelize
   -	MySQL
   -	Express.js
-  -	jQuery UI
-  -	Geocoder.js
+  -	jQuery
   - Heroku
-  - Okta Authentication
-  - Google Maps API
+  - Okta Authentication (API)
+  - Google Maps API (API)
   - Gravatar
-
-## **API Docs**
-	- Glassdoor API (for search comparison-possible other use)
-	- Google Maps API(Markers added)
+  - Request.js
+  - Local Storage
+  - Cookies
 
 ## **Architecture**
+  ![Entity-Relationship Diagram(ERD)](ERD.jpg?raw=true "ERD")
 
+
+
+## **MVC Compliance**
 	├── config
 	|     └── config.js
 	├── db
@@ -50,7 +67,7 @@
 
 Proximity is an application built for job searchers looking for new employment in a specific area. The user is also able to save a job for later, and can view all saved jobs in their personal page.
 
-Upon entering a job title, an address that will serve as the "center of the search", and a radius, a user can begin their search. 
+Upon entering a job title, an address that will serve as the "center of the search", and a radius, a user can begin their search.
 
 Code Style
 Object-Oriented Programming (OOP)
@@ -75,7 +92,7 @@ Users can search for a job within a given radius
 Users are given a map view of that search
 Users can save jobs for later
 
-Recruiters are given a convenient interface to add jobs 
+Recruiters are given a convenient interface to add jobs
 
 Installation
 Requirements:
