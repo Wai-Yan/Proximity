@@ -102,7 +102,7 @@ $(document).ready(function() {
               console.log(finalSearchQuary)
                                                   }
                                                 }
-                                            }
+        }
       }
       addList()
     })
