@@ -46,9 +46,9 @@ $(document).ready(function() {
 
           var redirectURL;
           if(loginObj.userType === "recruiter"){
-            redirectURL = 'http://localhost:8080/recruiter?token='+transaction.sessionToken+"&userid="+transaction.user.id+"&email="+loginObj.email+"&type="+loginObj.userType;
+            redirectURL = 'https://immense-spire-42576.herokuapp.com/recruiter?token='+transaction.sessionToken+"&userid="+transaction.user.id+"&email="+loginObj.email+"&type="+loginObj.userType;
           } else {
-            redirectURL = 'http://localhost:8080/authorizeduser?token='+transaction.sessionToken+"&userid="+transaction.user.id+"&email="+loginObj.email+"&type="+loginObj.userType;
+            redirectURL = 'https://immense-spire-42576.herokuapp.com/authorizeduser?token='+transaction.sessionToken+"&userid="+transaction.user.id+"&email="+loginObj.email+"&type="+loginObj.userType;
           }
 
           authClient.session.setCookieAndRedirect(transaction.sessionToken, redirectURL);

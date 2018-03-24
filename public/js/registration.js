@@ -170,9 +170,9 @@ $(document).ready(function() {
           console.log(loginObj.userType === "recruiter");
           var redirectURL;
           if(loginObj.userType === "recruiter"){
-            redirectURL = 'http://localhost:8080/recruiter?token='+transaction.sessionToken+"&userid="+transaction.user.id+"&email="+loginObj.email+"&type="+loginObj.userType;
+            redirectURL = 'https://immense-spire-42576.herokuapp.com/recruiter?token='+transaction.sessionToken+"&userid="+transaction.user.id+"&email="+loginObj.email+"&type="+loginObj.userType;
           } else {
-            redirectURL = 'http://localhost:8080/authorizeduser?token='+transaction.sessionToken+"&userid="+transaction.user.id+"&email="+loginObj.email+"&type="+loginObj.userType;
+            redirectURL = 'https://immense-spire-42576.herokuapp.com/authorizeduser?token='+transaction.sessionToken+"&userid="+transaction.user.id+"&email="+loginObj.email+"&type="+loginObj.userType;
           }
           //addProfileName(transaction.user.profile.firstName);
           //$( ".dropdown-content" ).find("p").text("HI").attr("value");

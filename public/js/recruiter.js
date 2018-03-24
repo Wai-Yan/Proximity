@@ -1,5 +1,5 @@
 $(document).ready(function() {
-  
+
 $( ".dropdown-content" ).find("p:first").text(localStorage.getItem("firstName"));
 $("#resultsRecreuiterPageTitleText").text("Your posted jobs")
 
@@ -51,7 +51,7 @@ getPosts();
 // print post info
 function displayPost(id) {
   console.log("hi")
-  queryURL = 'http://localhost:8080/api/posts/' + id
+  queryURL = '/api/posts/' + id
   console.log(queryURL)
   $.ajax({
     url: queryURL,
@@ -240,7 +240,7 @@ if (searchMarkersLatLng != []) {
           infowindow.open(map, this);
     })
     google.maps.event.addListener(marker, 'click', function() {
-        queryURL = 'http://localhost:8080/api/posts/' + $(".moreInfoUrl").data("value")
+        queryURL = '/api/posts/' + $(".moreInfoUrl").data("value")
         console.log(queryURL)
         $.ajax({
           url: queryURL,
