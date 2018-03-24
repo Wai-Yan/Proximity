@@ -33,7 +33,15 @@ Designed to use the node.js & express.js for server-side code accessing informat
     }
 
 ## **Screen Shots**
-  ![Home Page](Home Page.png?raw=true "Home Page")
+
+<p align="center">
+  <img src="HomePage.PNG" width="350"/>
+  <img src="MapView.PNG" width="350"/>
+  <img src="RegisterLogin.PNG" width="350"/>
+</p>
+
+
+  ![Home Page](Home Page.PNG?raw=true "Home Page")
   ![Map View](Map View.png?raw=true "Map View")
   ![Register & Login](Register Login.png?raw=true "Register Login")
 
