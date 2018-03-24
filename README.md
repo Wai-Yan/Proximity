@@ -28,7 +28,7 @@ Designed to use the node.js & express.js for server-side code accessing informat
 	 }
 
 ## **Screen Shots**
-	![Home Page](HomePage.png?raw=true "Home Page")
+	![Home Page](https://github.com/Wai-Yan/ProjectTwo/blob/master/HomePage.PNG?raw=true "Home Page")
   
   	![Map View](MapView.png?raw=true "Map View")
   
