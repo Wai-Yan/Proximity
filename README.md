@@ -28,11 +28,14 @@ Designed to use the node.js & express.js for server-side code accessing informat
 	 }
 
 ## **Screen Shots**
-	![Home Page](HomePage.png?raw=true "Home Page")
-  
-  	![Map View](MapView.png?raw=true "Map View")
-  
-  	![Register & Login](RegisterLogin.png?raw=true "Register Login")
+
+<p align="center">
+  <img src="HomePage.PNG" width="700" height="400"/>
+  <hr>
+  <img src="MapView.PNG" width="700" height="400"/>
+  <hr>
+  <img src="RegisterLogin.PNG" width="700" height="400"/>
+</p>
 
 
 ## **Tech Used**
