@@ -67,24 +67,23 @@ Designed to use the node.js & express.js for server-side code accessing informat
 	|     └── seeds.sql
 	├── models
 	|     ├── index.js
-	|     └── recruiterPost.js
+  |     ├── recruiterPost.js
+	|     └── searcher.js
 	├── public
 	|     ├── css
-	|           └── styles.css
+  |           ├── styles.css
+  |           └── etc.
+  |     ├── images
+  |           ├── contact.png
+  |           └── etc.
 	|     └── js
 	|           ├── jobSearcher.js
-	|           └── recruiter.js
+  |           ├── recruiter.js
+	|           └── etc.
 	├── routes
 	|     ├── jobSearch-routes.js
-	|     └── recruiterPost-routes.js
-	├── views
-	|     ├── index.handlebars
-	|     ├── partials
-	|           ├── jobSearch.handlebars
-	|           ├── recruiter.handlebars
-	|           └── jobSearchAvgSalary.handlebars
-	|     └── layouts
-	|           └── main.handlebars
+  |     ├── recruiterPost-routes.js
+	|     └── etc.
 	├── package.json
 	└── server.js
 
