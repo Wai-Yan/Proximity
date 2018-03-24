@@ -88,7 +88,7 @@ Designed to use the node.js & express.js for server-side code accessing informat
 		└── server.js
 
 ## **Installation**
-  - Deployed to Heroku, installation on local machine is not required: https://arcane-refuge-81320.herokuapp.com/
+  - Deployed to Heroku, installation on local machine is not required: https://immense-spire-42576.herokuapp.com
 
 ## **Tests**
   - Most tests for this application are run with a simple console.log() method. If the correct/expected information returns, then the team knows that the program is functioning as intended.
