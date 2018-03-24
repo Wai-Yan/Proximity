@@ -28,11 +28,19 @@ Designed to use the node.js & express.js for server-side code accessing informat
 	 }
 
 ## **Screen Shots**
+
+<p align="center">
+  <img src="HomePage.PNG" width="350"/>
+  <img src="MapView.PNG" width="350"/>
+  <img src="RegisterLogin.PNG" width="350"/>
+</p>
+
 	![Home Page](https://raw.github.com/Wai-Yan/ProjectTwo/blob/master/HomePage.PNG)
   
   	![Map View](MapView.PNG?raw=true "Map View")
   
   	![Register & Login](RegisterLogin.PNG?raw=true "Register Login")
+
 
 
 ## **Tech Used**
