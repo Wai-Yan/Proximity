@@ -28,11 +28,12 @@ Designed to use the node.js & express.js for server-side code accessing informat
 	 }
 
 ## **Screen Shots**
-	![Home Page](Home Page.png?raw=true "Home Page")
-  
-  	![Map View](Map View.png?raw=true "Map View")
-  
-  	![Register & Login](Register Login.png?raw=true "Register Login")
+
+<p align="center">
+  <img src="HomePage.PNG" width="700" height="400"/>
+  <img src="MapView.PNG" width="700" height="400"/>
+  <img src="RegisterLogin.PNG" width="700" height="400"/>
+</p>
 
 
 ## **Tech Used**
@@ -92,8 +93,10 @@ Designed to use the node.js & express.js for server-side code accessing informat
 
 	    for (var e = 0; e < results.length; e++ ) {
 		for (var j = 0; j < radiusMarkers.length; j++){
-		  if ((radiusMarkers[j].position.lat() === parseFloat(results[e].latitude)) && (radiusMarkers[j].position.lng() === parseFloat(results[e].longitude))) {
-		  finalSearchQuary.indexOf(results[e].id) === -1 ? finalSearchQuary.push(results[e].id) : console.log("This item already 			exists");
+		  if ((radiusMarkers[j].position.lat() === parseFloat(results[e].latitude)) && 
+		  (radiusMarkers[j].position.lng() === parseFloat(results[e].longitude))) {
+		  finalSearchQuary.indexOf(results[e].id) === -1 ? 
+		  finalSearchQuary.push(results[e].id) : console.log("This item already exists");
 		  console.log(finalSearchQuary)
 						      }
 						    }
