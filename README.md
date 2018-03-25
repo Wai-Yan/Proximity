@@ -34,7 +34,7 @@ Designed to use the node.js & express.js for server-side code accessing informat
   <hr>
   <img src="MapView2.PNG" width="700" height="400"/>
   <hr>
-  <img src="RegisterLogin.PNG" width="700" height="400"/>
+  <img src="RegisterLogin2.PNG" width="700" height="400"/>
   <img src="RecruiterPost.PNG" width="700" height="400"/>
 </p>
 
