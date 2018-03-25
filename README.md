@@ -35,6 +35,7 @@ Designed to use the node.js & express.js for server-side code accessing informat
   <img src="MapView.PNG" width="700" height="400"/>
   <hr>
   <img src="RegisterLogin.PNG" width="700" height="400"/>
+  <img src="RecruiterPost.PNG" width="700" height="400"/>
 </p>
 
 
@@ -57,7 +58,7 @@ Designed to use the node.js & express.js for server-side code accessing informat
   - Cookies
 
 ## **Architecture**
-  ![Entity-Relationship Diagram(ERD)](ERD.jpg?raw=true "ERD")
+  ![Entity-Relationship Diagram(ERD)](EntityRelationalDiagram.png?raw=true "ERD")
 
 ## **MVC Compliance**
 		├── config
@@ -95,9 +96,9 @@ Designed to use the node.js & express.js for server-side code accessing informat
 
 	    for (var e = 0; e < results.length; e++ ) {
 		for (var j = 0; j < radiusMarkers.length; j++){
-		  if ((radiusMarkers[j].position.lat() === parseFloat(results[e].latitude)) && 
+		  if ((radiusMarkers[j].position.lat() === parseFloat(results[e].latitude)) &&
 		  (radiusMarkers[j].position.lng() === parseFloat(results[e].longitude))) {
-		  finalSearchQuary.indexOf(results[e].id) === -1 ? 
+		  finalSearchQuary.indexOf(results[e].id) === -1 ?
 		  finalSearchQuary.push(results[e].id) : console.log("This item already exists");
 		  console.log(finalSearchQuary)
 						      }

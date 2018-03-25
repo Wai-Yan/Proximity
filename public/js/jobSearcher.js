@@ -95,11 +95,13 @@ $(document).ready(function() {
         });
         googleMaps()
         googleMapsMarkers(marker,radius)
+        console.log("Radius Markers:", radiusMarkers)
         for (var e = 0; e < results.length; e++ ) {
             for (var j = 0; j < radiusMarkers.length; j++){
-              if ((radiusMarkers[j].position.lat() === parseFloat(results[e].latitude)) && (radiusMarkers[j].position.lng() === parseFloat(results[e].longitude))) {
-              finalSearchQuary.indexOf(results[e].id) === -1 ? finalSearchQuary.push(results[e].id) : console.log("This item already exists");
-              console.log(finalSearchQuary)
+              if (radiusMarkers[j].placeId === results[e].placeID) {
+                finalSearchQuary.push(results[e].id)
+              // finalSearchQuary.indexOf(results[e].id) === -1 ? finalSearchQuary.push(results[e].id) : console.log("This item already exists");
+              // console.log(finalSearchQuary)
                                                   }
                                                 }
         }
