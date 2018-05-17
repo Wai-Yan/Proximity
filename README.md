@@ -1,6 +1,6 @@
 # Proximity
 
-Proximity is an application built for job searchers looking for new employment with a specified location and radius of that address. The job's the user searches for are based on the recruiter's posting jobs opportunities for job searchers.
+[Proximity](https://immense-spire-42576.herokuapp.com) is an application built for job searchers looking for new employment with a specified location and radius of that address. The job's the user searches for are based on the recruiter's posting jobs opportunities for job searchers.
 
 Designed to use the node.js & express.js for server-side code accessing information contained within mySQL using Sequelize to interact with the front-end user interactions and Heroku displaying the front-end deployment product:
 
